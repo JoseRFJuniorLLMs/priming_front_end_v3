@@ -384,30 +384,89 @@ Their journey took them to extraordinary places, from towering mountains to sand
   <div class="p-6">
     <div>
       <h1>Analysis of "{{ textNLP }}"</h1>
-      <p><strong>Pronouns:</strong> {{ pronouns.join(', ') }}</p>
-      <p><strong>Verbs:</strong> {{ verbs.join(', ') }}</p>
-      <p><strong>Nouns:</strong> {{ nouns.join(', ') }}</p>
-      <p><strong>Adjectives:</strong> {{ adjectives.join(', ') }}</p>
-      <p><strong>Adverbs:</strong> {{ adverbs.join(', ') }}</p>
-      <p><strong>People:</strong> {{ people.join(', ') }}</p>
-      <p><strong>Places:</strong> {{ places.join(', ') }}</p>
-      <p><strong>Organizations:</strong> {{ organizations.join(', ') }}</p>
-      <!-- <p><strong>Dates:</strong> {{ dates.join(', ') }}</p> -->
-      <!-- <p><strong>Values:</strong> {{ values.join(', ') }}</p> -->
-      <!-- Funcionalidades adicionais -->
-      <!-- <p><strong>Phrases:</strong> {{ phrases.join(', ') }}</p> -->
-      <p><strong>Clauses:</strong> {{ clauses.join(', ') }}</p>
-      <!-- <p><strong>Negations:</strong> {{ negations.join(', ') }}</p> -->
-      <p><strong>Questions:</strong> {{ questions.join(', ') }}</p>
-      <!-- <p><strong>Quotes:</strong> {{ quotes.join(', ') }}</p> -->
-      <p><strong>Acronyms:</strong> {{ acronyms.join(', ') }}</p>
-      <p><strong>Emails:</strong> {{ emails.join(', ') }}</p>
-      <p><strong>URLs:</strong> {{ urls.join(', ') }}</p>
-      <!-- <p><strong>Emojis:</strong> {{ emojis.join(', ') }}</p> -->
-      <!-- <p><strong>Mentions:</strong> {{ mentions.join(', ') }}</p> -->
-      <!-- <p><strong>Hashtags:</strong> {{ hashtags.join(', ') }}</p> -->
+      <div *ngIf="pronouns.length">
+        <p><strong>Pronouns:</strong></p>
+        <div *ngFor="let pronoun of pronouns">
+          <button mat-button color="accent" matTooltip="pronoun">{{ pronoun }}</button>
+        </div>
+      </div>
+      <div *ngIf="verbs.length">
+        <p><strong>Verbs:</strong></p>
+        <div *ngFor="let verb of verbs">
+          <button mat-button color="accent" matTooltip="verb">{{ verb }}</button>
+        </div>
+      </div>
+      <div *ngIf="nouns.length">
+        <p><strong>Nouns:</strong></p>
+        <div *ngFor="let noun of nouns">
+          <button mat-button color="accent" matTooltip="noun">{{ noun }}</button>
+        </div>
+      </div>
+      <div *ngIf="adjectives.length">
+        <p><strong>Adjectives:</strong></p>
+        <div *ngFor="let adjective of adjectives">
+          <button mat-button color="accent" matTooltip="adjective">{{ adjective }}</button>
+        </div>
+      </div>
+      <div *ngIf="adverbs.length">
+        <p><strong>Adverbs:</strong></p>
+        <div *ngFor="let adverb of adverbs">
+          <button mat-button color="accent" matTooltip="adverb">{{ adverb }}</button>
+        </div>
+      </div>
+      <div *ngIf="people.length">
+        <p><strong>People:</strong></p>
+        <div *ngFor="let person of people">
+          <button mat-button color="accent" matTooltip="person">{{ person }}</button>
+        </div>
+      </div>
+      <div *ngIf="places.length">
+        <p><strong>Places:</strong></p>
+        <div *ngFor="let place of places">
+          <button mat-button color="accent" matTooltip="place">{{ place }}</button>
+        </div>
+      </div>
+      <div *ngIf="organizations.length">
+        <p><strong>Organizations:</strong></p>
+        <div *ngFor="let organization of organizations">
+          <button mat-button color="accent" matTooltip="organization">{{ organization }}</button>
+        </div>
+      </div>
+      <div *ngIf="clauses.length">
+        <p><strong>Clauses:</strong></p>
+        <div *ngFor="let clause of clauses">
+          <button mat-button color="accent" matTooltip="clause">{{ clause }}</button>
+        </div>
+      </div>
+      <div *ngIf="questions.length">
+        <p><strong>Questions:</strong></p>
+        <div *ngFor="let question of questions">
+          <button mat-button color="accent" matTooltip="question">{{ question }}</button>
+        </div>
+      </div>
+      <div *ngIf="acronyms.length">
+        <p><strong>Acronyms:</strong></p>
+        <div *ngFor="let acronym of acronyms">
+          <button mat-button color="accent" matTooltip="acronym">{{ acronym }}</button>
+        </div>
+      </div>
+      <div *ngIf="emails.length">
+        <p><strong>Emails:</strong></p>
+        <div *ngFor="let email of emails">
+          <button mat-button color="accent" matTooltip="email">{{ email }}</button>
+        </div>
+      </div>
+      <div *ngIf="urls.length">
+        <p><strong>URLs:</strong></p>
+        <div *ngFor="let url of urls">
+          <button mat-button color="accent" matTooltip="url">{{ url }}</button>
+        </div>
+      </div>
     </div>
-  </div>
+</div>
+
+
+
 
 </mat-step>
 
@@ -501,34 +560,91 @@ Their journey took them to extraordinary places, from towering mountains to sand
         Their journey took them to extraordinary places, from towering mountains to sandy beaches. They met curious creatures and encountered unforeseen obstacles. But through it all, they shared an unbreakable bond, knowing that even in their contrasting natures, they had found the perfect travel companions. As the sun began to set on their extraordinary escapade, above and below stood side by side, their laughter echoing through the air. They had learned that sometimes the best adventures come from stepping out of your comfort zone and embracing the unexpected. And in the end, they realized that even though they were above and below, they had found a connection that would forever link them together.
                             " value="{{ chatMessage }}">
           </vex-widget-quick-line-chart>
+
           <div class="p-6">
             <div>
-              <h1>Analysis: Text</h1>
-              <p><strong>Pronouns:</strong> {{ pronouns.join(', ') }}</p>
-              <p><strong>Verbs:</strong> {{ verbs.join(', ') }}</p>
-              <p><strong>Nouns:</strong> {{ nouns.join(', ') }}</p>
-              <p><strong>Adjectives:</strong> {{ adjectives.join(', ') }}</p>
-              <p><strong>Adverbs:</strong> {{ adverbs.join(', ') }}</p>
-              <p><strong>People:</strong> {{ people.join(', ') }}</p>
-              <p><strong>Places:</strong> {{ places.join(', ') }}</p>
-              <p><strong>Organizations:</strong> {{ organizations.join(', ') }}</p>
-              <!-- <p><strong>Dates:</strong> {{ dates.join(', ') }}</p> -->
-              <!-- <p><strong>Values:</strong> {{ values.join(', ') }}</p> -->
-              <!-- Funcionalidades adicionais -->
-              <!-- <p><strong>Phrases:</strong> {{ phrases.join(', ') }}</p> -->
-              <p><strong>Clauses:</strong> {{ clauses.join(', ') }}</p>
-              <!-- <p><strong>Negations:</strong> {{ negations.join(', ') }}</p> -->
-              <p><strong>Questions:</strong> {{ questions.join(', ') }}</p>
-              <!-- <p><strong>Quotes:</strong> {{ quotes.join(', ') }}</p> -->
-              <p><strong>Acronyms:</strong> {{ acronyms.join(', ') }}</p>
-              <p><strong>Emails:</strong> {{ emails.join(', ') }}</p>
-              <p><strong>URLs:</strong> {{ urls.join(', ') }}</p>
-              <!-- <p><strong>Emojis:</strong> {{ emojis.join(', ') }}</p> -->
-              <!-- <p><strong>Mentions:</strong> {{ mentions.join(', ') }}</p> -->
-              <!-- <p><strong>Hashtags:</strong> {{ hashtags.join(', ') }}</p> -->
+              <h1>Analysis of "{{ textNLP }}"</h1>
+              <div *ngIf="pronouns.length">
+                <p><strong>Pronouns:</strong></p>
+                <div *ngFor="let pronoun of pronouns">
+                  <button mat-button color="accent" matTooltip="pronoun">{{ pronoun }}</button>
+                </div>
+              </div>
+              <div *ngIf="verbs.length">
+                <p><strong>Verbs:</strong></p>
+                <div *ngFor="let verb of verbs">
+                  <button mat-button color="accent" matTooltip="verb">{{ verb }}</button>
+                </div>
+              </div>
+              <div *ngIf="nouns.length">
+                <p><strong>Nouns:</strong></p>
+                <div *ngFor="let noun of nouns">
+                  <button mat-button color="accent" matTooltip="noun">{{ noun }}</button>
+                </div>
+              </div>
+              <div *ngIf="adjectives.length">
+                <p><strong>Adjectives:</strong></p>
+                <div *ngFor="let adjective of adjectives">
+                  <button mat-button color="accent" matTooltip="adjective">{{ adjective }}</button>
+                </div>
+              </div>
+              <div *ngIf="adverbs.length">
+                <p><strong>Adverbs:</strong></p>
+                <div *ngFor="let adverb of adverbs">
+                  <button mat-button color="accent" matTooltip="adverb">{{ adverb }}</button>
+                </div>
+              </div>
+              <div *ngIf="people.length">
+                <p><strong>People:</strong></p>
+                <div *ngFor="let person of people">
+                  <button mat-button color="accent" matTooltip="person">{{ person }}</button>
+                </div>
+              </div>
+              <div *ngIf="places.length">
+                <p><strong>Places:</strong></p>
+                <div *ngFor="let place of places">
+                  <button mat-button color="accent" matTooltip="place">{{ place }}</button>
+                </div>
+              </div>
+              <div *ngIf="organizations.length">
+                <p><strong>Organizations:</strong></p>
+                <div *ngFor="let organization of organizations">
+                  <button mat-button color="accent" matTooltip="organization">{{ organization }}</button>
+                </div>
+              </div>
+              <div *ngIf="clauses.length">
+                <p><strong>Clauses:</strong></p>
+                <div *ngFor="let clause of clauses">
+                  <button mat-button color="accent" matTooltip="clause">{{ clause }}</button>
+                </div>
+              </div>
+              <div *ngIf="questions.length">
+                <p><strong>Questions:</strong></p>
+                <div *ngFor="let question of questions">
+                  <button mat-button color="accent" matTooltip="question">{{ question }}</button>
+                </div>
+              </div>
+              <div *ngIf="acronyms.length">
+                <p><strong>Acronyms:</strong></p>
+                <div *ngFor="let acronym of acronyms">
+                  <button mat-button color="accent" matTooltip="acronym">{{ acronym }}</button>
+                </div>
+              </div>
+              <div *ngIf="emails.length">
+                <p><strong>Emails:</strong></p>
+                <div *ngFor="let email of emails">
+                  <button mat-button color="accent" matTooltip="email">{{ email }}</button>
+                </div>
+              </div>
+              <div *ngIf="urls.length">
+                <p><strong>URLs:</strong></p>
+                <div *ngFor="let url of urls">
+                  <button mat-button color="accent" matTooltip="url">{{ url }}</button>
+                </div>
+              </div>
             </div>
+        </div>
 
-          </div>
 
         </mat-step>
 
