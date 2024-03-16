@@ -282,6 +282,7 @@ errorText = "";
 
     this.mediaRecorder.stop(); // Pare a gravação
     this.isRecording = false; // Atualize o estado de gravação
+    this.isLoading = false; // Desativa progress
 
     this.mediaRecorder.onstop = () => {
       const audioBlob = new Blob(this.audioChunks, { type: 'audio/wav' });

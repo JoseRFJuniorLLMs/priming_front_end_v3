@@ -11,7 +11,12 @@ export class ImagemPopupComponent implements OnInit {
   imagens = [
     'assets/img/logo/priming.png',
     'assets/img/logo/priming2.png',
-    'assets/img/logo/priming3.png'
+    'assets/img/logo/priming3.png',
+    'assets/img/logo/priming4.png',
+    'assets/img/logo/priming5.png',
+    'assets/img/logo/priming6.png',
+    'assets/img/logo/priming7.png',
+    'assets/img/logo/priming8.png',
   ];
   imagemAtual: string | undefined; // Definido sem valor inicial aqui
 
