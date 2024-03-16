@@ -1,8 +1,12 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
 
+import { MatBadgeModule } from '@angular/material/badge';
+import { MatBottomSheet, MatBottomSheetModule } from '@angular/material/bottom-sheet';
+import { MatButtonModule } from '@angular/material/button';
 import { MatChipsModule } from '@angular/material/chips';
+import { MatDialog } from '@angular/material/dialog';
+import { MatIconModule } from '@angular/material/icon';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -10,18 +14,13 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { scaleInOutAnimation } from '@vex/animations/scale-in-out.animation';
 
-import { MatBadgeModule } from '@angular/material/badge';
-import { MatProgressBarModule } from '@angular/material/progress-bar';
-
-import { MatBottomSheet, MatBottomSheetModule } from '@angular/material/bottom-sheet';
-import { MatDialog } from '@angular/material/dialog';
-
 import { RsvpreaderComponent } from 'src/app/pages/dashboards/components/rsvpreader/rsvpreader.component';
 import { ShareBottomBookComponent } from 'src/app/pages/dashboards/components/share-bottom-book/share-bottom-book.component';
 import { ShareBottomGpt4Component } from 'src/app/pages/dashboards/components/share-bottom-gpt4/share-bottom-gpt4.component';
 import { ShareBottomWimHofComponent } from '../../../../../src/app/pages/dashboards/components/share-bottom-wim-hof/share-bottom-wim-hof.component';
 import { ShareBottomSheetComponent } from './../../../pages/dashboards/components/share-bottom-sheet/share-bottom-sheet.component';
 
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'vex-footer',
@@ -47,7 +46,8 @@ import { ShareBottomSheetComponent } from './../../../pages/dashboards/component
     MatBottomSheetModule,
     ShareBottomGpt4Component,
     ShareBottomBookComponent,
-    RsvpreaderComponent
+    RsvpreaderComponent,
+    HttpClientModule,
   ]
 })
 export class FooterComponent implements OnInit, OnDestroy {
@@ -60,10 +60,17 @@ export class FooterComponent implements OnInit, OnDestroy {
   showButton: boolean = false;
   result?: string;
 
+  audios: string[] = [
+    '../../assets/audio/bineural/music.mp3'
+  ];
+
+  audioPlayer: HTMLAudioElement | null = null;
+
   constructor(
     private cdr: ChangeDetectorRef,
     private _bottomSheet: MatBottomSheet,
     private dialog: MatDialog,
+    private http: HttpClient
     //@Inject(MAT_DIALOG_DATA) public data: { texto: string },
     ) { }
 
@@ -71,21 +78,17 @@ export class FooterComponent implements OnInit, OnDestroy {
   displayTimeMin: string = '30';
   timer: any;
   durationInSeconds: number = 1800;
-
   selected: string | null = null;
   icon1: string = 'some-icon1';
   icon2: string = 'some-icon2';
   icon3: string = 'some-icon3';
-
   icon60fps: string = 'mat:60fps';
   icon30fps: string = 'mat:30fps';
   iconmilitarytech: string = 'mat:military_tech';
-
-
   paused: boolean = false;
   remainingSeconds: number = 0;
-
   progress: number = 0;
+  isPlaying = false;
 
 changeIcons(): void {
   this.icon60fps = 'mat:60fps_select';
@@ -224,4 +227,34 @@ openBothConfigsZettelkasten() {//zettelkasten
   this._bottomSheet.open(ShareBottomWimHofComponent);
 }
 
+playBiNeural() {
+  // Se já existe um objeto de áudio e o áudio está tocando, pausá-lo
+  if (this.audioPlayer && !this.audioPlayer.paused) {
+    this.audioPlayer.pause();
+    this.isPlaying = false; // Atualiza o estado para refletir que o áudio foi pausado
+  } else {
+    // Se o áudio está pausado ou ainda não foi iniciado, começar a reprodução
+    if (this.audioPlayer) {
+      this.audioPlayer.play();
+      this.isPlaying = true; // Atualiza o estado para refletir que o áudio está tocando
+    } else {
+      // Se não há objeto de áudio, criar um e começar a tocar
+      const randomIndex = Math.floor(Math.random() * this.audios.length);
+      const audioToPlay = this.audios[randomIndex];
+      this.http.get(audioToPlay, { responseType: 'blob' }).subscribe(blob => {
+        const url = URL.createObjectURL(blob);
+        this.audioPlayer = new Audio(url);
+        this.audioPlayer.play().catch(error => console.error("Erro ao tentar reproduzir o áudio:", error));
+        this.audioPlayer.onended = () => {
+          this.isPlaying = false; // Atualiza o estado quando o áudio termina
+          URL.revokeObjectURL(url); // Libera o objeto URL
+          this.audioPlayer = null; // Remove a referência ao objeto Audio
+        };
+        this.isPlaying = true; // Atualiza o estado para refletir que o áudio está tocando
+      });
+    }
+  }
 }
+
+
+}// fim

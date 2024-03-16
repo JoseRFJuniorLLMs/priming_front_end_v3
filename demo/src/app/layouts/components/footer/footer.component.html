@@ -83,6 +83,10 @@
     <mat-icon class="icon-sm ltr:mr-2 rtl:ml-2"
       [svgIcon]="selected === 'get-vex1' ? 'mat:30fps_select' : 'mat:30fps'"></mat-icon>
   </a>
+  <button mat-raised-button color="primary" matBadgeSize="large" matTooltip="Play Music: Binaural influences the mental and physiological state of the listener, promoting relaxation, focus, meditation, or even helping with sleep." (click)="playBiNeural()">
+    <mat-icon class="icon-sm" svgIcon="mat:{{ isPlaying ? 'pause_circle' : 'play_circle' }}"></mat-icon>
+  </button>
+
 </div>
 
 <div class="flex-auto flex items-center container">
