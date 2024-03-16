@@ -156,11 +156,11 @@ export class DashboardAnalyticsComponent implements OnInit, AfterViewInit {
   private readyListener: () => void;
   private finishListener: () => void;
 
-  mostrarImagem = true;
+  mostrarImagem: boolean = true;
 
 //NLP
 // Manipulação de Texto
-textNLP: string = 'After a long day at work, she quickly went home to relax and prepare for the busy day ahead.';
+textNLP: string = '';
 pronouns: string[] = []; // Pronome
 verbs: string[] = []; // Verbo
 nouns: string[] = []; // Substantivo
@@ -198,8 +198,6 @@ showRSVPReader: boolean = false;
 voices: string[] = ['alloy', 'echo', 'fable', 'onyx', 'nova', 'shimmer'];
 voiceSelection: string = 'defaultVoice'; // Valor inicial para voz selecionada
 selectedVoice: string = ''; // Adiciona a declaração para 'selectedVoice'
-
-
 
 //==========================fim de declaracoes=============================//
 
@@ -253,8 +251,7 @@ openDialogX(textDisplay: string): void {
 
   /* ==================abrirPopup==================== */
   abrirPopup() {
-    this.dialog.open(ImagemPopupComponent, {
-      // Configurações, se necessário (ex: width, height)
+      this.dialog.open(ImagemPopupComponent, {
     });
   }
 
@@ -272,6 +269,10 @@ openDialogX(textDisplay: string): void {
   width: '900px',
   height: '800px',
   data: { texto: textDisplay }
+  });
+
+  this.dialogRef.afterOpened().subscribe(() => {
+    this.performAnalysis();
   });
 
     // Quando o diálogo for fechado, limpa a referência
@@ -307,6 +308,9 @@ openDialogX(textDisplay: string): void {
   /* ==================OnINIT==================== */
     ngOnInit(): void {
 
+    //this.words = this.chatMessage.split(' ');
+    this.performAnalysis();
+
     this.abrirPopup();
     this.analyzeText();
 
@@ -327,9 +331,7 @@ openDialogX(textDisplay: string): void {
       this.getCurrentTime();
     });
 
-/*     if (screenfull.isEnabled) {
-      screenfull.request();
-    } */
+
   }
 
    /* ==================COLUMNS COURSE==================== */
@@ -452,7 +454,6 @@ openDialogX(textDisplay: string): void {
   onSelection(selection: 'phrase' | 'text' | 'word' | 'srvp') {
     this.selectedChip = this.selectedChip === selection ? null : selection;
     this.openSnackBar(selection);
-    this.layoutService.collapseCloseSidenav();
   }
 
   /* ==================WAVESURFER==================== */
@@ -624,8 +625,7 @@ displayFullText(text: string): void {
     });
 
     snackBarRef.afterDismissed().subscribe(() => {
-      //this.playSound('../../../../assets/audio/toc.wav');
-      //this.openDialog(textDisplay);
+   //
     });
   }
 
@@ -848,8 +848,15 @@ selectVoice(voice: string): void {
 
 
 /* ==================analyzeText==================== */
+performAnalysis(): void {
+  // Atualiza textNLP com o valor de chatMessage
+  this.textNLP = this.chatMessage;
+  // Agora chama analyzeText para processar o texto
+  this.analyzeText();
+}
+
 analyzeText() {
-  const doc = nlp(this.textNLP);
+  const doc = nlp(this.chatMessage);
   // Análise básica
   this.pronouns = doc.pronouns().out('array');
   this.verbs = doc.verbs().out('array');
@@ -862,7 +869,7 @@ analyzeText() {
   //this.dates = doc.dates().out('array');
   //this.values = doc.values().out('array');
   // Funcionalidades adicionais
-  //this.phrases = doc.phrases().out('array'); // Frases
+  //this.phrases = doc.phrases().out('any'); // Frases
   this.clauses = doc.clauses().out('array'); // Cláusulas
   //this.negations = doc.negations().out('array'); // Negativas
   this.questions = doc.questions().out('array'); // Perguntas
