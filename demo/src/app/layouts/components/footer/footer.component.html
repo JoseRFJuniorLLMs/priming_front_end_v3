@@ -1,0 +1,118 @@
+<div class="flex-auto flex items-center container">
+  <a class="action flex-none" (click)="stopProgressBar()" [matTooltip]="selected === 'get-vex3' ? 'Pause' : 'Pause'"
+    color="primary" id="get-vex3" mat-flat-button>
+    <mat-slide-toggle color="warn" [checked]="selected === 'get-vex3'" (change)="onToggleChange('get-vex3')">
+    </mat-slide-toggle>
+    <mat-icon class="icon-sm ltr:mr-2 rtl:ml-2"
+      [svgIcon]="selected === 'get-vex3' ? 'mat:sentiment_dissatisfied' : 'mat:front_hand'"></mat-icon>
+  </a>
+
+  <!-- <a color="primary" id="get-vex5" mat-flat-button> -->
+  <!-- (click)="openBothConfigsEpubs()" -->
+  <!--   <a color="primary" id="get-vex7" mat-flat-button> -->
+
+<!--   <button
+    matTooltip=" RSVP, the technique of : Rapid Serial Visual Presentation, is a method used to present visual information, such as words or images, in a quick sequence, one after the other, at the same visual fixation point. This technique is often used in psychological research on visual processing and attention, as well as in practical applications to improve speed reading and the efficiency of information absorption."
+    (click)="openBothConfigsRSVP()" class="config-panel-toggle2" color="primary" mat-fab type="button">
+    <i class="fa fa-book" style="font-size: 24px;"></i>
+  </button> -->
+
+  <button
+    matTooltip="Shadowing can be a very effective language learning technique, especially for beginners. It helps to familiarize the learner with the sounds and rhythms of the language, and can also help to build vocabulary and improve listening skills. It can be particularly useful for languages that have a different phonetic system than the learner's native language. The shadowing technique can be used in a variety of ways. Some people prefer to listen to a recording and repeat each sentence or phrase immediately after hearing it."
+    (click)="openBothConfigsGpt()" class="config-panel-toggle2" color="primary" mat-fab type="button">
+    <i class="fa fa-book-reader" style="font-size: 24px;"></i>
+  </button>
+  <!--   </a> -->
+  <!--   </a> -->
+
+  <!-- (click)="openBothConfigsGpt4()" -->
+  <!--  <a color="primary" id="get-vex6" mat-flat-button> -->
+  <button
+    matTooltip="GPT-Help, which stands for Generative Pre-trained Transformer 4, is a multimodal large language model developed by OpenAI. It's the fourth iteration in their series of foundational models and has generated significant buzz in the AI community."
+    (click)="openBothConfigsGpt()" class="config-panel-toggle2" color="primary" mat-fab type="button">
+    <i class="fa fa-robot" style="font-size: 24px;"></i>
+  </button>
+  <!--   </a> -->
+
+  <!-- (click)="openBothConfigsWimHof()" -->
+  <!--  <a color="primary" id="get-vex7" mat-flat-button> -->
+  <button
+    matTooltip="The Wim Hof Method is a powerful approach that aims to keep your body and mind in their optimal natural state. Developed by Dutch extreme athlete Wim Hof (also known as “The Iceman”), this method combines controlled breathing and cold exposure to stimulate various physiological processes."
+    (click)="openBothConfigsWimHof()" class="config-panel-toggle4" color="primary" mat-fab type="button">
+    <i class="fa fa-yin-yang" style="font-size: 24px;"></i>
+  </button>
+  <!--   </a> -->
+
+  <!-- (click)="openBothConfigsBooks()" -->
+  <!-- <a color="primary" id="get-vex8" mat-flat-button> -->
+  <button
+    matTooltip="The Zettelkasten Method (Linking notes, One idea per note), literally translated from German as slip box method, is a note-taking system designed for knowledge management and creative thinking. Developed by sociologist Niklas Luhmann, it emphasizes capturing ideas on individual notes and then linking them together to form a web of knowledge."
+    (click)="openBothConfigsWimHof()" class="config-panel-toggle3" color="primary" mat-fab type="button">
+    <i class="fa fa-feather-alt" style="font-size: 24px;"></i>
+  </button>
+  <!--   </a> -->
+  <!-- POMODORO 90 -->
+  <a class="action flex-none" disabled
+    matTooltip="Pomodoro Technique is a time management method developed by Francesco Cirillo. It’s designed to enhance productivity and focus by breaking work into manageable intervals.»»»»Pomodoro 90: {{ displayTime }}"
+    color="primary" id="get-vex4" mat-flat-button>
+    <mat-slide-toggle color="warn" [checked]="selected === 'get-vex4'"
+      (change)="onToggleChange('get-vex4')"></mat-slide-toggle>
+    <mat-icon class="icon-sm ltr:mr-2 rtl:ml-2" svgIcon="mat:alarm_on"></mat-icon>
+    <mat-icon class="icon-sm ltr:mr-2 rtl:ml-2"
+      [svgIcon]="selected === 'get-vex4' ? 'mat:military_tech' : 'mat:settings_accessibility'"></mat-icon>
+  </a>
+
+  <!-- POMODORO 60 -->
+  <a class="action flex-none"
+    matTooltip="Pomodoro Technique is a time management method developed by Francesco Cirillo. It’s designed to enhance productivity and focus by breaking work into manageable intervals.»»»»Pomodoro 60: {{ displayTime }}"
+    color="primary" id="get-vex2" mat-flat-button>
+    <mat-slide-toggle color="warn" [checked]="selected === 'get-vex2'"
+      (change)="onToggleChange('get-vex2')"></mat-slide-toggle>
+    <mat-icon class="icon-sm ltr:mr-2 rtl:ml-2" svgIcon="mat:alarm_on"></mat-icon>
+    <mat-icon class="icon-sm ltr:mr-2 rtl:ml-2"
+      [svgIcon]="selected === 'get-vex2' ? 'mat:60fps_select' : 'mat:60fps'"></mat-icon>
+  </a>
+
+  <!-- POMODORO 30 -->
+  <a class="action flex-none"
+    matTooltip="Pomodoro Technique is a time management method developed by Francesco Cirillo. It’s designed to enhance productivity and focus by breaking work into manageable intervals.»»»»Pomodoro 30: {{ displayTime }}"
+    color="primary" id="get-vex1" mat-flat-button>
+    <mat-slide-toggle color="warn" [checked]="selected === 'get-vex1'" (change)="onToggleChange('get-vex1')">
+    </mat-slide-toggle>
+    <mat-icon class="icon-sm ltr:mr-2 rtl:ml-2" svgIcon="mat:alarm_on"></mat-icon>
+    <mat-icon class="icon-sm ltr:mr-2 rtl:ml-2"
+      [svgIcon]="selected === 'get-vex1' ? 'mat:30fps_select' : 'mat:30fps'"></mat-icon>
+  </a>
+
+  <mat-progress-bar mode="buffer" value="{{ displayTimeMin }}" color="primary">
+  </mat-progress-bar>
+</div>
+
+<div class="flex-auto flex items-center container">
+
+  <!-- PLAY -->
+  <button mat-raised-button color="primary" matBadgeSize="large" matTooltip="Play Music: Binaural influences the mental and physiological state of the listener, promoting relaxation, focus, meditation, or even helping with sleep." (click)="playBiNeural()">
+    <mat-icon class="icon-sm" svgIcon="mat:{{ isPlaying ? 'pause_circle' : 'play_circle' }}"></mat-icon>
+  </button>
+
+
+  <mat-progress-bar mode="buffer" value="{{ displayTimeMin }}" color="primary">
+  </mat-progress-bar>
+
+    <mat-divider></mat-divider>
+
+  <!-- POMODORO -->
+  <button mat-raised-button color="primary" value="{{ displayTimeMin }}" color="warn" matBadge="{{ displayTimeMin }}"
+    matBadgeSize="large" matTooltip="Core Time Intervals
+  Pomodoro:  A single Pomodoro is 30 minutes long, dedicated to focused work on a task.
+  Short Break: After each Pomodoro, take a short 5-minute break to rest and reset your mind.
+  {{ displayTime }}" matBadgePosition="before" matBadgeColor="warn" (click)="pauseTimer()">
+    Pomodoro {{ displayTime }}
+  </button>
+
+
+
+  <mat-progress-bar mode="buffer" value="{{ displayTimeMin }}" color="warn">
+  </mat-progress-bar>
+
+</div>

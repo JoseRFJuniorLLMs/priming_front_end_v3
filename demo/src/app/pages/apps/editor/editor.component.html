@@ -1,0 +1,13 @@
+<div class="h-full flex flex-col">
+  <vex-secondary-toolbar class="flex-none shadow-none" current="WYSIWYG Editor">
+    <vex-breadcrumbs [crumbs]="['Apps', 'WYSIWYG Editor']"></vex-breadcrumbs>
+  </vex-secondary-toolbar>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/k89GF-i_Eyg" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+  <div class="bg-foreground flex-1 overflow-y-auto">
+    <quill-editor
+      [styles]="{ flex: '1 1 0' }"
+      [formControl]="form"
+      class="w-full"></quill-editor>
+  </div>
+</div>

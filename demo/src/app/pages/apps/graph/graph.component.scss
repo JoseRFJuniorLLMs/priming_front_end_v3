@@ -1,0 +1,14 @@
+// graph.component.scss
+:host {
+  display: block;
+  height: 100%;
+}
+
+ngx-graph {
+  width: 100%;
+  height: 100%;
+
+  .node text {
+    pointer-events: none;
+  }
+}

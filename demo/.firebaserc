@@ -1,0 +1,9 @@
+{
+  "projects": {
+    "default": "priming-ing",
+    "public": "public",
+    "yes": "primingv1"
+  },
+  "targets": {},
+  "etags": {}
+}

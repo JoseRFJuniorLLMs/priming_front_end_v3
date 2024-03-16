@@ -1,0 +1,26 @@
+:host {
+  @apply bg-foreground dark:bg-base border-t text-default flex w-full bottom-0 relative;
+  height: var(--vex-footer-height);
+  z-index: var(--vex-footer-z-index);
+}
+
+// footer.component.scss
+.demo-section {
+  font-size: 24px;
+  width: 80px;
+  height: 80px;
+}
+
+.mat-icon.custom-icon {
+  font-size: 60px; // Ajuste o tamanho conforme necessário
+  height: 60px; // Ajuste a altura conforme necessário
+  width: 60px; // Ajuste a largura conforme necessário
+}
+
+.mat-icon.custom-icon-menu {
+  font-size: 40px; // Ajuste o tamanho conforme necessário
+  height: 40px; // Ajuste a altura conforme necessário
+  width: 40px; // Ajuste a largura conforme necessário
+}
+
+

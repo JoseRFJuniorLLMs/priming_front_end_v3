@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Priming</title>
+  <base href="/" />
+  <!--
+    <script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-analytics.js";
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+
+    // Your web app's Firebase configuration
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    const firebaseConfig = {
+      apiKey: "AIzaSyBzifFEOQrDU0fFDAq0h1wxd3u_Dyq-DPo",
+      authDomain: "primingv1.firebaseapp.com",
+      projectId: "primingv1",
+      storageBucket: "primingv1.appspot.com",
+      messagingSenderId: "495734453317",
+      appId: "1:495734453317:web:ad014d643536c155559f2c",
+      measurementId: "G-FP818D51ZF"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+  </script>  -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <meta content="width=device-width, initial-scale=1" name="viewport" />
+  <link href="favicon.ico" rel="icon" type="image/x-icon" />
+
+</head>
+<body dir="ltr">
+<style>
+  #vex-splash-screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #111827;
+    z-index: 99999;
+    pointer-events: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+  }
+
+  .vex-splash-screen-loader {
+    width: 150px;
+    height: 22px;
+    border-radius: 20px;
+    color: #0076b9;
+    border: 2px solid;
+    position: relative;
+  }
+
+  .vex-splash-screen-loader::before {
+    content: "";
+    position: absolute;
+    margin: 2px;
+    inset: 0 100% 0 0;
+    border-radius: inherit;
+    background: currentColor;
+    animation: vex-splash-screen-loader-animation 2s forwards;
+  }
+
+  @keyframes vex-splash-screen-loader-animation {
+    100% {
+      inset: 0;
+    }
+  }
+</style>
+
+<div id="vex-splash-screen">
+  <img
+    height="70"
+    width="70"
+    loading="eager"
+    src="assets/img/logo/logo.svg" />
+  <div class="vex-splash-screen-loader"></div>
+</div>
+
+<vex-root></vex-root>
+</body>
+</html>

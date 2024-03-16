@@ -1,0 +1,7 @@
+{
+    "hosting": {
+      "site": "priming-ing",
+      "public": "dist"
+    }
+  }
+  

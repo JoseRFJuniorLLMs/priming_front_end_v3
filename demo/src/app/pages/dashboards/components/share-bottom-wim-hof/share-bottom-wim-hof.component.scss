@@ -1,0 +1,18 @@
+.mat-nav-list {
+  width: 100%;
+  height: 100%;
+}
+
+// styles.scss (ou qualquer outro arquivo SCSS relevante)
+
+.iframe-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; // Ajuste a altura conforme necessário
+}
+
+iframe {
+  width: 100%;
+  height: 100%;
+}

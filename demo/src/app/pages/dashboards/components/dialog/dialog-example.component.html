@@ -1,0 +1,132 @@
+<mat-dialog-content>
+
+  <div class="container p-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+    <div class="loading-indicator" *ngIf="isLoading">
+      <mat-progress-spinner mode="indeterminate" color="warn"></mat-progress-spinner>
+      <mat-progress-bar mode="indeterminate" color="warn"></mat-progress-bar>
+      <mat-progress-bar mode="buffer" color="warn"></mat-progress-bar>
+      <mat-progress-bar mode="query" color="warn"></mat-progress-bar>
+    </div>
+    <div class="error-message" *ngIf="errorText">
+      <p>{{ errorText }}</p>
+    </div>
+  </div>
+
+  <div>{{displayedHtml}}</div>
+  <mat-horizontal-stepper #stepper="matHorizontalStepper" [linear]="true">
+    <ng-template matStepperIcon="edit">
+      <mat-icon svgIcon="mat:done_all"></mat-icon>
+    </ng-template>
+
+    <ng-template matStepperIcon="done">
+      <mat-icon svgIcon="mat:done_all"></mat-icon>
+    </ng-template>
+
+    <mat-step>
+      <ng-template matStepLabel>Listen</ng-template>
+      <mat-card class="example-card">
+        <mat-card-header>
+          <mat-card-title-group>
+            <mat-card-title>
+              <!-- Usando interpolação de strings para exibir o texto com palavras destacadas -->
+              <span class="highlighted-yellow" [innerHTML]="displayedHtml"></span>
+            </mat-card-title>
+          </mat-card-title-group>
+        </mat-card-header>
+        <mat-card-content>
+        </mat-card-content>
+      </mat-card>
+    </mat-step>
+
+    <mat-step>
+      <ng-template matStepLabel>Read</ng-template>
+      <mat-card class="example-card">
+        <mat-card-header>
+          <mat-card-title-group (click)="playSound()">
+            <mat-card-title>
+              <!-- Usando interpolação de strings para exibir o texto com palavras destacadas -->
+              <span class="highlighted-gray" [innerHTML]="displayedHtml"></span>
+            </mat-card-title>
+          </mat-card-title-group>
+        </mat-card-header>
+        <mat-card-content>
+        </mat-card-content>
+      </mat-card>
+    </mat-step>
+
+    <mat-step>
+      <ng-template matStepLabel>Speak</ng-template>
+      <mat-card class="example-card">
+
+        <mat-dialog-actions>
+
+          <button class="play-sound-button2" mat-icon-button [color]="isRecording ? 'warn' : 'red'"
+          type="button" matTooltip="Start Recording"
+            (click)="startRecording()">
+            <mat-icon svgIcon="mat:mic"></mat-icon>
+          </button>
+
+          <button class="play-sound-button2" mat-icon-button [color]="isRecording ? 'red' : 'warn'"
+          type="button" matTooltip="Stop Recording"
+            (click)="stopRecording()">
+            <mat-icon svgIcon="mat:stop"></mat-icon>
+          </button>
+
+        </mat-dialog-actions>
+
+        <mat-card class="example-card">
+          <mat-card-header>
+            <mat-card-title>
+              <!-- Usando interpolação de strings para exibir o texto com palavras destacadas -->
+              <span [innerHTML]="displayedHtml"></span>
+            </mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <div>
+              <h1>Grammar Analysis</h1>
+              <p><strong>Pronouns:</strong> {{ pronouns.join(', ') }}</p>
+              <p><strong>Verbs:</strong> {{ verbs.join(', ') }}</p>
+              <p><strong>Nouns:</strong> {{ nouns.join(', ') }}</p>
+              <p><strong>Adjectives:</strong> {{ adjectives.join(', ') }}</p>
+              <p><strong>Adverbs:</strong> {{ adverbs.join(', ') }}</p>
+              <p><strong>People:</strong> {{ people.join(', ') }}</p>
+              <p><strong>Places:</strong> {{ places.join(', ') }}</p>
+              <p><strong>Organizations:</strong> {{ organizations.join(', ') }}</p>
+              <!-- <p><strong>Dates:</strong> {{ dates.join(', ') }}</p> -->
+              <!-- <p><strong>Values:</strong> {{ values.join(', ') }}</p> -->
+              <!-- Funcionalidades adicionais -->
+              <!-- <p><strong>Phrases:</strong> {{ phrases.join(', ') }}</p> -->
+              <p><strong>Clauses:</strong> {{ clauses.join(', ') }}</p>
+              <!-- <p><strong>Negations:</strong> {{ negations.join(', ') }}</p> -->
+              <p><strong>Questions:</strong> {{ questions.join(', ') }}</p>
+              <!-- <p><strong>Quotes:</strong> {{ quotes.join(', ') }}</p> -->
+              <p><strong>Acronyms:</strong> {{ acronyms.join(', ') }}</p>
+              <p><strong>Emails:</strong> {{ emails.join(', ') }}</p>
+              <p><strong>URLs:</strong> {{ urls.join(', ') }}</p>
+              <!-- <p><strong>Emojis:</strong> {{ emojis.join(', ') }}</p> -->
+              <!-- <p><strong>Mentions:</strong> {{ mentions.join(', ') }}</p> -->
+              <!-- <p><strong>Hashtags:</strong> {{ hashtags.join(', ') }}</p> -->
+            </div>
+          </mat-card-content>
+        </mat-card>
+
+      </mat-card>
+    </mat-step>
+  </mat-horizontal-stepper>
+</mat-dialog-content>
+
+<!-- Div para o WaveSurfer -->
+<mat-progress-bar id="1" mode="buffer"></mat-progress-bar>
+<div #waveform class="waveform-container" style="cursor: pointer;"></div>
+<span class="example-spacer"></span>
+<mat-progress-bar id="2" class="play-sound-button" color="warn" mode="buffer"></mat-progress-bar>
+
+<button mat-fab style="cursor: pointer;" class="play-sound-button" color="warn"
+  matTooltip="Play : Repeat as many times as necessary!" type="button" (click)="playSound()">
+  <mat-icon svgIcon="mat:play_arrow"></mat-icon>
+</button>
+
+<button mat-icon-button matTooltip="Close" class="close-button" color="warn" format_align_left type="button"
+  (click)="closeDialog()">
+  <mat-icon svgIcon="mat:close"></mat-icon>
+</button>

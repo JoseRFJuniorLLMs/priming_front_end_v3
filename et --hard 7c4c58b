@@ -1,0 +1,132 @@
+[33m7c4c58b[m[33m ([m[1;36mHEAD -> [m[1;32mdev-junior[m[33m)[m UPGRADE TEST
+[33m29b2db5[m READ SRVP
+[33m9b53229[m RSVPREADER
+[33m361f57d[m RSVPREADER
+[33m0d6ff64[m rsvp
+[33m0c68ad0[m update RSVP
+[33mfb0291f[m BUG CLICK
+[33m64295da[m SELECT, BUG
+[33m4d1659c[m progress leyout
+[33mecfeee1[m lesson table update
+[33ma52cc39[m graph
+[33m1de29dc[m graph
+[33m3f6a483[m update crud
+[33me854fd6[m crud lessons
+[33m2bad269[m courses
+[33m571ec55[m update books
+[33m05dbf7a[m contador de pagina
+[33m83751df[m book dump
+[33md14e594[m update music
+[33m45e46af[m upgrade books
+[33m57d013c[m import ePub from 'epubjs';
+[33m46d1d84[m books update
+[33maf37f17[m update books
+[33mbda0a14[m word list begin
+[33m665f6f6[m UPDATE GRAMATICA
+[33meea8bb3[m update image
+[33ma0ade0c[m VERSAO CORRIGIDA ! SELECT
+[33m9ac824c[m compromise
+[33mf048c2d[m BUG DE WORD PHASE TEXT
+[33me21eb93[m snackbar retorno
+[33m75c0cce[m iupdate limpo
+[33m77741e4[m update TELA
+[33m77c6826[m volume update
+[33ma14fb25[m velocidade
+[33mbf0dccb[m volume velocidade
+[33meec6601[m update
+[33m9429e5d[m botao grande
+[33mefce82d[m update
+[33m48bf672[m fonte tamanho ok
+[33mce674bc[m falta ficar grande a letra
+[33me6ed416[m Repeat as many times as necessary!
+[33mf2ba5ae[m UPPDATE PAINEL
+[33m73305a0[m update PAINEL
+[33m612a47f[m import { MatHorizontalStepper } from '@angular/material/stepper';
+[33maaa396f[m update read
+[33m513cdf2[m falta correcoes em botoes
+[33mc6c255e[m update com bug de wasper !
+[33m0747e86[m update com erro na transcricao
+[33mfeabee7[m ok updatea dialog speach to text, text to speach
+[33mbaac6f1[m update contagem wizard
+[33ma0343b2[m painel sound
+[33m9bfa971[m painel
+[33m3ca6015[m update nova arquitetura e bugs
+[33m4dce4c1[m sound
+[33mcc58366[m imagem update
+[33m6f4c6d8[m update: lesson
+[33mb70eee1[m MOCK TELA DASHBOARD
+[33m0ca5100[m PAINEL UPDATE
+[33mea6a7e9[m UPDATE SICRONIA
+[33m8565e94[m update SINCRONIA
+[33m20dbfd5[m update
+[33mb5167f5[m UPDATE
+[33m6930f2b[m UPDATE
+[33m8eee7d5[m UPDATE
+[33m3c525b8[m FRIZ V2 GPT4
+[33mfbb829c[m V1 UPGRADE
+[33m1ddf828[m V1 UPDATE
+[33m6d75735[m times
+[33m7b0a900[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m update
+[33mb68218f[m update
+[33mcc0ed41[m update wave
+[33mc295512[m sound v1
+[33mebc12e5[m record
+[33m5a2ce85[m speeach
+[33m5e52b57[m update gpt4
+[33maac89f6[m update gpt
+[33me4dbe4f[m gpt4
+[33m9c30d94[m update
+[33me19b2b1[m gpt4
+[33ma36d025[m dasboard
+[33m7a52f93[m   [class.vex-layout-toolbar-fixed]="config.toolbar.fixed"
+[33ma5ea977[m rest
+[33mb2d307a[m times
+[33m0c58b92[m UPDATE: footer share-boottom
+[33ma4e805c[m update front
+[33m3c9885d[m notes udpdate
+[33m9ddaf7d[m notes
+[33maed440f[m notes
+[33m01f8849[m update read book
+[33m91b7e63[m update upub
+[33m55717f5[m update file, epub
+[33m058551d[m file.pdf
+[33m7de9840[m update
+[33mc9f873f[m update footer
+[33md2c0b16[m update game
+[33me244ce0[m toogglet
+[33m6c47a6b[m update toggle
+[33m85a51c9[m update clock
+[33m3899b71[m antes time
+[33m08e95b5[m togglet
+[33m6c8f6c4[m togglet
+[33mf3bc522[m wim hof
+[33m8792ad3[m video
+[33ma39628b[m update templeat
+[33m82c492d[m epub
+[33m5c446b0[m pengiun
+[33m2486f5e[m peguin books
+[33m94ff2ba[m pdf
+[33m8a6f28e[m update login
+[33m0ea2b38[m login
+[33md77b27e[m update
+[33mf956759[m UPDATE
+[33m8de3e3c[m firebase
+[33me30911a[m update
+[33mc4f7e52[m UPDATE
+[33m07b6e92[m update
+[33mfcb2ab2[m update
+[33m347546a[m game 1
+[33mfd6924f[m drag drop list
+[33m73fd29e[m update games
+[33mb456111[m update
+[33m673f853[m Priming Phrase Shape Game
+[33mc4a59be[m update
+[33m60b8c52[m update model
+[33m05c90a7[m bitcoin
+[33m1600dd5[m updateStatusStudent;StatusStudent;StatusStudent;StatusStudent;StatusStudent;StatusStudent;StatusStudent;StatusStudent;StatusStudent;
+[33mf414add[m update
+[33m46178a5[m update services
+[33md23c5d8[m model, service
+[33m0beae16[m UPDATE
+[33md662bf5[m first commit
+[33m636a3ce[m first commit

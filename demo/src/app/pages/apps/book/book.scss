@@ -1,0 +1,57 @@
+#waveform {
+  background: linear-gradient(to right, #ffffff, #ffffff);
+  border-radius: 5px; // Arredondar os cantos para uma aparência suave
+}
+
+// Container do Waveform
+.waveform-container {
+  position: relative;
+  width: 100%; // ou a largura desejada
+  height: auto; // ou a altura desejada
+  // Outros estilos necessários para o container
+}
+
+// Waveform
+#waveform {
+  cursor: pointer;
+  // Estilos específicos para o waveform
+}
+
+// Tooltip
+.tooltip-meu-tooltip {
+  position: absolute;
+  bottom: 100%; // Coloca o tooltip acima do elemento trigger
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: black;
+  color: white;
+  padding: 5px;
+  border-radius: 4px;
+  font-size: 12px;
+  display: none; // Inicialmente oculto, mostre via JS ou evento
+  z-index: 1000; // Garante que o tooltip apareça sobre outros elementos
+  white-space: nowrap; // Previne quebra de linha no texto do tooltip
+
+  // Adiciona uma pequena seta ou "ponta" ao tooltip, se desejar
+  &:after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: black transparent transparent transparent;
+  }
+}
+
+// Exemplo de classe adicional para mostrar o tooltip (adicione esta classe via JavaScript)
+.tooltip-visible {
+  display: block;
+}
+
+
+
+
+
+

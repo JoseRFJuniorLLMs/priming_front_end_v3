@@ -1,0 +1,34 @@
+<mat-toolbar color="primary">
+  <span>GPT Help</span>
+</mat-toolbar>
+<br>
+<vex-page-layout mode="card">
+
+  <vex-page-layout-content class="container">
+    <div class="card">
+
+
+          <div class="p-6">
+
+              <div class="panel">
+               <!--  <h1>{{ chatMessage }}</h1> -->
+
+                <div class="container p-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+                      <div class="question-form">
+                      <textarea matTooltip="GPT" (paste)="questionToOpenAI(questionText)" (keyup.enter)="questionToOpenAI(questionText)" cols="100" rows="15" type="text" [(ngModel)]="questionText" placeholder="What is your doubt ?"></textarea>
+                    </div>
+
+                  <div class="loading-indicator" *ngIf="isLoading">
+                    <p>Loading...</p> <!-- trocar por um loadin -->
+                  </div>
+
+                  <div class="error-message" *ngIf="errorText">
+                    <p>{{ errorText }}</p>
+                  </div>
+                </div>
+              </div>
+          </div>
+
+    </div>
+  </vex-page-layout-content>
+</vex-page-layout>
