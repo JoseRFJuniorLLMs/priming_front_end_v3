@@ -83,25 +83,10 @@
     <mat-icon class="icon-sm ltr:mr-2 rtl:ml-2"
       [svgIcon]="selected === 'get-vex1' ? 'mat:30fps_select' : 'mat:30fps'"></mat-icon>
   </a>
-
-  <mat-progress-bar mode="buffer" value="{{ displayTimeMin }}" color="primary">
-  </mat-progress-bar>
 </div>
 
 <div class="flex-auto flex items-center container">
 
-  <!-- PLAY -->
-  <button mat-raised-button color="primary" matBadgeSize="large" matTooltip="Play Music: Binaural influences the mental and physiological state of the listener, promoting relaxation, focus, meditation, or even helping with sleep." (click)="playBiNeural()">
-    <mat-icon class="icon-sm" svgIcon="mat:{{ isPlaying ? 'pause_circle' : 'play_circle' }}"></mat-icon>
-  </button>
-
-
-  <mat-progress-bar mode="buffer" value="{{ displayTimeMin }}" color="primary">
-  </mat-progress-bar>
-
-    <mat-divider></mat-divider>
-
-  <!-- POMODORO -->
   <button mat-raised-button color="primary" value="{{ displayTimeMin }}" color="warn" matBadge="{{ displayTimeMin }}"
     matBadgeSize="large" matTooltip="Core Time Intervals
   Pomodoro:  A single Pomodoro is 30 minutes long, dedicated to focused work on a task.
@@ -109,8 +94,6 @@
   {{ displayTime }}" matBadgePosition="before" matBadgeColor="warn" (click)="pauseTimer()">
     Pomodoro {{ displayTime }}
   </button>
-
-
 
   <mat-progress-bar mode="buffer" value="{{ displayTimeMin }}" color="warn">
   </mat-progress-bar>

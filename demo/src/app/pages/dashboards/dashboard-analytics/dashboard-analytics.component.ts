@@ -114,6 +114,7 @@ export class DashboardAnalyticsComponent implements OnInit, AfterViewInit {
   courses$!: Observable<Course[]>;
   //displayedColumns: string[] = ['_id', 'level', 'name', 'content', 'objective', 'status', 'category', 'price', 'lessons'];
   displayedColumns: string[] = ['_id', 'level', 'name', 'content', 'objective', 'status', 'category', 'price', 'lessons', 'expandToggle'];
+  //displayedColumns: string[] = ['_id', 'level', 'name', 'content', 'objective', 'status', 'category', 'price', 'expandToggle'];
 
   /* ==================VIEWCHILD==================== */
   @ViewChild('waveform', { static: false }) waveformEl!: ElementRef<any>;
@@ -123,6 +124,9 @@ export class DashboardAnalyticsComponent implements OnInit, AfterViewInit {
   private waveform!: WaveSurfer;
   private subscription: Subscription = new Subscription;
   public isPlaying: boolean = false;
+  //voices: string[] = ['alloy', 'echo', 'fable', 'onyx', 'nova', 'shimmer'];
+  //voices: string[] = ['alloy'];
+  //speechRecognition: any;
   isTranscribing = false;
   textToSpeech!: string;
   audioBlob!: Blob;
@@ -323,6 +327,9 @@ openDialogX(textDisplay: string): void {
       this.getCurrentTime();
     });
 
+/*     if (screenfull.isEnabled) {
+      screenfull.request();
+    } */
   }
 
    /* ==================COLUMNS COURSE==================== */
@@ -377,7 +384,58 @@ openDialogX(textDisplay: string): void {
     }
   }
 
-  /* ==================handleResponse==================== */
+
+ /*  async questionToOpenAI(question: string, selection: 'phrase' | 'text' | 'word', voiceSelection: string) {
+    this.isLoading = true;
+    try {
+      const contentMessage = this.buildContentMessage(question, selection, voiceSelection);
+      const response = await this.postToOpenAI(contentMessage);
+
+      if (this.responseIsValid(response)) {
+        this.handleResponse(response);
+      } else {
+        throw new Error("Resposta da API não contém dados válidos.");
+      }
+    } catch (error) {
+      this.handleError(error);
+    } finally {
+      this.isLoading = false;
+    }
+  }
+
+  private buildContentMessage(question: string, selection: string, voiceSelection: string): string {
+    let message = `repeat this ${selection} in ${voiceSelection} voice: ${question}`;
+    switch (selection) {
+      case 'phrase':
+        message += ', and provide more sentences that contain the word simple and children';
+        break;
+      case 'text':
+        message += ' and provide stories using memory palace memorization technique, for children with the word.';
+        break;
+      case 'word':
+        // Adicionar lógica específica para 'word', se necessário.
+        break;
+    }
+    return message;
+  }
+
+  private async postToOpenAI(contentMessage: string) {
+    const headers = {
+      "Authorization": `Bearer ${gpt4.gptApiKey}`,
+      "Content-Type": "application/json",
+    };
+    return await this.http.post<any>(gpt4.gptUrl, {
+      messages: [{ role: 'user', content: contentMessage }],
+      temperature: 0.0,
+      max_tokens: 300,
+      model: "gpt-4",
+    }, { headers }).toPromise();
+  }
+
+  private responseIsValid(response: any): boolean {
+    return response && response.choices && response.choices.length > 0 && response.choices[0].message;
+  }
+ */
   private handleResponse(response: any) {
     this.chatMessage = response.choices[0].message.content;
     const displayTime = this.displayTextWordByWord(this.chatMessage);
@@ -385,7 +443,6 @@ openDialogX(textDisplay: string): void {
     setTimeout(() => this.generateAudio(), displayTime);
   }
 
-  /* ==================handleError==================== */
   private handleError(error: any) {
     this.errorText = "Falha ao obter resposta da API (OPEN IA): " + (error as Error).message;
     this.openSnackBar(this.errorText);
@@ -430,7 +487,6 @@ openDialogX(textDisplay: string): void {
   this.waveform.on('finish', () => this.hidePlaybackHint());
   }
 
-  /* ==================events==================== */
   events() {
     this.waveform.once('interaction', () => {
       this.waveform.play();
@@ -586,6 +642,7 @@ handleMouseUp(event: MouseEvent) {
   if (event.target && (event.target as HTMLElement).tagName === 'INPUT' && (event.target as HTMLInputElement).type === 'range') {
     return;
   }
+
   // Não faz nada se um diálogo está aberto
   if (this.isDialogOpen) {
     return;
@@ -737,7 +794,7 @@ onSpeedChange(event: Event): void {
   }
 }
 
-/* ==================VOLUME==================== */
+// testes volume
 /* diminuirVolume() {
   // Diminui o volume. Certifique-se de não ir abaixo do mínimo permitido.
   this.waveform.setVolume(Math.max(this.waveform.getVolume() - 0.1, 0)); // Exemplo: diminuir 10%
@@ -762,7 +819,6 @@ aumentarVelocidade() {
   this.openSnackBar("Velocidade Aumentada.");
 }
  */
-
 /* ==================updatePlaybackHint==================== */
   updatePlaybackHint(currentTime: number) {
     const minutes = Math.floor(currentTime / 60);
@@ -789,6 +845,7 @@ selectVoice(voice: string): void {
   this.selectedVoice = voice; // Ajuste conforme necessário.
   this.openSnackBar(`Voice selected: ${voice}`); // Para depuração
 }
+
 
 /* ==================analyzeText==================== */
 analyzeText() {
@@ -818,6 +875,7 @@ analyzeText() {
   //this.hashtags = doc.hashtags().out('array'); // Hashtags
   // Nota: Algumas dessas funcionalidades podem requerer plugins adicionais ou implementação específica.
 }
+
 
 
 //fim

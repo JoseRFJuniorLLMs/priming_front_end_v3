@@ -1,14 +1,12 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
-
 import { MatButtonModule } from '@angular/material/button';
-import { MatChipsModule } from '@angular/material/chips';
-import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
+
+import { MatChipsModule } from '@angular/material/chips';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
-
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { scaleInOutAnimation } from '@vex/animations/scale-in-out.animation';
 
@@ -24,7 +22,6 @@ import { ShareBottomGpt4Component } from 'src/app/pages/dashboards/components/sh
 import { ShareBottomWimHofComponent } from '../../../../../src/app/pages/dashboards/components/share-bottom-wim-hof/share-bottom-wim-hof.component';
 import { ShareBottomSheetComponent } from './../../../pages/dashboards/components/share-bottom-sheet/share-bottom-sheet.component';
 
-import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'vex-footer',
@@ -50,8 +47,7 @@ import { HttpClient } from '@angular/common/http';
     MatBottomSheetModule,
     ShareBottomGpt4Component,
     ShareBottomBookComponent,
-    RsvpreaderComponent,
-    MatDividerModule
+    RsvpreaderComponent
   ]
 })
 export class FooterComponent implements OnInit, OnDestroy {
@@ -64,20 +60,11 @@ export class FooterComponent implements OnInit, OnDestroy {
   showButton: boolean = false;
   result?: string;
 
-    private audios = [
-    //'../../assets/audio/bineural/music1.mp3',
-    '../../assets/audio/bineural/music.mp3',
-    // Adicione todos os arquivos desejados aqui
-  ];
-
-  isPlaying = false;
-
   constructor(
     private cdr: ChangeDetectorRef,
     private _bottomSheet: MatBottomSheet,
     private dialog: MatDialog,
     //@Inject(MAT_DIALOG_DATA) public data: { texto: string },
-    private http: HttpClient
     ) { }
 
   displayTime: string = '30:00';
@@ -237,26 +224,4 @@ openBothConfigsZettelkasten() {//zettelkasten
   this._bottomSheet.open(ShareBottomWimHofComponent);
 }
 
-playBiNeural() {
-  this.isPlaying = !this.isPlaying; // Alterna o estado de reprodução
-
-  if (!this.isPlaying) {
-    return; // Se já está tocando, retorna sem fazer nada (ou implemente a lógica para pausar)
-  }
-
-  const randomIndex = Math.floor(Math.random() * this.audios.length);
-  const audioToPlay = this.audios[randomIndex];
-
-  this.http.get(audioToPlay, { responseType: 'blob' }).subscribe(blob => {
-    const url = URL.createObjectURL(blob);
-    const audio = new Audio(url);
-    audio.play().catch(error => console.error("Erro ao tentar reproduzir o áudio:", error));
-    audio.onended = () => {
-      this.isPlaying = false; // Atualiza o estado quando o áudio termina
-      URL.revokeObjectURL(url); // Libera o objeto URL
-    };
-  });
 }
-
-
-}//fim
