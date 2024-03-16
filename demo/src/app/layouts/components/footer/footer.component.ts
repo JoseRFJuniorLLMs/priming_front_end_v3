@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatBottomSheet, MatBottomSheetModule } from '@angular/material/bottom-sheet';
@@ -9,6 +10,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatSliderModule } from '@angular/material/slider';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { RouterLink, RouterOutlet } from '@angular/router';
@@ -48,6 +50,8 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
     ShareBottomBookComponent,
     RsvpreaderComponent,
     HttpClientModule,
+    MatSliderModule,
+    FormsModule
   ]
 })
 export class FooterComponent implements OnInit, OnDestroy {
@@ -56,6 +60,7 @@ export class FooterComponent implements OnInit, OnDestroy {
 
   @Output() openConfig = new EventEmitter();
   @Output() openBottomConfig = new EventEmitter();
+  volume: number = 0.5; // Valor inicial do volume
 
   showButton: boolean = false;
   result?: string;
@@ -208,13 +213,6 @@ openBothConfigsShadowing() { //shadowing
   this._bottomSheet.open(ShareBottomWimHofComponent);
 }
 
-/* openBothConfigsRSVP() { // RSVP
-  this._bottomSheet.open(RsvpreaderComponent, {
-    data: { text: this.selected }
-  });
-  this._bottomSheet.open(RsvpreaderComponent);
-} */
-
 openBothConfigsWimHof() {//wim hof
   this._bottomSheet.open(ShareBottomWimHofComponent);
 }
@@ -227,34 +225,34 @@ openBothConfigsZettelkasten() {//zettelkasten
   this._bottomSheet.open(ShareBottomWimHofComponent);
 }
 
-playBiNeural() {
-  // Se já existe um objeto de áudio e o áudio está tocando, pausá-lo
-  if (this.audioPlayer && !this.audioPlayer.paused) {
-    this.audioPlayer.pause();
-    this.isPlaying = false; // Atualiza o estado para refletir que o áudio foi pausado
-  } else {
-    // Se o áudio está pausado ou ainda não foi iniciado, começar a reprodução
-    if (this.audioPlayer) {
-      this.audioPlayer.play();
-      this.isPlaying = true; // Atualiza o estado para refletir que o áudio está tocando
-    } else {
-      // Se não há objeto de áudio, criar um e começar a tocar
-      const randomIndex = Math.floor(Math.random() * this.audios.length);
-      const audioToPlay = this.audios[randomIndex];
-      this.http.get(audioToPlay, { responseType: 'blob' }).subscribe(blob => {
-        const url = URL.createObjectURL(blob);
-        this.audioPlayer = new Audio(url);
-        this.audioPlayer.play().catch(error => console.error("Erro ao tentar reproduzir o áudio:", error));
-        this.audioPlayer.onended = () => {
-          this.isPlaying = false; // Atualiza o estado quando o áudio termina
-          URL.revokeObjectURL(url); // Libera o objeto URL
-          this.audioPlayer = null; // Remove a referência ao objeto Audio
-        };
-        this.isPlaying = true; // Atualiza o estado para refletir que o áudio está tocando
-      });
-    }
+adjustVolume(value: number): void {
+  this.volume = value; // Atualiza a propriedade de volume
+  if (this.audioPlayer) {
+    this.audioPlayer.volume = this.volume;
   }
 }
+
+// Método playBiNeural modificado para usar a propriedade 'volume'
+playBiNeural() {
+  if (this.audioPlayer && !this.audioPlayer.paused) {
+    this.audioPlayer.pause();
+    this.isPlaying = false;
+  } else {
+    if (!this.audioPlayer) {
+      this.audioPlayer = new Audio('/assets/audio/bineural/music.mp3');
+      this.audioPlayer.volume = this.volume; // Defina o volume do player de áudio
+    }
+    this.audioPlayer.play().then(() => {
+      this.isPlaying = true;
+    }).catch(error => console.error("Erro ao tentar reproduzir o áudio:", error));
+
+    this.audioPlayer.onended = () => {
+      this.isPlaying = false;
+      this.audioPlayer = null;
+    };
+  }
+}
+
 
 
 }// fim
