@@ -1,50 +1,156 @@
 <ngx-graph
   class="chart-container"
-  [view]="[800, 550]"
+  [view]="[chartWidth, chartHeight]"
   [links]="[
     {
       id: 'a',
       source: 'first',
       target: 'second',
-      label: 'is parent of'
+      label: 'priming semantic'
     }, {
       id: 'b',
       source: 'first',
       target: 'c1',
-      label: 'custom label'
+      label: 'priming semantic'
     }, {
-      id: 'd',
+      id: 'c',
       source: 'first',
       target: 'c2',
-      label: 'custom label'
+      label: 'priming semantic'
     }, {
+      id: 'd',
+      source: 'c1',
+      target: 'd',
+      label: 'priming semantic'
+    },
+    {
       id: 'e',
-      source: 'c1',
-      target: 'd',
-      label: 'first link'
-    }, {
+      source: 'first',
+      target: 'e',
+      label: 'priming semantic'
+    },
+    {
       id: 'f',
-      source: 'c1',
-      target: 'd',
-      label: 'second link'
+      source: 'first',
+      target: 'f',
+      label: 'priming semantic'
+    },
+    {
+      id: 'g',
+      source: 'first',
+      target: 'g',
+      label: 'priming semantic'
+    },
+    {
+      id: 'h',
+      source: 'first',
+      target: 'h',
+      label: 'priming semantic'
+    },
+    {
+      id: 'i',
+      source: 'first',
+      target: 'i',
+      label: 'priming semantic'
+    },
+    {
+      id: 'j',
+      source: 'first',
+      target: 'j',
+      label: 'priming semantic'
+    },
+    {
+      id: 'p',
+      source: 'e',
+      target: 'k',
+      label: 'prime semantic'
+    },
+    {
+      id: 'q',
+      source: 'e',
+      target: 'l',
+      label: 'prime semantic'
+    },
+    {
+      id: 'r',
+      source: 'e',
+      target: 'm',
+      label: 'prime semantic'
+    },
+    {
+      id: 's',
+      source: 'e',
+      target: 'n',
+      label: 'prime semantic'
+    },
+    {
+      id: 't',
+      source: 'e',
+      target: 'o',
+      label: 'prime semantic'
     }
   ]"
   [nodes]="[
     {
       id: 'first',
-      label: 'A'
+      label: 'I LOVE YOU'
     }, {
       id: 'second',
-      label: 'B'
+      label: 'AFFECTION'
     }, {
       id: 'c1',
-      label: 'C1'
+      label: 'HAPPINESS'
     }, {
       id: 'c2',
-      label: 'C2'
-    }, {
+      label: 'I HAVE ROMANCE'
+    },
+    {
       id: 'd',
-      label: 'D'
+      label: 'SHE BRINGS SUNSHINE INTO MY LIFE'
+    },
+    {
+      id: 'e',
+      label: 'I HAVE PASSION'
+    },
+    {
+      id: 'f',
+      label: 'I HAVE JOY'
+    },
+    {
+      id: 'g',
+      label: 'I HAVE DEVOTION'
+    },
+    {
+      id: 'h',
+      label: 'I HAVE INTIMACY'
+    },
+    {
+      id: 'i',
+      label: 'I HAVE CARE'
+    },
+    {
+      id: 'j',
+      label: 'I HAVE ADMIRATION'
+    },
+    {
+      id: 'k',
+      label: 'LOVE'
+    },
+    {
+      id: 'l',
+      label: 'FIRE'
+    },
+    {
+      id: 'm',
+      label: 'DESIRE'
+    },
+    {
+      id: 'n',
+      label: 'INTENSITY'
+    },
+    {
+      id: 'o',
+      label: 'ENTHUSIASM'
     }
   ]"
   [clusters]="[
@@ -90,64 +196,6 @@
   <ng-template #linkTemplate let-link>
     <svg:g class="edge">
       <svg:path class="line" stroke-width="2" marker-end="url(#arrow)"></svg:path>
-      <svg:text class="edge-label" text-anchor="middle">
-        <textPath
-          class="text-path"
-          [attr.href]="'#' + link.id"
-          [style.dominant-baseline]="link.dominantBaseline"
-          startOffset="50%"
-        >
-          {{link.label}}
-        </textPath>
-      </svg:text>
-    </svg:g>
-  </ng-template>
-</ngx-graph>
-<ngx-graph
-  class="chart-container"
-  [view]="[800, 550]"
-  [links]="links"
-  [nodes]="nodes"
-  layout="dagreCluster"
->
-  <!-- Template para definições SVG -->
-  <ng-template #defsTemplate>
-    <svg:marker id="arrow" viewBox="0 -5 10 10" refX="8" refY="0" markerWidth="4" markerHeight="4" orient="auto">
-      <svg:path d="M0,-5L10,0L0,5" class="arrow-head" />
-    </svg:marker>
-  </ng-template>
-
-  <!-- Template para os clusters -->
-  <ng-template #clusterTemplate let-cluster>
-    <svg:g class="node cluster">
-      <svg:rect
-        rx="5"
-        ry="5"
-        [attr.width]="cluster.dimension.width"
-        [attr.height]="cluster.dimension.height"
-        [attr.fill]="cluster.data.color"
-      />
-    </svg:g>
-  </ng-template>
-
-  <!-- Template para os nós -->
-  <ng-template #nodeTemplate let-node>
-    <svg:g class="node">
-      <svg:rect
-        [attr.width]="node.dimension.width"
-        [attr.height]="node.dimension.height"
-        [attr.fill]="node.data.color"
-      />
-      <svg:text alignment-baseline="central" [attr.x]="10" [attr.y]="node.dimension.height / 2">
-        {{node.label}}
-      </svg:text>
-    </svg:g>
-  </ng-template>
-
-  <!-- Template para as arestas -->
-  <ng-template #linkTemplate let-link>
-    <svg:g class="edge">
-      <svg:path class="line" stroke-width="2" marker-end="url(#arrow)" [attr.d]="link.line"></svg:path>
       <svg:text class="edge-label" text-anchor="middle">
         <textPath
           class="text-path"

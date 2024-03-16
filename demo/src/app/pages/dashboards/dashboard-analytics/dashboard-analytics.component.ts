@@ -474,7 +474,7 @@ openDialogX(textDisplay: string): void {
       interact: true,
       dragToSeek: true,
       mediaControls: true, //controles
-      autoplay: true,
+      autoplay: false,
       fillParent: true,
     });
 

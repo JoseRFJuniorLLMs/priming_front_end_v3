@@ -1,14 +1,16 @@
-// graph.component.scss
-:host {
+:host, ngx-graph {
   display: block;
-  height: 100%;
+  width: 100vw; /* 100% da largura da viewport */
+  height: 100vh; /* 100% da altura da viewport */
+  margin: 0; /* Remova as margens padrão do corpo */
+  overflow: hidden; /* Evite a rolagem */
 }
 
 ngx-graph {
   width: 100%;
   height: 100%;
+}
 
-  .node text {
-    pointer-events: none;
-  }
+.node text {
+  pointer-events: none;
 }
