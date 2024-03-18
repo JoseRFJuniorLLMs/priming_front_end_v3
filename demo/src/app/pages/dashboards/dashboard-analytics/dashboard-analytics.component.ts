@@ -45,7 +45,13 @@ import { VexSecondaryToolbarComponent } from '@vex/components/vex-secondary-tool
 
 import nlp from 'compromise';
 import { interval, Observable, Subscription } from 'rxjs';
+
 import WaveSurfer from 'wavesurfer.js';
+//import RecordPlugin from 'wavesurfer.js/dist/plugins/record.esm.js'
+//import TimelinePlugin from 'wavesurfer.js/dist/plugins/timeline.esm.js'
+//import Spectrogram from 'wavesurfer.js/dist/plugins/spectrogram.esm.js'
+//import RegionsPlugin from 'wavesurfer.js/dist/plugins/regions.esm.js'
+
 //import { NlpService } from 'promise-nlp';
 import { WordComponent } from '../components/word/word.component';
 
@@ -124,7 +130,7 @@ export class DashboardAnalyticsComponent implements OnInit, AfterViewInit {
   /* ==================VARIAVEIS==================== */
   private waveform!: WaveSurfer;
   private subscription: Subscription = new Subscription;
-  public isPlaying: boolean = false;
+  public isPlaying: boolean = true;
   //voices: string[] = ['alloy', 'echo', 'fable', 'onyx', 'nova', 'shimmer'];
   //voices: string[] = ['alloy'];
   //speechRecognition: any;
@@ -443,18 +449,25 @@ openDialogX(textDisplay: string): void {
       waveColor: '#d3d3d3',
       progressColor: 'rgb(0, 0, 0)',
       cursorColor: 'rgb(0, 0, 0)',
-      cursorWidth: 5,
-      minPxPerSec: 50,
-      barWidth: 10,
-      barRadius: 2,
-      barGap: 2,
+      cursorWidth: 6,
+      barGap: 3,
+      barWidth: 2,
+      barHeight: 3,
+      barRadius: 10,
+      autoScroll: true,
+      autoCenter: true,
+      interact: true,
+      dragToSeek: true,
+      fillParent: true,
+      autoplay: true,
+      /*minPxPerSec: 50,
       autoScroll: true,
       autoCenter: true,
       interact: true,
       dragToSeek: true,
       mediaControls: true, //controles
-      autoplay: false,
-      fillParent: true,
+      autoplay: true,
+      fillParent: true, */
     });
 
     this.waveform.on('audioprocess', () => {
@@ -481,6 +494,19 @@ openDialogX(textDisplay: string): void {
       this.openSnackBar("Pause");
     })
   }
+
+  toggleAudio() {
+    if (this.isPlaying) {
+      this.waveform.pause();
+      this.openSnackBar("waveform: Pause");
+    } else {
+      this.waveform.play();
+      this.openSnackBar("waveform: Play");
+      this.textToSpeechService.speak(this.chatMessage); // Legenda do Chrome
+    }
+    this.isPlaying = !this.isPlaying;
+  }
+
 
   /* ==================FUNCAO PARA PEGAR O ARRAY DE STRING==================== */
   getWordsArray(text: string): string[] {
@@ -544,6 +570,7 @@ displayFullText(text: string): void {
     this.loadAndPlayAudio(audioUrl, text);
     this.openSnackBar("Play Audio Sicrono: "+ text);
   }
+
 
   /* ==================PLAY AUDIO==================== */
   playAudio() {

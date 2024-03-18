@@ -21,7 +21,10 @@ import { HighlightModule } from 'ngx-highlightjs';
 import { QuillEditorComponent } from 'ngx-quill';
 
 import WaveSurfer from 'wavesurfer.js';
-//import RegionsPlugin from 'wavesurfer.js/src/plugin/regions';
+//import RecordPlugin from 'wavesurfer.js/dist/plugins/record.esm.js'
+//import TimelinePlugin from 'wavesurfer.js/dist/plugins/timeline.esm.js'
+//import Spectrogram from 'wavesurfer.js/dist/plugins/spectrogram.esm.js'
+//import RegionsPlugin from 'wavesurfer.js/dist/plugins/regions.esm.js'
 //import gpt4 from '../../../../../../gpt4.json';
 
 @Component({
@@ -69,10 +72,11 @@ export class FlashcardComponent implements AfterViewInit {
   private initWaveSurfer(): void {
     this.wavesurfer = WaveSurfer.create({
       container: this.waveformContainer.nativeElement,
-      waveColor: 'rgb(200, 0, 200)',
-      progressColor: 'rgb(100, 0, 100)',
+      waveColor: '#ff4e00',
+      progressColor: '#e60a6d',
+      barRadius: 30,
+      barWidth: 0.1,
       url: '../../assets/audio/micro-machines.wav',
-      autoplay: false,
     });
 
     // Adicione um evento para lidar com o estado de reprodução
@@ -88,13 +92,18 @@ export class FlashcardComponent implements AfterViewInit {
     this.wavesurfer.on('finish', () => {
       this.isPlaying = false;
     });
+
+    this.wavesurfer.on('play', () => this.isPlaying = true);
+    this.wavesurfer.on('pause', () => this.isPlaying = false);
+    this.wavesurfer.on('finish', () => this.isPlaying = false);
+
   }
 
   togglePlayback(): void {
     if (this.isPlaying) {
-      this.pauseAudio();
+      this.wavesurfer.pause();
     } else {
-      this.playAudio();
+      this.wavesurfer.play();
     }
   }
 
@@ -111,68 +120,7 @@ export class FlashcardComponent implements AfterViewInit {
   }
 
 
-
   // Custom Render Function
-  /**
-  customRender(wavesurfer: WaveSurfer): void {
-    const canvas = wavesurfer.container.querySelector('canvas');
-    if (!canvas) {
-        console.error('Canvas element not found');
-        return;
-    }
-
-    const ctx = canvas.getContext('2d');
-    if (!ctx) {
-        console.error('Canvas context not available');
-        return;
-    }
-
-    // Limpa o canvas antes de aplicar a renderização personalizada
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    // Obtém os picos de áudio
-    const peaks = wavesurfer.backend.getPeaks(canvas.width);
-
-    // Calcula o valor máximo de pico
-    const maxPeak = Math.max(...peaks);
-
-    // Calcula o valor máximo absoluto de pico
-    const absMaxPeak = Math.max(...peaks.map(Math.abs));
-
-    const { width, height } = canvas;
-    const step = 10;
-
-    ctx.translate(0, height / 2);
-    ctx.strokeStyle = ctx.fillStyle;
-    ctx.beginPath();
-
-    for (let i = 0; i < width; i += step * 2) {
-        const peakIndex = Math.floor((i / width) * peaks.length);
-        const peakValue = peaks[peakIndex];
-        const normalizedPeakValue = Math.abs(peakValue) / absMaxPeak;
-        const value = normalizedPeakValue * height;
-        let x = i;
-        let y = value;
-
-        ctx.moveTo(x, 0);
-        ctx.lineTo(x, y);
-        ctx.arc(x + step / 2, y, step / 2, Math.PI, 0, true);
-        ctx.lineTo(x + step, 0);
-
-        x += step;
-        y = -y;
-        ctx.moveTo(x, 0);
-        ctx.lineTo(x, y);
-        ctx.arc(x + step / 2, y, step / 2, Math.PI, 0, false);
-        ctx.lineTo(x + step, 0);
-    }
-
-    ctx.stroke();
-    ctx.closePath();
-
-    // Reset the transform after drawing
-    ctx.setTransform(1, 0, 0, 1, 0, 0);
-}**/
 
 
 }// fim

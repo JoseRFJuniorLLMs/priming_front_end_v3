@@ -57,37 +57,45 @@
           <ng-template matStepLabel>Word</ng-template>
           <!-- Word INICIO -->
 
+                <!-- waveform-viewer.component.html -->
+      <div class="audio-container">
+
+        <button mat-fab color="primary" (click)="toggleAudio()">
+          <!-- Ícone de Play -->
+          <mat-icon *ngIf="!isPlaying" mat-icon-button matTooltip="Play" svgIcon="mat:play_arrow" (click)="playAudio()">
+            play_arrow
+          </mat-icon>
+          <!-- Ícone de Pause -->
+          <mat-icon *ngIf="isPlaying" mat-icon-button matTooltip="Pause" svgIcon="mat:pause" (click)="pauseAudio()">
+            pause
+          </mat-icon>
+        </button>
+        <div #waveform class="waveform-container"></div>
+
+      </div>
+
           <div class="p-1">
             <div class="pane1">
 
-              <!-- Waveform -->
 
-              <div #waveform autoplay matTooltip="Time Current: {{currentTime}}" style="cursor: pointer;"
-                [style.left]="progressPercentage + '%'">
-                <div class="time-indicator" [style.left]="progressPercentage + '%'">
-                </div>
+<!--               <div class="player">
 
-                <button mat-icon-button matTooltip="Play Waveform
-                  {{currentTime}}" color="primary" (click)="playAudio()">
-                  <mat-icon svgIcon="mat:play_arrow"></mat-icon>
+                <button mat-fab color="primary" (click)="toggleAudio()">
+
+                  <mat-icon *ngIf="!isPlaying" matTooltip="Play" svgIcon="mat:play_arrow">
+                    play_arrow
+                  </mat-icon>
+
+                  <mat-icon *ngIf="isPlaying" matTooltip="Pause" svgIcon="mat:pause">
+                    pause
+                  </mat-icon>
                 </button>
 
-                <button mat-icon-button matTooltip="Stop Waveform {{currentTime}}" color="primary"
-                  (click)="stopAudio()">
-                  <mat-icon svgIcon="mat:stop"></mat-icon>
-                </button>
-
-                <button mat-icon-button matTooltip="Pause Waveform {{currentTime}}" color="primary"
-                  (click)="pauseAudio()">
-                  <mat-icon svgIcon="mat:pause_circle"></mat-icon>
-                </button>
-
-                <div id="playback-hint"
-                  style="position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background-color: black; color: white; padding: 8px 12px; border-radius: 4px; display: none;">
-                  Tempo: 00:00
-                </div>
 
               </div>
+              <div #waveform autoplay style="cursor: pointer;">
+              </div> -->
+
 
               <div>
 
@@ -159,13 +167,12 @@
                       <mat-icon svgIcon="mat:flash_on"></mat-icon>
                     </mat-chip-option>
 
-                    <mat-chip-option #chipWord value="rsvp" color="warn"
-                    (click)="openDialogFlashCard()"
-                    matTooltip="Flash Cards - Hermann Ebbinghaus : Spaced repetition is a study technique based on the idea that reviews of learned material should be done at increasing time intervals to improve long-term retention. This method is widely recognized for its effectiveness in learning and memorization. The theory behind spaced repetition is that each time information is reviewed, after progressively longer periods, the strength of the memory and the time until it is forgotten increase."
-                    color="primary">
-                    Flash Cards
-                    <mat-icon svgIcon="mat:style"></mat-icon>
-                  </mat-chip-option>
+                    <mat-chip-option #chipWord value="rsvp" color="warn" (click)="openDialogFlashCard()"
+                      matTooltip="Flash Cards - Hermann Ebbinghaus : Spaced repetition is a study technique based on the idea that reviews of learned material should be done at increasing time intervals to improve long-term retention. This method is widely recognized for its effectiveness in learning and memorization. The theory behind spaced repetition is that each time information is reviewed, after progressively longer periods, the strength of the memory and the time until it is forgotten increase."
+                      color="primary">
+                      Flash Cards
+                      <mat-icon svgIcon="mat:style"></mat-icon>
+                    </mat-chip-option>
 
                   </mat-card-content>
                 </mat-card>
@@ -265,227 +272,20 @@ Their journey took them to extraordinary places, from towering mountains to sand
 
         </mat-step>
 
-<!-- COURSE FIM -->
+        <!-- COURSE FIM -->
 
 
-<!-- PHRASE INICIO -->
+        <!-- PHRASE INICIO -->
 
-<mat-step>
-  <ng-template matStepLabel>Phrase</ng-template>
-
-  <div class="p-1">
-    <div class="pane1">
-
-      <div>
-
-        <!-- inicio -->
-
-        <mat-card>Voice
-          <mat-card-content>
-
-            <mat-chip-listbox aria-label="Voice selection">
-              <mat-chip-option color="warn" matTooltip="Priming Alloy Option Selected!"
-                (click)="selectVoice('alloy')" [selected]="voiceSelection === 'alloy'">
-                <img matTooltip="Alloy" alt="Alloy" matChipAvatar src="assets/img/avatars/1.jpg" /> Alloy
-              </mat-chip-option>
-              <mat-divider></mat-divider>
-              <mat-chip-option color="warn" matTooltip="Priming Echo Option Selected!"
-                (click)="selectVoice('echo')" [selected]="voiceSelection === 'echo'">
-                <img matTooltip="Echo" alt="Echo" matChipAvatar src="assets/img/avatars/2.jpg" /> Echo
-              </mat-chip-option>
-              <mat-divider></mat-divider>
-              <mat-chip-option color="warn" matTooltip="Priming Fable Option Selected!"
-                (click)="selectVoice('fable')" [selected]="voiceSelection === 'fable'">
-                <img matTooltip="Fable" alt="Fable" matChipAvatar src="assets/img/avatars/3.jpg" /> Fable
-              </mat-chip-option>
-              <mat-divider></mat-divider>
-              <mat-chip-option color="warn" matTooltip="Priming Onyx Option Selected!"
-                (click)="selectVoice('onyx')" [selected]="voiceSelection === 'onyx'">
-                <img matTooltip="Onyx" alt="Onyx" matChipAvatar src="assets/img/avatars/4.jpg" /> Onyx
-              </mat-chip-option>
-              <mat-divider></mat-divider>
-              <mat-chip-option color="warn" matTooltip="Priming Nova Option Selected!"
-                (click)="selectVoice('nova')" [selected]="voiceSelection === 'nova'">
-                <img matTooltip="Nova" alt="Nova" matChipAvatar src="assets/img/avatars/5.jpg" /> Nova
-              </mat-chip-option>
-              <mat-divider></mat-divider>
-              <mat-chip-option color="warn" matTooltip="Priming Shimmer Option Selected!"
-                (click)="selectVoice('shimmer')" [selected]="voiceSelection === 'shimmer'">
-                <img matTooltip="Shimmer" alt="Shimmer" matChipAvatar src="assets/img/avatars/6.jpg" /> Shimmer
-              </mat-chip-option>
-            </mat-chip-listbox>
-
-            <mat-chip-option #chipPhrase value="phrase" [selected]="selectedChip === 'phrase'"
-              (click)="onSelection('phrase')" matTooltip="Priming Phrase Option Selected!" color="primary">
-              Phrase
-              <mat-icon svgIcon="mat:speaker_notes"></mat-icon>
-            </mat-chip-option>
-            <mat-chip-option #chipText value="text" color="warn" [selected]="selectedChip === 'text'"
-              (click)="onSelection('text')" matTooltip="Priming Text Option Selected!">
-              Text
-              <mat-icon svgIcon="mat:menu_book"></mat-icon>
-            </mat-chip-option>
-
-            <mat-chip-option #chipWord value="word" color="warn" [selected]="selectedChip === 'word'"
-              (click)="onSelection('word')" matTooltip="Priming Word Option Selected!">
-              Word
-              <mat-icon svgIcon="mat:fact_check"></mat-icon>
-            </mat-chip-option>
-
-            <mat-chip-option disabled #chipWord value="image" color="warn" matTooltip="Image Option Selected!">
-              Image
-              <mat-icon svgIcon="mat:image_search"></mat-icon>
-            </mat-chip-option>
-
-            <mat-chip-option #chipWord value="rsvp" color="warn" [selected]="selectedChip === 'srvp'"
-              (click)="onSelection('srvp')" (click)="toggleRSVPReader()"
-              matTooltip="RSVP, the technique of : Rapid Serial Visual Presentation, is a method used to present visual information, such as words or images, in a quick sequence, one after the other, at the same visual fixation point. This technique is often used in psychological research on visual processing and attention, as well as in practical applications to improve speed."
-              color="primary">
-              SRVP
-              <mat-icon svgIcon="mat:flash_on"></mat-icon>
-            </mat-chip-option>
-
-          </mat-card-content>
-        </mat-card>
-      </div>
-    </div>
-  </div>
-
-  <!-- Quick Line Chart -->
-  <vex-widget-quick-line-chart #chatContainer icon="mat:pageview" iconClass="text-primary-900 bg-primary-900/10"
-    label="
-                    1 - She opened the book to the first page, eager to start her journey.
-                    2 - Reading in the quiet library, her mind wandered to distant lands.
-                    3 - Lands filled with mystery, adventure awaited her every decision.
-                    4 - Decisions that would shape the characters' fates, intertwined with destiny.
-                    5 - Destiny played its hand as the hero ventured into the dark forest.
-                    6 - Forests, vast and unexplored, hid secrets in their shadows.
-                    7 - Shadows danced as the night approached, cloaking the world in silence.
-                    8 - Silence, a rare commodity, was cherished by the weary traveler.
-                    9 - Travelers from distant lands brought tales of strange customs and wisdom.
-                    10 - Wisdom, sought after by many, was found in the simplest of moments.
-                    11 - Moments passed, each tick of the clock marking the passage of time.
-                    12 - Time, an ever-flowing river, carried dreams and aspirations to the sea.
-                    13 - Sea waves crashed against the shore, a constant rhythm in the chaos.
-                    14 - Chaos and order, two sides of the same coin, balanced the universe.
-                    15 - The universe, vast and mysterious, held the secrets of existence.
-                    16 - Existence, a puzzle, challenged minds to seek out its meaning.
-                    17 - Meanings evolved, words connecting thoughts across cultures and ages.
-                    18 - Ages of history were written in the stars, for those who dared to look.
-                    19 - Looking forward, she envisioned a world of peace and prosperity.
-                    20 - Prosperity, not just wealth, but the richness of life and love.
-                    21 - Love, an eternal flame, ignited hearts with passion and purpose.
-                    22 - Purpose drove the greatest achievements, fueled by unwavering determination.
-                    23 - Determination, a key to success, opened doors to unimagined futures.
-                    24 - Futures imagined within the pages of books became blueprints for reality.
-                    25 - Reality, often stranger than fiction, surprised at every turn.
-                    26 - Turning points in life offered opportunities for growth and change.
-                    27 - Change, the only constant, reshaped destinies in its flowing currents.
-                    28 - Currents of thought converged, leading to breakthroughs and discoveries.
-                    29 - Discoveries, both small and grand, pushed the boundaries of knowledge.
-                    30 - Knowledge, shared and cultivated, became the foundation of progress.
-                    " value="{{ chatMessage }}">
-  </vex-widget-quick-line-chart>
-
-  <div class="p-6">
-    <div>
-      <h1>Analysis of "{{ textNLP }}"</h1>
-      <div *ngIf="pronouns.length">
-        <p><strong>Pronouns:</strong></p>
-        <div *ngFor="let pronoun of pronouns">
-          <button mat-button color="accent" matTooltip="pronoun">{{ pronoun }}</button>
-        </div>
-      </div>
-      <div *ngIf="verbs.length">
-        <p><strong>Verbs:</strong></p>
-        <div *ngFor="let verb of verbs">
-          <button mat-button color="accent" matTooltip="verb">{{ verb }}</button>
-        </div>
-      </div>
-      <div *ngIf="nouns.length">
-        <p><strong>Nouns:</strong></p>
-        <div *ngFor="let noun of nouns">
-          <button mat-button color="accent" matTooltip="noun">{{ noun }}</button>
-        </div>
-      </div>
-      <div *ngIf="adjectives.length">
-        <p><strong>Adjectives:</strong></p>
-        <div *ngFor="let adjective of adjectives">
-          <button mat-button color="accent" matTooltip="adjective">{{ adjective }}</button>
-        </div>
-      </div>
-      <div *ngIf="adverbs.length">
-        <p><strong>Adverbs:</strong></p>
-        <div *ngFor="let adverb of adverbs">
-          <button mat-button color="accent" matTooltip="adverb">{{ adverb }}</button>
-        </div>
-      </div>
-      <div *ngIf="people.length">
-        <p><strong>People:</strong></p>
-        <div *ngFor="let person of people">
-          <button mat-button color="accent" matTooltip="person">{{ person }}</button>
-        </div>
-      </div>
-      <div *ngIf="places.length">
-        <p><strong>Places:</strong></p>
-        <div *ngFor="let place of places">
-          <button mat-button color="accent" matTooltip="place">{{ place }}</button>
-        </div>
-      </div>
-      <div *ngIf="organizations.length">
-        <p><strong>Organizations:</strong></p>
-        <div *ngFor="let organization of organizations">
-          <button mat-button color="accent" matTooltip="organization">{{ organization }}</button>
-        </div>
-      </div>
-      <div *ngIf="clauses.length">
-        <p><strong>Clauses:</strong></p>
-        <div *ngFor="let clause of clauses">
-          <button mat-button color="accent" matTooltip="clause">{{ clause }}</button>
-        </div>
-      </div>
-      <div *ngIf="questions.length">
-        <p><strong>Questions:</strong></p>
-        <div *ngFor="let question of questions">
-          <button mat-button color="accent" matTooltip="question">{{ question }}</button>
-        </div>
-      </div>
-      <div *ngIf="acronyms.length">
-        <p><strong>Acronyms:</strong></p>
-        <div *ngFor="let acronym of acronyms">
-          <button mat-button color="accent" matTooltip="acronym">{{ acronym }}</button>
-        </div>
-      </div>
-      <div *ngIf="emails.length">
-        <p><strong>Emails:</strong></p>
-        <div *ngFor="let email of emails">
-          <button mat-button color="accent" matTooltip="email">{{ email }}</button>
-        </div>
-      </div>
-      <div *ngIf="urls.length">
-        <p><strong>URLs:</strong></p>
-        <div *ngFor="let url of urls">
-          <button mat-button color="accent" matTooltip="url">{{ url }}</button>
-        </div>
-      </div>
-    </div>
-</div>
-
-
-
-
-</mat-step>
-
-<!-- PHRASE FIM -->
-
-<!-- TEXT INICIO -->
         <mat-step>
-          <ng-template matStepLabel>Text</ng-template>
+          <ng-template matStepLabel>Phrase</ng-template>
 
           <div class="p-1">
             <div class="pane1">
 
-              <!-- inicio -->
+              <div>
+
+                <!-- inicio -->
 
                 <mat-card>Voice
                   <mat-card-content>
@@ -552,11 +352,218 @@ Their journey took them to extraordinary places, from towering mountains to sand
                       <mat-icon svgIcon="mat:flash_on"></mat-icon>
                     </mat-chip-option>
 
-
                   </mat-card-content>
                 </mat-card>
               </div>
             </div>
+          </div>
+
+          <!-- Quick Line Chart -->
+          <vex-widget-quick-line-chart #chatContainer icon="mat:pageview" iconClass="text-primary-900 bg-primary-900/10"
+            label="
+                    1 - She opened the book to the first page, eager to start her journey.
+                    2 - Reading in the quiet library, her mind wandered to distant lands.
+                    3 - Lands filled with mystery, adventure awaited her every decision.
+                    4 - Decisions that would shape the characters' fates, intertwined with destiny.
+                    5 - Destiny played its hand as the hero ventured into the dark forest.
+                    6 - Forests, vast and unexplored, hid secrets in their shadows.
+                    7 - Shadows danced as the night approached, cloaking the world in silence.
+                    8 - Silence, a rare commodity, was cherished by the weary traveler.
+                    9 - Travelers from distant lands brought tales of strange customs and wisdom.
+                    10 - Wisdom, sought after by many, was found in the simplest of moments.
+                    11 - Moments passed, each tick of the clock marking the passage of time.
+                    12 - Time, an ever-flowing river, carried dreams and aspirations to the sea.
+                    13 - Sea waves crashed against the shore, a constant rhythm in the chaos.
+                    14 - Chaos and order, two sides of the same coin, balanced the universe.
+                    15 - The universe, vast and mysterious, held the secrets of existence.
+                    16 - Existence, a puzzle, challenged minds to seek out its meaning.
+                    17 - Meanings evolved, words connecting thoughts across cultures and ages.
+                    18 - Ages of history were written in the stars, for those who dared to look.
+                    19 - Looking forward, she envisioned a world of peace and prosperity.
+                    20 - Prosperity, not just wealth, but the richness of life and love.
+                    21 - Love, an eternal flame, ignited hearts with passion and purpose.
+                    22 - Purpose drove the greatest achievements, fueled by unwavering determination.
+                    23 - Determination, a key to success, opened doors to unimagined futures.
+                    24 - Futures imagined within the pages of books became blueprints for reality.
+                    25 - Reality, often stranger than fiction, surprised at every turn.
+                    26 - Turning points in life offered opportunities for growth and change.
+                    27 - Change, the only constant, reshaped destinies in its flowing currents.
+                    28 - Currents of thought converged, leading to breakthroughs and discoveries.
+                    29 - Discoveries, both small and grand, pushed the boundaries of knowledge.
+                    30 - Knowledge, shared and cultivated, became the foundation of progress.
+                    " value="{{ chatMessage }}">
+          </vex-widget-quick-line-chart>
+
+          <div class="p-6">
+            <div>
+              <h1>Analysis of "{{ textNLP }}"</h1>
+              <div *ngIf="pronouns.length">
+                <p><strong>Pronouns:</strong></p>
+                <div *ngFor="let pronoun of pronouns">
+                  <button mat-button color="accent" matTooltip="pronoun">{{ pronoun }}</button>
+                </div>
+              </div>
+              <div *ngIf="verbs.length">
+                <p><strong>Verbs:</strong></p>
+                <div *ngFor="let verb of verbs">
+                  <button mat-button color="accent" matTooltip="verb">{{ verb }}</button>
+                </div>
+              </div>
+              <div *ngIf="nouns.length">
+                <p><strong>Nouns:</strong></p>
+                <div *ngFor="let noun of nouns">
+                  <button mat-button color="accent" matTooltip="noun">{{ noun }}</button>
+                </div>
+              </div>
+              <div *ngIf="adjectives.length">
+                <p><strong>Adjectives:</strong></p>
+                <div *ngFor="let adjective of adjectives">
+                  <button mat-button color="accent" matTooltip="adjective">{{ adjective }}</button>
+                </div>
+              </div>
+              <div *ngIf="adverbs.length">
+                <p><strong>Adverbs:</strong></p>
+                <div *ngFor="let adverb of adverbs">
+                  <button mat-button color="accent" matTooltip="adverb">{{ adverb }}</button>
+                </div>
+              </div>
+              <div *ngIf="people.length">
+                <p><strong>People:</strong></p>
+                <div *ngFor="let person of people">
+                  <button mat-button color="accent" matTooltip="person">{{ person }}</button>
+                </div>
+              </div>
+              <div *ngIf="places.length">
+                <p><strong>Places:</strong></p>
+                <div *ngFor="let place of places">
+                  <button mat-button color="accent" matTooltip="place">{{ place }}</button>
+                </div>
+              </div>
+              <div *ngIf="organizations.length">
+                <p><strong>Organizations:</strong></p>
+                <div *ngFor="let organization of organizations">
+                  <button mat-button color="accent" matTooltip="organization">{{ organization }}</button>
+                </div>
+              </div>
+              <div *ngIf="clauses.length">
+                <p><strong>Clauses:</strong></p>
+                <div *ngFor="let clause of clauses">
+                  <button mat-button color="accent" matTooltip="clause">{{ clause }}</button>
+                </div>
+              </div>
+              <div *ngIf="questions.length">
+                <p><strong>Questions:</strong></p>
+                <div *ngFor="let question of questions">
+                  <button mat-button color="accent" matTooltip="question">{{ question }}</button>
+                </div>
+              </div>
+              <div *ngIf="acronyms.length">
+                <p><strong>Acronyms:</strong></p>
+                <div *ngFor="let acronym of acronyms">
+                  <button mat-button color="accent" matTooltip="acronym">{{ acronym }}</button>
+                </div>
+              </div>
+              <div *ngIf="emails.length">
+                <p><strong>Emails:</strong></p>
+                <div *ngFor="let email of emails">
+                  <button mat-button color="accent" matTooltip="email">{{ email }}</button>
+                </div>
+              </div>
+              <div *ngIf="urls.length">
+                <p><strong>URLs:</strong></p>
+                <div *ngFor="let url of urls">
+                  <button mat-button color="accent" matTooltip="url">{{ url }}</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+
+        </mat-step>
+
+        <!-- PHRASE FIM -->
+
+        <!-- TEXT INICIO -->
+        <mat-step>
+          <ng-template matStepLabel>Text</ng-template>
+
+          <div class="p-1">
+            <div class="pane1">
+
+              <!-- inicio -->
+
+              <mat-card>Voice
+                <mat-card-content>
+
+                  <mat-chip-listbox aria-label="Voice selection">
+                    <mat-chip-option color="warn" matTooltip="Priming Alloy Option Selected!"
+                      (click)="selectVoice('alloy')" [selected]="voiceSelection === 'alloy'">
+                      <img matTooltip="Alloy" alt="Alloy" matChipAvatar src="assets/img/avatars/1.jpg" /> Alloy
+                    </mat-chip-option>
+                    <mat-divider></mat-divider>
+                    <mat-chip-option color="warn" matTooltip="Priming Echo Option Selected!"
+                      (click)="selectVoice('echo')" [selected]="voiceSelection === 'echo'">
+                      <img matTooltip="Echo" alt="Echo" matChipAvatar src="assets/img/avatars/2.jpg" /> Echo
+                    </mat-chip-option>
+                    <mat-divider></mat-divider>
+                    <mat-chip-option color="warn" matTooltip="Priming Fable Option Selected!"
+                      (click)="selectVoice('fable')" [selected]="voiceSelection === 'fable'">
+                      <img matTooltip="Fable" alt="Fable" matChipAvatar src="assets/img/avatars/3.jpg" /> Fable
+                    </mat-chip-option>
+                    <mat-divider></mat-divider>
+                    <mat-chip-option color="warn" matTooltip="Priming Onyx Option Selected!"
+                      (click)="selectVoice('onyx')" [selected]="voiceSelection === 'onyx'">
+                      <img matTooltip="Onyx" alt="Onyx" matChipAvatar src="assets/img/avatars/4.jpg" /> Onyx
+                    </mat-chip-option>
+                    <mat-divider></mat-divider>
+                    <mat-chip-option color="warn" matTooltip="Priming Nova Option Selected!"
+                      (click)="selectVoice('nova')" [selected]="voiceSelection === 'nova'">
+                      <img matTooltip="Nova" alt="Nova" matChipAvatar src="assets/img/avatars/5.jpg" /> Nova
+                    </mat-chip-option>
+                    <mat-divider></mat-divider>
+                    <mat-chip-option color="warn" matTooltip="Priming Shimmer Option Selected!"
+                      (click)="selectVoice('shimmer')" [selected]="voiceSelection === 'shimmer'">
+                      <img matTooltip="Shimmer" alt="Shimmer" matChipAvatar src="assets/img/avatars/6.jpg" /> Shimmer
+                    </mat-chip-option>
+                  </mat-chip-listbox>
+
+                  <mat-chip-option #chipPhrase value="phrase" [selected]="selectedChip === 'phrase'"
+                    (click)="onSelection('phrase')" matTooltip="Priming Phrase Option Selected!" color="primary">
+                    Phrase
+                    <mat-icon svgIcon="mat:speaker_notes"></mat-icon>
+                  </mat-chip-option>
+                  <mat-chip-option #chipText value="text" color="warn" [selected]="selectedChip === 'text'"
+                    (click)="onSelection('text')" matTooltip="Priming Text Option Selected!">
+                    Text
+                    <mat-icon svgIcon="mat:menu_book"></mat-icon>
+                  </mat-chip-option>
+
+                  <mat-chip-option #chipWord value="word" color="warn" [selected]="selectedChip === 'word'"
+                    (click)="onSelection('word')" matTooltip="Priming Word Option Selected!">
+                    Word
+                    <mat-icon svgIcon="mat:fact_check"></mat-icon>
+                  </mat-chip-option>
+
+                  <mat-chip-option disabled #chipWord value="image" color="warn" matTooltip="Image Option Selected!">
+                    Image
+                    <mat-icon svgIcon="mat:image_search"></mat-icon>
+                  </mat-chip-option>
+
+                  <mat-chip-option #chipWord value="rsvp" color="warn" [selected]="selectedChip === 'srvp'"
+                    (click)="onSelection('srvp')" (click)="toggleRSVPReader()"
+                    matTooltip="RSVP, the technique of : Rapid Serial Visual Presentation, is a method used to present visual information, such as words or images, in a quick sequence, one after the other, at the same visual fixation point. This technique is often used in psychological research on visual processing and attention, as well as in practical applications to improve speed."
+                    color="primary">
+                    SRVP
+                    <mat-icon svgIcon="mat:flash_on"></mat-icon>
+                  </mat-chip-option>
+
+
+                </mat-card-content>
+              </mat-card>
+            </div>
+          </div>
 
           <!-- Quick Line Chart -->
           <vex-widget-quick-line-chart #chatContainer icon="mat:pageview" iconClass="text-primary-900 bg-primary-900/10"
@@ -649,27 +656,27 @@ Their journey took them to extraordinary places, from towering mountains to sand
                 </div>
               </div>
             </div>
-        </div>
+          </div>
 
 
         </mat-step>
 
-<!-- TEXT FIM -->
+        <!-- TEXT FIM -->
 
-<!-- ZETTELKASTEN INICIO -->
+        <!-- ZETTELKASTEN INICIO -->
 
         <mat-step>
           <ng-template matStepLabel>Zettelkasten</ng-template>
 
-        <div class="p-6">
-          <img src="assets/img/zettelkasten/zettelkasten_steeps.png" alt="Zettelkasten">
-          <p>
-        </div>
+          <div class="p-6">
+            <img src="assets/img/zettelkasten/zettelkasten_steeps.png" alt="Zettelkasten">
+            <p>
+          </div>
 
         </mat-step>
-<!-- ZETTELKASTEN FIM -->
+        <!-- ZETTELKASTEN FIM -->
 
-<!-- GRAPH INICIO -->
+        <!-- GRAPH INICIO -->
         <mat-step>
           <ng-template matStepLabel>Graph</ng-template>
 
@@ -681,7 +688,7 @@ Their journey took them to extraordinary places, from towering mountains to sand
 
         </mat-step>
 
-<!-- GRAPH FIM -->
+        <!-- GRAPH FIM -->
       </mat-horizontal-stepper>
     </div>
 
@@ -855,11 +862,11 @@ Their journey took them to extraordinary places, from towering mountains to sand
           <div class="p-6">
 
 
-   <div *ngIf="mostrarImagem" class="video-wrapper">
-    <video autoplay muted loop playsinline>
-      <source src="../../../../assets/priming.mp4" type="video/mp4">
-    </video>
-  </div>
+            <div *ngIf="mostrarImagem" class="video-wrapper">
+              <video autoplay muted loop playsinline>
+                <source src="../../../../assets/priming.mp4" type="video/mp4">
+              </video>
+            </div>
 
           </div>
         </mat-tab>
