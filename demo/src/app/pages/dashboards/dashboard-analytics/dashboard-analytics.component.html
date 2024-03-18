@@ -159,11 +159,11 @@
                       <mat-icon svgIcon="mat:flash_on"></mat-icon>
                     </mat-chip-option>
 
-                    <mat-chip-option disabled #chipWord value="rsvp" color="warn" [selected]="selectedChip === 'srvp'"
-                    (click)="onSelection('srvp')" (click)="toggleRSVPReader()"
-                    matTooltip="Flashcards - Hermann Ebbinghaus : Spaced repetition is a study technique based on the idea that reviews of learned material should be done at increasing time intervals to improve long-term retention. This method is widely recognized for its effectiveness in learning and memorization. The theory behind spaced repetition is that each time information is reviewed, after progressively longer periods, the strength of the memory and the time until it is forgotten increase."
+                    <mat-chip-option #chipWord value="rsvp" color="warn"
+                    (click)="openDialogFlashCard()"
+                    matTooltip="Flash Cards - Hermann Ebbinghaus : Spaced repetition is a study technique based on the idea that reviews of learned material should be done at increasing time intervals to improve long-term retention. This method is widely recognized for its effectiveness in learning and memorization. The theory behind spaced repetition is that each time information is reviewed, after progressively longer periods, the strength of the memory and the time until it is forgotten increase."
                     color="primary">
-                    Flashcards
+                    Flash Cards
                     <mat-icon svgIcon="mat:style"></mat-icon>
                   </mat-chip-option>
 
@@ -260,7 +260,6 @@ Their journey took them to extraordinary places, from towering mountains to sand
                 </div>
               </div>
 
-              <!-- </div> -->
             </div>
           </div>
 

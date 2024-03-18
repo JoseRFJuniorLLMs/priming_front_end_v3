@@ -21,6 +21,7 @@ import { QuillEditorComponent } from 'ngx-quill';
 
 import nlp from 'compromise';
 import WaveSurfer from 'wavesurfer.js';
+//import RegionsPlugin from 'wavesurfer.js/src/plugin/regions';
 import gpt4 from '../../../../../../gpt4.json';
 
 @Component({

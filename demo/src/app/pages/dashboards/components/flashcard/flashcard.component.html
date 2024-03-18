@@ -1,0 +1,41 @@
+
+
+<mat-dialog-content>
+
+  <div class="container p-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+    <div class="loading-indicator" *ngIf="isLoading">
+      <mat-progress-spinner mode="indeterminate" color="warn"></mat-progress-spinner>
+      <mat-progress-bar mode="indeterminate" color="warn"></mat-progress-bar>
+      <mat-progress-bar mode="buffer" color="warn"></mat-progress-bar>
+      <mat-progress-bar mode="query" color="warn"></mat-progress-bar>
+    </div>
+    <div class="error-message" *ngIf="errorText">
+      <p>{{ errorText }}</p>
+    </div>
+  </div>
+
+
+  <div class="p-1">
+    <div class="pane1">
+
+  <!-- waveform-viewer.component.html -->
+  <div class="audio-container">
+    <button (click)="togglePlayback()">
+      <!-- Ícone de Play -->
+      <mat-icon *ngIf="!isPlaying" mat-icon-button matTooltip="Play"  svgIcon="mat:play_arrow"
+      (click)="playAudio()">
+        play_arrow
+      </mat-icon>
+      <!-- Ícone de Pause -->
+      <mat-icon *ngIf="isPlaying" mat-icon-button matTooltip="Pause" svgIcon="mat:pause" (click)="pauseAudio()">
+        pause
+      </mat-icon>
+    </button>
+    <div #waveformContainer class="waveform-container"></div>
+  </div>
+
+
+</div>
+</div>
+
+</mat-dialog-content>

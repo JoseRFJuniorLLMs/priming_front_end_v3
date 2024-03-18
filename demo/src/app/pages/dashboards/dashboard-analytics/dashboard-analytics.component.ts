@@ -61,6 +61,7 @@ import { RsvpreaderComponent } from '../components/rsvpreader/rsvpreader.compone
 import { ImagemPopupComponent } from './imagem-popup.component';
 
 import { VexLayoutService } from '@vex/services/vex-layout.service';
+import { FlashcardComponent } from '../components/flashcard/flashcard.component';
 
 // Interface para descrever a estrutura da resposta da API
 interface ResponseData {
@@ -194,6 +195,7 @@ volume: number = 50; // Valor inicial para o volume
 speed: number = 100; // Valor inicial para a velocidade
 
 showRSVPReader: boolean = false;
+showFlashCard: boolean = false;
 
 voices: string[] = ['alloy', 'echo', 'fable', 'onyx', 'nova', 'shimmer'];
 voiceSelection: string = 'defaultVoice'; // Valor inicial para voz selecionada
@@ -239,7 +241,7 @@ openDialogX(textDisplay: string): void {
     this.isDialogOpen = false;
   });
 }
-//===============================================
+
   /* ==================SRVP==================== */
   someMethodThatSelectsText(text: string) {
     this.sharedDataService.setSelectedText(text);
@@ -305,6 +307,33 @@ openDialogX(textDisplay: string): void {
       });
     }
 
+      /* ==================openDialog FlashCard==================== */
+      openDialogFlashCard(): void {
+        this.isDialogOpen = true;
+        // Verifica se já existe um diálogo aberto
+        if (this.dialogRef) {
+          // Fecha o diálogo atual antes de abrir um novo
+          this.dialogRef.close();
+        }
+
+      // Abre o novo diálogo e armazena sua referência
+      this.dialogRef = this.dialog.open(FlashcardComponent, {
+      width: '900px',
+      height: '800px',
+      //data: { texto: textDisplay }
+      });
+
+        // Quando o diálogo for fechado, limpa a referência
+        this.dialogRef.afterClosed().subscribe(() => {
+          this.dialogRef = null;
+          this.isDialogOpen = false; // Resetar quando o diálogo é fechado
+        });
+      }
+
+      toggleFlashCard() {
+        this.showFlashCard = !this.showFlashCard;
+      }
+
   /* ==================OnINIT==================== */
     ngOnInit(): void {
 
@@ -344,7 +373,8 @@ openDialogX(textDisplay: string): void {
     this.subscription.unsubscribe();
   }
 
-  /*questionToOpenAI CONSOME API DA OPEN IA, recebe question, retorna messages */
+    /* ==================CONSOME API DA OPEN IA==================== */
+    /*questionToOpenAI CONSOME API DA OPEN IA, recebe question, retorna messages */
     async questionToOpenAI(question: string, selection: 'phrase' | 'text' | 'word') {
     this.isLoading = true;
     try {
@@ -386,58 +416,6 @@ openDialogX(textDisplay: string): void {
     }
   }
 
-
- /*  async questionToOpenAI(question: string, selection: 'phrase' | 'text' | 'word', voiceSelection: string) {
-    this.isLoading = true;
-    try {
-      const contentMessage = this.buildContentMessage(question, selection, voiceSelection);
-      const response = await this.postToOpenAI(contentMessage);
-
-      if (this.responseIsValid(response)) {
-        this.handleResponse(response);
-      } else {
-        throw new Error("Resposta da API não contém dados válidos.");
-      }
-    } catch (error) {
-      this.handleError(error);
-    } finally {
-      this.isLoading = false;
-    }
-  }
-
-  private buildContentMessage(question: string, selection: string, voiceSelection: string): string {
-    let message = `repeat this ${selection} in ${voiceSelection} voice: ${question}`;
-    switch (selection) {
-      case 'phrase':
-        message += ', and provide more sentences that contain the word simple and children';
-        break;
-      case 'text':
-        message += ' and provide stories using memory palace memorization technique, for children with the word.';
-        break;
-      case 'word':
-        // Adicionar lógica específica para 'word', se necessário.
-        break;
-    }
-    return message;
-  }
-
-  private async postToOpenAI(contentMessage: string) {
-    const headers = {
-      "Authorization": `Bearer ${gpt4.gptApiKey}`,
-      "Content-Type": "application/json",
-    };
-    return await this.http.post<any>(gpt4.gptUrl, {
-      messages: [{ role: 'user', content: contentMessage }],
-      temperature: 0.0,
-      max_tokens: 300,
-      model: "gpt-4",
-    }, { headers }).toPromise();
-  }
-
-  private responseIsValid(response: any): boolean {
-    return response && response.choices && response.choices.length > 0 && response.choices[0].message;
-  }
- */
   private handleResponse(response: any) {
     this.chatMessage = response.choices[0].message.content;
     const displayTime = this.displayTextWordByWord(this.chatMessage);
