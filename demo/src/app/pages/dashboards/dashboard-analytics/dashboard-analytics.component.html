@@ -7,7 +7,6 @@
   </div>
 </div>
 
-
 <vex-page-layout mode="card">
 
   <vex-page-layout-content class="container">
@@ -29,23 +28,22 @@
 
           <!-- Word INICIO -->
 
-          <!-- waveform-viewer.component.html -->
-          <div class="audio-container">
+      <!-- waveform-viewer.component.html -->
+      <div class="audio-container">
 
-            <button mat-fab color="primary" (click)="toggleAudio()">
-              <!-- Ícone de Play -->
-              <mat-icon *ngIf="!isPlaying" mat-icon-button matTooltip="Play" svgIcon="mat:play_arrow"
-                (click)="playAudio()">
-                play_arrow
-              </mat-icon>
-              <!-- Ícone de Pause -->
-              <mat-icon *ngIf="isPlaying" mat-icon-button matTooltip="Pause" svgIcon="mat:pause" (click)="pauseAudio()">
-                pause
-              </mat-icon>
-            </button>
-            <div #waveform class="waveform-container"></div>
+        <button mat-fab color="primary" (click)="toggleAudio()">
+          <!-- Ícone de Play -->
+          <mat-icon *ngIf="!isPlaying" mat-icon-button matTooltip="Play" svgIcon="mat:play_arrow" (click)="playAudio()">
+            play_arrow
+          </mat-icon>
+          <!-- Ícone de Pause -->
+          <mat-icon *ngIf="isPlaying" mat-icon-button matTooltip="Pause" svgIcon="mat:pause" (click)="pauseAudio()">
+            pause
+          </mat-icon>
+        </button>
+        <div #waveform class="waveform-container"></div>
 
-          </div>
+      </div>
 
           <div class="p-1">
             <div class="pane1">
@@ -117,7 +115,7 @@
                       color="primary">
                       SRVP
                       <mat-icon svgIcon="mat:flash_on"></mat-icon>
-                      <rsvpreader *ngIf="showRSVPReader" [text]="selectedText"></rsvpreader>
+                      <rsvpreader *ngIf="showRSVPReader" [text]="selectedText"></rsvpreader> <!-- texto variavel -->
                     </mat-chip-option>
 
                     <mat-chip-option #chipWord value="rsvp" color="warn" (click)="openDialogFlashCard()"
@@ -144,15 +142,16 @@
                     " value="{{ chatMessage }}">
                 </vex-widget-quick-line-chart>
 
+ <!--                <input type="text" [(ngModel)]="imagePrompt" placeholder="Digite seu prompt aqui">
+                <button (click)="generateImageFromOpenAI(imagePrompt)">Gerar Imagem</button> -->
+
+                <!-- Adicione esta tag img ao seu template -->
+                <img *ngIf="generatedImageUrl" [src]="generatedImageUrl" alt="Imagem Gerada">
+
                 <div class="p-6">
-
-                  <input type="text" [(ngModel)]="imagePrompt" placeholder="Digite seu prompt aqui">
-                  <button (click)="generateImageFromOpenAI(imagePrompt)">Gerar Imagem</button>
-
-                  <!-- Adicione esta tag img ao seu template -->
-                  <img *ngIf="generatedImageUrl" [src]="generatedImageUrl" alt="Imagem Gerada">
-
+                  <img src="assets/img/logo/above4.png" alt="ABOVE">
                   <p>
+
                 </div>
 
               </div>

@@ -373,7 +373,7 @@ generatedImageUrl: string = ''
         this.openSnackBar("Phrase");
       } else if (selection === 'text') {
         this.openSnackBar("Text");
-        contentMessage += 'and provide stories using memory palace memorization technique, for children with the word.';
+        contentMessage += 'and provide 1 stories using memory palace memorization technique, for children with the word.';
       } else if (selection === 'word') {
         this.openSnackBar("Word");
         contentMessage += ', ';
