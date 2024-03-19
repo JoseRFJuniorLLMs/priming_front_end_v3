@@ -62,12 +62,12 @@ import { CoursesService } from '../../../services/courses.service';
 import { BookComponent } from '../../apps/book/book.component';
 import { GraphComponent } from '../../apps/graph/graph.component';
 import { PageLayoutDemoComponent } from '../../ui/page-layouts/page-layout-demo/page-layout-demo.component';
-import { DialogExampleComponent } from '../components/dialog-ia/dialog-ia.component';
+import { DialogIAComponent } from '../components/dialog-ia/dialog-ia.component';
 import { RsvpreaderComponent } from '../components/dialog-rsvpreader/rsvpreader.component';
 import { ImagemPopupComponent } from './imagem-popup.component';
 
 import { VexLayoutService } from '@vex/services/vex-layout.service';
-import { FlashcardComponent } from '../components/flashcard/flashcard.component';
+import { FlashcardComponent } from '../components/dialog-flashcard/flashcard.component';
 
 // Interface para descrever a estrutura da resposta da API
 interface ResponseData {
@@ -230,7 +230,7 @@ selectedVoice: string = ''; // Adiciona a declaração para 'selectedVoice'
     this.voiceSelection = voice;
   }
 
-openDialogX(textDisplay: string): void {
+/* openDialogX(textDisplay: string): void {
   this.isDialogOpen = true;
   if (this.dialogRef) {
     this.dialogRef.close();
@@ -246,15 +246,7 @@ openDialogX(textDisplay: string): void {
     this.isDialogOpen = false;
   });
 }
-
-  /* ==================SRVP==================== */
-  someMethodThatSelectsText(text: string) {
-    this.sharedDataService.setSelectedText(text);
-  }
-
-  toggleRSVPReader() {
-    this.showRSVPReader = !this.showRSVPReader;
-  }
+ */
 
   /* ==================abrirPopup==================== */
   abrirPopup() {
@@ -262,7 +254,7 @@ openDialogX(textDisplay: string): void {
     });
   }
 
-  /* ==================openDialog Speach==================== */
+  /* ==================Dialog Speach IA==================== */
   openDialogSpeach(textDisplay: string): void {
     this.isDialogOpen = true;
     // Verifica se já existe um diálogo aberto
@@ -272,7 +264,7 @@ openDialogX(textDisplay: string): void {
     }
 
   // Abre o novo diálogo e armazena sua referência
-  this.dialogRef = this.dialog.open(DialogExampleComponent, {
+  this.dialogRef = this.dialog.open(DialogIAComponent, {
   width: '900px',
   height: '800px',
   data: { texto: textDisplay }
@@ -289,7 +281,13 @@ openDialogX(textDisplay: string): void {
     });
   }
 
-  /* ==================openDialog SRVP==================== */
+    /* ==================SRVP==================== */
+    someMethodThatSelectsText(text: string) {
+      this.sharedDataService.setSelectedText(text);
+    }
+    toggleRSVPReader() {
+      this.showRSVPReader = !this.showRSVPReader;
+    }
     openDialogSRVP(textDisplay: string): void {
       this.isDialogOpen = true;
       // Verifica se já existe um diálogo aberto
@@ -304,22 +302,21 @@ openDialogX(textDisplay: string): void {
     height: '800px',
     data: { texto: textDisplay }
     });
-
-      // Quando o diálogo for fechado, limpa a referência
+    // Quando o diálogo for fechado, limpa a referência
       this.dialogRef.afterClosed().subscribe(() => {
         this.dialogRef = null;
         this.isDialogOpen = false; // Resetar quando o diálogo é fechado
       });
     }
 
-      /* ==================openDialog FlashCard==================== */
-      openDialogFlashCard(): void {
+    /* ==================openDialog FlashCard==================== */
+    openDialogFlashCard(): void {
         this.isDialogOpen = true;
         // Verifica se já existe um diálogo aberto
         if (this.dialogRef) {
           // Fecha o diálogo atual antes de abrir um novo
           this.dialogRef.close();
-        }
+      }
 
       // Abre o novo diálogo e armazena sua referência
       this.dialogRef = this.dialog.open(FlashcardComponent, {
@@ -334,7 +331,6 @@ openDialogX(textDisplay: string): void {
           this.isDialogOpen = false; // Resetar quando o diálogo é fechado
         });
       }
-
       toggleFlashCard() {
         this.showFlashCard = !this.showFlashCard;
       }
@@ -436,7 +432,7 @@ openDialogX(textDisplay: string): void {
   /* ==================SELECTION PHASE TEXT WORD==================== */
   onSelection(selection: 'phrase' | 'text' | 'word' | 'srvp') {
     this.selectedChip = this.selectedChip === selection ? null : selection;
-    this.openSnackBar(selection);
+    this.openSnackBar("Now you have to select a text...("+selection+")");
   }
 
   ngAfterViewInit(): void {
@@ -542,7 +538,7 @@ displayFullText(text: string): void {
   const displayElement = document.getElementById('textDisplay');
   if (displayElement) {
       displayElement.textContent = text;
-   }
+  }
 }
 
   /* ==================ATUALIZA O TEXTO BASEADO NO AUDIO==================== */
@@ -670,15 +666,12 @@ handleMouseUp(event: MouseEvent) {
 
     // Especificamente para 'srvp'
     if (this.selectedChip === 'srvp') {
-      // Certifica-se de chamar o método ou ação correta para abrir o painel ou dialog desejado
-      // Substitua 'openDialogSRVP' pelo método correto se necessário
-      this.openDialogSRVP(selectedText);
+      this.openDialogSRVP(selectedText); //VAI TER QUE MOSTRAR DADOS DO BANCO ?
     } else {
       // Chama questionToOpenAI ou qualquer outra lógica para diferentes botões
       this.questionToOpenAI(selectedText, this.selectedChip);
     }
   }
-  // Outras condições ou lógicas podem ser adicionadas conforme necessário
 }
 
 /* ==================GERA AUDIO==================== */
@@ -798,31 +791,6 @@ onSpeedChange(event: Event): void {
   }
 }
 
-// testes volume
-/* diminuirVolume() {
-  // Diminui o volume. Certifique-se de não ir abaixo do mínimo permitido.
-  this.waveform.setVolume(Math.max(this.waveform.getVolume() - 0.1, 0)); // Exemplo: diminuir 10%
-  this.openSnackBar("Volume Diminuído.");
-}
-
-aumentarVolume() {
-  // Aumenta o volume. Certifique-se de não exceder o máximo permitido.
-  this.waveform.setVolume(Math.min(this.waveform.getVolume() + 0.1, 1)); // Exemplo: aumentar 10%
-  this.openSnackBar("Volume Aumentado.");
-}
-
-diminuirVelocidade() {
-  // Diminui a velocidade. Certifique-se de não ir abaixo do mínimo permitido.
-  this.waveform.setPlaybackRate(Math.max(this.waveform.getPlaybackRate() - 0.1, 0.5)); // Exemplo
-  this.openSnackBar("Velocidade Diminuída.");
-}
-
-aumentarVelocidade() {
-  // Aumenta a velocidade. Certifique-se de não exceder o máximo permitido.
-  this.waveform.setPlaybackRate(Math.min(this.waveform.getPlaybackRate() + 0.1, 2)); // Exemplo
-  this.openSnackBar("Velocidade Aumentada.");
-}
- */
 /* ==================updatePlaybackHint==================== */
   updatePlaybackHint(currentTime: number) {
     const minutes = Math.floor(currentTime / 60);
@@ -870,21 +838,11 @@ analyzeText() {
   this.people = doc.people().out('array');
   this.places = doc.places().out('array');
   this.organizations = doc.organizations().out('array');
-  //this.dates = doc.dates().out('array');
-  //this.values = doc.values().out('array');
-  // Funcionalidades adicionais
-  //this.phrases = doc.phrases().out('any'); // Frases
   this.clauses = doc.clauses().out('array'); // Cláusulas
-  //this.negations = doc.negations().out('array'); // Negativas
   this.questions = doc.questions().out('array'); // Perguntas
-  //this.quotes = doc.quotes().out('array'); // Citações
   this.acronyms = doc.acronyms().out('array'); // Siglas
   this.emails = doc.emails().out('array'); // E-mails
   this.urls = doc.urls().out('array'); // URLs
-  //this.emojis = doc.emojis().out('array'); // Emojis
-  //this.mentions = doc.mentions().out('array'); // Menções (@usuario)
-  //this.hashtags = doc.hashtags().out('array'); // Hashtags
-  // Nota: Algumas dessas funcionalidades podem requerer plugins adicionais ou implementação específica.
 }
 
 

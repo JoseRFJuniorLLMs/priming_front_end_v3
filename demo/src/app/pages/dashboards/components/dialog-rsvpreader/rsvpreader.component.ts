@@ -1,23 +1,19 @@
 import { Component, Inject, Input, OnInit } from '@angular/core';
-
-
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
-import { MatTooltipModule } from '@angular/material/tooltip';
+import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { EMPTY, Subscription } from 'rxjs';
-//import { SharedDataService } from 'src/app/services/sahred-data.service';
-import { DialogExampleComponent } from '../dialog-ia/dialog-ia.component';
 
+import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatRippleModule } from '@angular/material/core';
-import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 
 @Component({
@@ -56,8 +52,7 @@ export class RsvpreaderComponent implements OnInit{
   constructor(
     //private sharedDataService: SharedDataService,
     private sanitizer: DomSanitizer,
-    @Inject(MAT_DIALOG_DATA) public data: { texto: string },
-    private dialogRef: MatDialogRef<DialogExampleComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: { texto: string }
     ) {}
 
   ngOnInit() {

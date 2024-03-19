@@ -52,7 +52,7 @@ import gpt4 from '../../../../../../gpt4.json';
   ]
 })
 
-export class DialogExampleComponent implements OnInit {
+export class DialogIAComponent implements OnInit {
   @ViewChild('spectrogram') spectrogramEl: ElementRef | undefined;
   @ViewChild('waveform') waveformEl!: ElementRef;
   @ViewChild('stepper') stepper!: MatStepper;
@@ -106,7 +106,7 @@ errorText = "";
   constructor(
     private http: HttpClient,
     @Inject(MAT_DIALOG_DATA) public data: { texto: string },
-    private dialogRef: MatDialogRef<DialogExampleComponent>,
+    private dialogRef: MatDialogRef<DialogIAComponent>,
   ) { }
 
   ngOnInit() {

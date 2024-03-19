@@ -33,8 +33,8 @@ import WaveSurfer from 'wavesurfer.js';
 @Component({
   selector: 'vex-flashcard',
   standalone: true,
-  templateUrl: './flashcard.component.html',
-  styleUrl: './flashcard.component.scss',
+  templateUrl: 'flashcard.component.html',
+  styleUrl: 'flashcard.component.scss',
   imports: [
     MatDialogModule,
     MatButtonModule,
