@@ -101,7 +101,7 @@ export class ShareBottomGpt4Component implements OnInit {
     const response: ResponseData | undefined = await this.http.post<ResponseData>(gpt4.gptUrl, {
       messages: [{ role: 'user', content: question }],
       temperature: 0.5,
-      max_tokens: 4000,
+      max_tokens: 100,
       model: "gpt-4",
     }, { headers }).toPromise();
 

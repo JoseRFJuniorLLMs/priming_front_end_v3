@@ -381,7 +381,7 @@ generatedImageUrl: string = ''
       const response = await this.http.post<any>(gpt4.gptUrl, {
         messages: [{ role: 'user', content: contentMessage }],
         temperature: 0.0,
-        max_tokens: 300,
+        max_tokens: 100,
         model: "gpt-4",
       }, { headers }).toPromise();
 
@@ -518,6 +518,7 @@ displayFullText(text: string): void {
   if (displayElement) {
       displayElement.textContent = text;
   }
+
 }
 
   /* ==================ATUALIZA O TEXTO BASEADO NO AUDIO==================== */
@@ -712,6 +713,7 @@ generateAudio(): void {
         this.waveform.load(audioUrl);
         this.waveform.on('ready', onReady);
         this.waveform.on('finish', onFinish);
+        this.generateImageFromOpenAI(this.chatMessage); // TODO: GERA IMAGME SE O TEXTO FOR SELECIONADO
       },
       error => {
         console.error("Error generating audio:", error);

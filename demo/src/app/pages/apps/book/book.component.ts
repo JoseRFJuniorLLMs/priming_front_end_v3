@@ -227,7 +227,7 @@ async questionToOpenAI(question: string) {
         messages: [{ role: 'user', content: "repeat this tex:" + question}],
         //messages: [{ role: 'user', content: "repeat this word:" + question }],
         temperature: 0.0,//0.5
-        max_tokens: 1000,//4000
+        max_tokens: 100,//4000
         model: "gpt-4",
       }, { headers }).toPromise();
       if (!response || !response.choices || response.choices.length === 0 || !response.choices[0].message) {
