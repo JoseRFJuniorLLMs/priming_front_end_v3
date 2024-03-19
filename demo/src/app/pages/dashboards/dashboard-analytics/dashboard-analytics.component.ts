@@ -675,7 +675,7 @@ generateAudio(): void {
     const openAIKey = gpt4.gptApiKey;
     const url = "https://api.openai.com/v1/audio/speech";
     const body = {
-      model: "tts-1-hd",//tts-1-hd, tts-1
+      model: "tts-1",//tts-1-hd, tts-1
       //voice: this.getRandomVoice(),
       voice: this.selectedVoice,
       input: this.chatMessage
@@ -758,7 +758,7 @@ generateImageFromOpenAI(selectedText: string) {
   });
 
   const body = {
-    model: "dall-e-3",
+    model: "dall-e-2", //"dall-e-3",
     prompt: selectedText,
     quality: "standard",
     size: "1024x1024",

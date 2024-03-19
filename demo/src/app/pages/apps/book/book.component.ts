@@ -377,7 +377,7 @@ async questionToOpenAI(question: string) {
 
     // Configura o corpo da requisição
     const body = JSON.stringify({
-      model: "tts-1-hd",
+      model: "tts-1",
       voice: this.getRandomVoice(),
       input: text
       //"model": "tts-1-hd",//tts-1-hd, tts-1
