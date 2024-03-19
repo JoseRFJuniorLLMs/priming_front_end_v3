@@ -16,7 +16,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { scaleInOutAnimation } from '@vex/animations/scale-in-out.animation';
 
-import { RsvpreaderComponent } from 'src/app/pages/dashboards/components/rsvpreader/rsvpreader.component';
+import { RsvpreaderComponent } from 'src/app/pages/dashboards/components/dialog-rsvpreader/rsvpreader.component';
 import { ShareBottomBookComponent } from 'src/app/pages/dashboards/components/share-bottom-book/share-bottom-book.component';
 import { ShareBottomGpt4Component } from 'src/app/pages/dashboards/components/share-bottom-gpt4/share-bottom-gpt4.component';
 import { ShareBottomWimHofComponent } from '../../../../../src/app/pages/dashboards/components/share-bottom-wim-hof/share-bottom-wim-hof.component';

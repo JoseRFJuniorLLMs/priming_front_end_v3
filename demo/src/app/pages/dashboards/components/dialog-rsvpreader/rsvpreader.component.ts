@@ -7,7 +7,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { EMPTY, Subscription } from 'rxjs';
 //import { SharedDataService } from 'src/app/services/sahred-data.service';
-import { DialogExampleComponent } from '../dialog/dialog-example.component';
+import { DialogExampleComponent } from '../dialog-ia/dialog-ia.component';
 
 import { MatCardModule } from '@angular/material/card';
 import { MatRippleModule } from '@angular/material/core';

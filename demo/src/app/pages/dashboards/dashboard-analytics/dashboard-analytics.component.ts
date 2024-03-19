@@ -62,8 +62,8 @@ import { CoursesService } from '../../../services/courses.service';
 import { BookComponent } from '../../apps/book/book.component';
 import { GraphComponent } from '../../apps/graph/graph.component';
 import { PageLayoutDemoComponent } from '../../ui/page-layouts/page-layout-demo/page-layout-demo.component';
-import { DialogExampleComponent } from '../components/dialog/dialog-example.component';
-import { RsvpreaderComponent } from '../components/rsvpreader/rsvpreader.component';
+import { DialogExampleComponent } from '../components/dialog-ia/dialog-ia.component';
+import { RsvpreaderComponent } from '../components/dialog-rsvpreader/rsvpreader.component';
 import { ImagemPopupComponent } from './imagem-popup.component';
 
 import { VexLayoutService } from '@vex/services/vex-layout.service';
