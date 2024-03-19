@@ -1,23 +1,3 @@
-<!-- <button (click)="openDialogX('Texto para ser exibido')">Abrir Diálogo</button> -->
-
-<!-- <vex-secondary-toolbar current="Dashboards">
-  <vex-breadcrumbs
-    [crumbs]="['Dashboards', 'Student']"
-    class="flex-auto"></vex-breadcrumbs>
-
-  <button class="ml-2" color="primary" mat-icon-button type="button">
-    <mat-icon svgIcon="mat:more_vert"></mat-icon>
-  </button>
-</vex-secondary-toolbar> -->
-
-<!--
-<div class="container p-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
-  <video autoplay muted loop playsinline style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
-    <source src="../../../../assets/priming.mp4" type="video/mp4">
-  </video>
-</div>-->
-
-
 <div class="container p-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
   <div class="loading-indicator" *ngIf="isLoading">
     <mat-progress-spinner mode="indeterminate" color="accent"></mat-progress-spinner>
@@ -27,16 +7,7 @@
   </div>
 </div>
 
-<rsvpreader *ngIf="showRSVPReader" [text]="selectedText"></rsvpreader>
 
-<!-- <div *ngIf="mostrarImagem" class="video-wrapper">
-  <video autoplay muted loop playsinline>
-    <source src="../../../../assets/priming.mp4" type="video/mp4">
-  </video>
-</div>
-
-<img *ngIf="mostrarImagem" src="assets/img/logo/priming.png" alt="Priming">
- -->
 <vex-page-layout mode="card">
 
   <vex-page-layout-content class="container">
@@ -55,50 +26,31 @@
 
         <mat-step>
           <ng-template matStepLabel>Word</ng-template>
+
           <!-- Word INICIO -->
 
-      <!-- waveform-viewer.component.html -->
-      <div class="audio-container">
+          <!-- waveform-viewer.component.html -->
+          <div class="audio-container">
 
-        <button mat-fab color="primary" (click)="toggleAudio()">
-          <!-- Ícone de Play -->
-          <mat-icon *ngIf="!isPlaying" mat-icon-button matTooltip="Play" svgIcon="mat:play_arrow" (click)="playAudio()">
-            play_arrow
-          </mat-icon>
-          <!-- Ícone de Pause -->
-          <mat-icon *ngIf="isPlaying" mat-icon-button matTooltip="Pause" svgIcon="mat:pause" (click)="pauseAudio()">
-            pause
-          </mat-icon>
-        </button>
-        <div #waveform class="waveform-container"></div>
+            <button mat-fab color="primary" (click)="toggleAudio()">
+              <!-- Ícone de Play -->
+              <mat-icon *ngIf="!isPlaying" mat-icon-button matTooltip="Play" svgIcon="mat:play_arrow"
+                (click)="playAudio()">
+                play_arrow
+              </mat-icon>
+              <!-- Ícone de Pause -->
+              <mat-icon *ngIf="isPlaying" mat-icon-button matTooltip="Pause" svgIcon="mat:pause" (click)="pauseAudio()">
+                pause
+              </mat-icon>
+            </button>
+            <div #waveform class="waveform-container"></div>
 
-      </div>
+          </div>
 
           <div class="p-1">
             <div class="pane1">
 
-
-<!--               <div class="player">
-
-                <button mat-fab color="primary" (click)="toggleAudio()">
-
-                  <mat-icon *ngIf="!isPlaying" matTooltip="Play" svgIcon="mat:play_arrow">
-                    play_arrow
-                  </mat-icon>
-
-                  <mat-icon *ngIf="isPlaying" matTooltip="Pause" svgIcon="mat:pause">
-                    pause
-                  </mat-icon>
-                </button>
-
-
-              </div>
-              <div #waveform autoplay style="cursor: pointer;">
-              </div> -->
-
-
               <div>
-
 
                 <!-- inicio -->
 
@@ -165,6 +117,7 @@
                       color="primary">
                       SRVP
                       <mat-icon svgIcon="mat:flash_on"></mat-icon>
+                      <rsvpreader *ngIf="showRSVPReader" [text]="selectedText"></rsvpreader>
                     </mat-chip-option>
 
                     <mat-chip-option #chipWord value="rsvp" color="warn" (click)="openDialogFlashCard()"
@@ -176,30 +129,6 @@
 
                   </mat-card-content>
                 </mat-card>
-
-                <!--                 <mat-stepper orientation="vertical">
-                  <mat-step>
-                    <ng-template matStepLabel>Step 1</ng-template>
-                    <ng-template matStepContent>
-                      <p>This content was rendered lazily</p>
-                      <button mat-button matStepperNext>Next</button>
-                    </ng-template>
-                  </mat-step>
-                  <mat-step>
-                    <ng-template matStepLabel>Step 2</ng-template>
-                    <ng-template matStepContent>
-                      <p>This content was also rendered lazily</p>
-                      <button mat-button matStepperPrevious>Back</button>
-                      <button mat-button matStepperNext>Next</button>
-                    </ng-template>
-                  </mat-step>
-                  <mat-step>
-                    <ng-template matStepLabel>Step 3</ng-template>
-                    <p>This content was rendered eagerly</p>
-                    <button mat-button matStepperPrevious>Back</button>
-                  </mat-step>
-                </mat-stepper> -->
-
 
                 <!-- fim -->
 
@@ -216,18 +145,16 @@
                 </vex-widget-quick-line-chart>
 
                 <div class="p-6">
-                  <img src="assets/img/logo/above4.png" alt="ABOVE">
+
+                  <input type="text" [(ngModel)]="imagePrompt" placeholder="Digite seu prompt aqui">
+                  <button (click)="generateImageFromOpenAI(imagePrompt)">Gerar Imagem</button>
+
+                  <!-- Adicione esta tag img ao seu template -->
+                  <img *ngIf="generatedImageUrl" [src]="generatedImageUrl" alt="Imagem Gerada">
+
                   <p>
                 </div>
-<!--
-                <div class="p-6">
-                  <img src="assets/img/logo/above2.png" alt="ABOVE">
-                  <p>
-                </div>
-                <div class="p-6">
-                  <img src="assets/img/logo/above3.png" alt="ABOVE">
-                  <p>
-                </div> -->
+
               </div>
 
             </div>

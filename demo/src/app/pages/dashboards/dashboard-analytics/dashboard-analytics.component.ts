@@ -206,6 +206,9 @@ voices: string[] = ['alloy', 'echo', 'fable', 'onyx', 'nova', 'shimmer'];
 voiceSelection: string = 'defaultVoice'; // Valor inicial para voz selecionada
 selectedVoice: string = ''; // Adiciona a declaração para 'selectedVoice'
 
+imagePrompt: string = '';
+generatedImageUrl: string = ''
+
 //==========================fim de declaracoes=============================//
 
   /* ==================CONTRUTOR==================== */
@@ -223,30 +226,12 @@ selectedVoice: string = ''; // Adiciona a declaração para 'selectedVoice'
     this.finishListener = () => {};
   }
 
-//================================================
+//======================FIM CONSTRUTO=================//
 
   // Método para atualizar voiceSelection com base na escolha do usuário
   updateVoiceSelection(voice: string) {
     this.voiceSelection = voice;
   }
-
-/* openDialogX(textDisplay: string): void {
-  this.isDialogOpen = true;
-  if (this.dialogRef) {
-    this.dialogRef.close();
-  }
-  this.dialogRef = this.dialog.open(DialogExampleComponent, {
-    width: '900px',
-    height: '800px',
-    data: { texto: textDisplay }
-  });
-
-  this.dialogRef.afterClosed().subscribe((result: any) => {
-    console.log('O diálogo foi fechado');
-    this.isDialogOpen = false;
-  });
-}
- */
 
   /* ==================abrirPopup==================== */
   abrirPopup() {
@@ -360,8 +345,6 @@ selectedVoice: string = ''; // Adiciona a declaração para 'selectedVoice'
     this.subscription = interval(1000).subscribe(() => {
       this.getCurrentTime();
     });
-
-
   }
 
    /* ==================COLUMNS COURSE==================== */
@@ -488,7 +471,6 @@ selectedVoice: string = ''; // Adiciona a declaração para 'selectedVoice'
     })
   }
 
-
   toggleAudio() {
     if (this.isPlaying) {
       this.waveform.pause();
@@ -498,9 +480,6 @@ selectedVoice: string = ''; // Adiciona a declaração para 'selectedVoice'
     }
     this.isPlaying = !this.isPlaying;
   }
-
-
-
 
   /* ==================FUNCAO PARA PEGAR O ARRAY DE STRING==================== */
   getWordsArray(text: string): string[] {
@@ -741,6 +720,60 @@ generateAudio(): void {
       }
     );
   }
+
+  /* ==================GENERATE IMAGE==================== */
+/*   generateImageFromOpenAI(prompt: string) {
+    const openAIKey = gpt4.gptApiKey;
+    const headers = new HttpHeaders({
+      "Authorization": `Bearer ${openAIKey}`,
+      'Content-Type': 'application/json'
+    });
+
+    const body = {
+      model: "dall-e-3", // Ajuste conforme o modelo desejado
+      prompt: prompt,
+      quality: "standard",
+      size: "1024x1024",
+      n: 1
+    };
+
+    this.http.post<any>('https://api.openai.com/v1/images/generations', body, { headers }).subscribe({
+      next: (response) => {
+        this.generatedImageUrl = response.data[0].url; // Exemplo, ajuste conforme necessário
+      },
+      error: (error) => {
+        console.error('Erro ao gerar a imagem:', error);
+      }
+    });
+  } */
+
+  // Método modificado para aceitar o texto selecionado como argumento
+generateImageFromOpenAI(selectedText: string) {
+  const openAIKey = gpt4.gptApiKey;
+  const headers = new HttpHeaders({
+    "Authorization": `Bearer ${openAIKey}`,
+    'Content-Type': 'application/json'
+  });
+
+  const body = {
+    model: "dall-e-3",
+    prompt: selectedText,
+    quality: "standard",
+    size: "1024x1024",
+    n: 1
+  };
+
+  this.http.post<any>('https://api.openai.com/v1/images/generations', body, { headers }).subscribe({
+    next: (response) => {
+      this.generatedImageUrl = response.data[0].url; // Ajuste conforme necessário
+    },
+    error: (error) => {
+      console.error('Erro ao gerar a imagem:', error);
+    }
+  });
+}
+
+
 
  /* ==================DISPLAY WORD BY WORD AND SHOW IMAGE==================== */
   displayTextWordByWord(text: string): number {
