@@ -58,9 +58,10 @@ import WaveSurfer from 'wavesurfer.js';
 })
 export class FlashcardComponent implements AfterViewInit {
 
+  words: string[] = ['Hello', 'World', 'Love', 'Have'];
+  currentWordIndex = 0;
 
   @ViewChild('waveformContainer') waveformContainer!: ElementRef;
-  @ViewChild('waveformCanvasRef') waveformCanvasRef!: ElementRef<HTMLCanvasElement>;
 
   private wavesurfer!: WaveSurfer;
   isPlaying = false;
@@ -87,7 +88,7 @@ export class FlashcardComponent implements AfterViewInit {
       interact: true,
       dragToSeek: true,
       fillParent: true,
-      autoplay: true,
+      autoplay: false,
       url: '../../assets/audio/micro-machines.wav',
     });
 
@@ -132,6 +133,10 @@ export class FlashcardComponent implements AfterViewInit {
     }
   }
 
+    // Método para mostrar a próxima palavra no flashcard
+    showNextWord(): void {
+      this.currentWordIndex = (this.currentWordIndex + 1) % this.words.length;
+    }
 
   // Custom Render Function
 

@@ -11,21 +11,37 @@
     </div>
   </div>
 
-  <mat-card>
+
+  <mat-card class="example-card">
     <mat-card-header>
-      <img mat-card-xl-image alt="3" src="assets/img/logo/priming.png">
+      <mat-card-title-group>
+        <mat-card-title>
+
+            <div class="flashcard">
+              <div class="word">{{ words[currentWordIndex] }}</div>
+            </div>
+
+
+        </mat-card-title>
+        <mat-card-subtitle>Traducao aqui</mat-card-subtitle>
+        <img mat-card-xl-image alt="img" src="https://material.angular.io/assets/img/examples/shiba2.jpg" >
+      </mat-card-title-group>
     </mat-card-header>
   </mat-card>
+
 </mat-dialog-content>
 
 <mat-card-actions>
   <div class="flex">
-    <button class="meu-botao" matTooltip="Done1" color="primary" mat-fab type="button">
-      <i class="fa fa-check" style="font-size: 30px;"></i>
-    </button>
-    <button class="meu-botao" matTooltip="Done2" color="warn" mat-fab type="button">
+
+    <button class="meu-botao" (click)="showNextWord()" matTooltip="Done2" color="basic" mat-fab type="button">
       <i class="fa fa-skull-crossbones" style="font-size: 30px;"></i>
     </button>
+
+    <button class="meu-botao" (click)="showNextWord()" matTooltip="Done1" color="warn" mat-fab type="button">
+      <i class="fa fa-heartbeat" style="font-size: 30px;"></i>
+    </button>
+
   </div>
 </mat-card-actions>
 

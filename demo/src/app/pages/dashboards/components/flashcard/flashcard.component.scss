@@ -28,3 +28,22 @@
   width: 100%; // Garante que .flex ocupa toda a largura disponível
   // Remova propriedades como margin ou padding que possam estar empurrando para o lado
 }
+
+.flashcard-container {
+  display: flex;
+  align-items: center;
+  height: 100vh; // Ajuste conforme necessário para o tamanho desejado
+}
+
+.flashcard {
+  background-color: #fff;
+  border: 1px solid #0c0c0c;
+  border-radius: 0px;
+  padding: 20px;
+  text-align: center; // Centraliza o texto horizontalmente
+  margin-left: 20px; // Espaçamento à esquerda para separar a imagem do flashcard
+}
+
+.word {
+  font-size: 3em; // Tamanho das letras aumentado para 2 vezes o tamanho padrão
+}

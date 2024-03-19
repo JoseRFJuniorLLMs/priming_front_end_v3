@@ -474,7 +474,8 @@ openDialogX(textDisplay: string): void {
   this.waveform.setVolume(0.1); // 10/100
   this.waveform.on('audioprocess', (currentTime) => this.updatePlaybackHint(currentTime));
   this.waveform.on('pause', () => this.hidePlaybackHint());
-  this.waveform.on('finish', () => this.hidePlaybackHint());
+  //this.waveform.on('finish', () => this.hidePlaybackHint());
+  this.waveform.on('finish', () => this.isPlaying = false);
   }
 
     events() {
