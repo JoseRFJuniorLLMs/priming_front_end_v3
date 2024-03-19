@@ -1,25 +1,30 @@
+/* Estilos gerais mantidos */
 .audio-container {
-  display: flex; /* Use flexbox para alinhar os itens horizontalmente */
-  align-items: center; /* Alinhe os itens verticalmente ao centro */
+  display: flex;
+  align-items: center;
 }
 
 .audio-container button {
-  margin-right: 10px; /* Ajuste o espaçamento à direita conforme necessário */
+  margin-right: 10px;
 }
 
 .waveform-container {
-  flex: 1; /* Ocupa todo o espaço disponível restante */
+  flex: 1;
 }
 
-
-// No seu arquivo de estilo SCSS
-
 .mat-card-actions {
-  .flex {
-    display: flex;
-    justify-content: center; // Centraliza horizontalmente
-    align-items: center; // Centraliza verticalmente, se necessário
-    width: 100%; // Ocupa toda a largura do container pai
-    padding: 16px 0; // Adiciona um pouco de espaço acima e abaixo para não ficar muito colado
-  }
+  display: flex;
+  justify-content: center; // Centraliza os botões horizontalmente
+  align-items: center; // Centraliza os botões verticalmente
+  width: 100%; // Ocupa toda a largura do contêiner pai
+  // Remova qualquer outra propriedade que possa estar afetando o posicionamento
+}
+
+// Se .flex é o contêiner direto dos botões, remova estilos que possam afetar o alinhamento
+.flex {
+  display: flex;
+  justify-content: center; // Isso deve centralizar os botões horizontalmente dentro de .flex
+  align-items: center; // E verticalmente
+  width: 100%; // Garante que .flex ocupa toda a largura disponível
+  // Remova propriedades como margin ou padding que possam estar empurrando para o lado
 }

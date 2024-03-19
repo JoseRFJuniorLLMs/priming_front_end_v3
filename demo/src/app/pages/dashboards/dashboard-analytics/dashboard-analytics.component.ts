@@ -126,14 +126,14 @@ export class DashboardAnalyticsComponent implements OnInit, AfterViewInit {
   /* ==================VIEWCHILD==================== */
   @ViewChild('waveform', { static: false }) waveformEl!: ElementRef<any>;
   @ViewChild(RsvpreaderComponent) rsvpReader!: RsvpreaderComponent;
+  /* @ViewChild('waveformContainer') waveformContainer!: ElementRef;
+  @ViewChild('waveformCanvasRef') waveformCanvasRef!: ElementRef<HTMLCanvasElement>; */
+
 
   /* ==================VARIAVEIS==================== */
   private waveform!: WaveSurfer;
   private subscription: Subscription = new Subscription;
-  public isPlaying: boolean = true;
-  //voices: string[] = ['alloy', 'echo', 'fable', 'onyx', 'nova', 'shimmer'];
-  //voices: string[] = ['alloy'];
-  //speechRecognition: any;
+  public isPlaying: boolean = false;
   isTranscribing = false;
   textToSpeech!: string;
   audioBlob!: Blob;
@@ -162,7 +162,6 @@ export class DashboardAnalyticsComponent implements OnInit, AfterViewInit {
   private isGeneratingAudio: boolean = false;
   private readyListener: () => void;
   private finishListener: () => void;
-
   mostrarImagem: boolean = true;
 
 //NLP
@@ -440,9 +439,13 @@ openDialogX(textDisplay: string): void {
     this.openSnackBar(selection);
   }
 
-  /* ==================WAVESURFER==================== */
   ngAfterViewInit(): void {
-    this.isPlaying = true;
+    this.initWaveSurfer();
+  }
+
+  /* ==================WAVESURFER==================== */
+  private initWaveSurfer(): void {
+    //this.isPlaying = true;
     this.waveform = WaveSurfer.create({
       container: this.waveformEl.nativeElement,
       url: '../../assets/audio/micro-machines.wav',
@@ -459,7 +462,7 @@ openDialogX(textDisplay: string): void {
       interact: true,
       dragToSeek: true,
       fillParent: true,
-      autoplay: true,
+      autoplay: false,
       /*minPxPerSec: 50,
         mediaControls: true, //controles
           */
@@ -474,19 +477,17 @@ openDialogX(textDisplay: string): void {
   this.waveform.on('finish', () => this.hidePlaybackHint());
   }
 
-  events() {
+    events() {
     this.waveform.once('interaction', () => {
       this.waveform.play();
     })
 
     this.waveform.on('play', () => {
       this.isPlaying = true;
-      this.openSnackBar("Play");
     })
 
     this.waveform.on('pause', () => {
       this.isPlaying = false;
-      this.openSnackBar("Pause");
     })
   }
 
@@ -494,14 +495,13 @@ openDialogX(textDisplay: string): void {
   toggleAudio() {
     if (this.isPlaying) {
       this.waveform.pause();
-      this.openSnackBar("waveform: Pause");
     } else {
       this.waveform.play();
-      this.openSnackBar("waveform: Play");
       this.textToSpeechService.speak(this.chatMessage); // Legenda do Chrome
     }
     this.isPlaying = !this.isPlaying;
   }
+
 
 
 
@@ -529,6 +529,7 @@ openDialogX(textDisplay: string): void {
     // Adiciona um listener para o evento de término do áudio
     // Se um callback foi fornecido, ele será chamado ao terminar a reprodução
     this.waveform.on('finish', () => {
+        this.isPlaying = false;
         if (onAudioFinish) {
             onAudioFinish(); // Chama o callback fornecido
         }

@@ -63,7 +63,7 @@ export class FlashcardComponent implements AfterViewInit {
   @ViewChild('waveformCanvasRef') waveformCanvasRef!: ElementRef<HTMLCanvasElement>;
 
   private wavesurfer!: WaveSurfer;
-  isPlaying = false; // Variável para controlar o estado de reprodução
+  isPlaying = false;
 
   errorText = "";
   isLoading = false;
@@ -116,6 +116,7 @@ export class FlashcardComponent implements AfterViewInit {
       this.wavesurfer.pause();
     } else {
       this.wavesurfer.play();
+      //this.textToSpeechService.speak(this.chatMessage); // Legenda do Chrome
     }
   }
 
