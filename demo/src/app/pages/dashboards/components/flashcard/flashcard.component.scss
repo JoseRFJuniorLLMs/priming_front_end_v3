@@ -10,3 +10,16 @@
 .waveform-container {
   flex: 1; /* Ocupa todo o espaço disponível restante */
 }
+
+
+// No seu arquivo de estilo SCSS
+
+.mat-card-actions {
+  .flex {
+    display: flex;
+    justify-content: center; // Centraliza horizontalmente
+    align-items: center; // Centraliza verticalmente, se necessário
+    width: 100%; // Ocupa toda a largura do container pai
+    padding: 16px 0; // Adiciona um pouco de espaço acima e abaixo para não ficar muito colado
+  }
+}

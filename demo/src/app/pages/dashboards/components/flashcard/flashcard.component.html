@@ -1,5 +1,20 @@
 <mat-dialog-content>
 
+  <mat-card>
+    <mat-card-header>
+      <img mat-card-avatar alt="3" src="assets/img/logo/priming7.png">
+      <mat-card-title>Gerald Morris</mat-card-title>
+      <mat-card-subtitle>Yesterday</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <p>Piqued favour stairs it enable exeter as seeing. Remainder met improving but engrossed sincerity age. Better
+        but length gay denied abroad are. Attachment astonished to on appearance imprudence so collecting in excellence.
+        Tiled way blind lived whose new. The for fully had she there leave merit enjoy forth. </p>
+    </mat-card-content>
+    <mat-divider></mat-divider>
+  </mat-card>
+
+
   <div class="container p-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
     <div class="loading-indicator" *ngIf="isLoading">
       <mat-progress-spinner mode="indeterminate" color="warn"></mat-progress-spinner>
@@ -19,21 +34,37 @@
       <!-- waveform-viewer.component.html -->
       <div class="audio-container">
 
-        <button mat-fab color="primary" (click)="togglePlayback()">
+        <button matTooltip="Play" mat-fab color="primary" (click)="togglePlayback()">
           <!-- Ícone de Play -->
-          <mat-icon *ngIf="!isPlaying" mat-icon-button matTooltip="Play" svgIcon="mat:play_arrow" (click)="playAudio()">
+          <mat-icon *ngIf="!isPlaying" mat-icon-button matTooltip="Play" svgIcon="mat:play_arrow">
             play_arrow
           </mat-icon>
           <!-- Ícone de Pause -->
-          <mat-icon *ngIf="isPlaying" mat-icon-button matTooltip="Pause" svgIcon="mat:pause" (click)="pauseAudio()">
+          <mat-icon *ngIf="isPlaying" mat-icon-button matTooltip="Pause" svgIcon="mat:pause">
             pause
           </mat-icon>
         </button>
+
         <div #waveformContainer class="waveform-container"></div>
 
       </div>
 
     </div>
   </div>
+
+  <mat-card-actions>
+    <div class="flex">
+      <button matTooltip="Done1" class="config-panel-toggle2" color="primary" mat-fab type="button">
+        <i class="fa fa-check" style="font-size: 24px;"></i>
+      </button>
+
+      <button matTooltip="Done2" class="config-panel-toggle2" color="primary" mat-fab type="button">
+        <i class="fa fa-skull-crossbones" style="font-size: 24px;"></i>
+      </button>
+      <button matTooltip="Done3" class="config-panel-toggle2" color="primary" mat-fab type="button">
+        <i class="fa fa-baby" style="font-size: 24px;"></i>
+      </button>
+    </div>
+  </mat-card-actions>
 
 </mat-dialog-content>

@@ -461,13 +461,8 @@ openDialogX(textDisplay: string): void {
       fillParent: true,
       autoplay: true,
       /*minPxPerSec: 50,
-      autoScroll: true,
-      autoCenter: true,
-      interact: true,
-      dragToSeek: true,
-      mediaControls: true, //controles
-      autoplay: true,
-      fillParent: true, */
+        mediaControls: true, //controles
+          */
     });
 
     this.waveform.on('audioprocess', () => {
@@ -495,6 +490,7 @@ openDialogX(textDisplay: string): void {
     })
   }
 
+
   toggleAudio() {
     if (this.isPlaying) {
       this.waveform.pause();
@@ -506,6 +502,7 @@ openDialogX(textDisplay: string): void {
     }
     this.isPlaying = !this.isPlaying;
   }
+
 
 
   /* ==================FUNCAO PARA PEGAR O ARRAY DE STRING==================== */

@@ -1,4 +1,3 @@
-
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
@@ -21,6 +20,8 @@ import { HighlightModule } from 'ngx-highlightjs';
 import { QuillEditorComponent } from 'ngx-quill';
 
 import WaveSurfer from 'wavesurfer.js';
+//import RegionsPlugin from 'wavesurfer.js/src/plugin/regions';
+
 //import RecordPlugin from 'wavesurfer.js/dist/plugins/record.esm.js'
 //import TimelinePlugin from 'wavesurfer.js/dist/plugins/timeline.esm.js'
 //import Spectrogram from 'wavesurfer.js/dist/plugins/spectrogram.esm.js'
@@ -59,6 +60,8 @@ export class FlashcardComponent implements AfterViewInit {
 
 
   @ViewChild('waveformContainer') waveformContainer!: ElementRef;
+  @ViewChild('waveformCanvasRef') waveformCanvasRef!: ElementRef<HTMLCanvasElement>;
+
   private wavesurfer!: WaveSurfer;
   isPlaying = false; // Variável para controlar o estado de reprodução
 
@@ -74,8 +77,17 @@ export class FlashcardComponent implements AfterViewInit {
       container: this.waveformContainer.nativeElement,
       waveColor: '#ff4e00',
       progressColor: '#e60a6d',
-      barRadius: 30,
-      barWidth: 0.1,
+      cursorWidth: 6,
+      barGap: 3,
+      barWidth: 2,
+      barHeight: 3,
+      barRadius: 10,
+      autoScroll: true,
+      autoCenter: true,
+      interact: true,
+      dragToSeek: true,
+      fillParent: true,
+      autoplay: true,
       url: '../../assets/audio/micro-machines.wav',
     });
 
