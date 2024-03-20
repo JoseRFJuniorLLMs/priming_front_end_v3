@@ -13,7 +13,6 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import ePub from 'epubjs';
 import WaveSurfer from 'wavesurfer.js';
 import gpt4 from '../../../../../gpt4.json';
-import { BucketService } from './bucket-service';
 
 // Interface para descrever a estrutura da resposta da API
 interface ResponseData {
@@ -67,8 +66,7 @@ export class BookComponent implements OnInit, AfterViewInit {
 
   constructor(
     private http: HttpClient,
-    private _snackBar: MatSnackBar,
-    private bucketService: BucketService
+    private _snackBar: MatSnackBar
   ) { }
 
   ngOnInit() {
