@@ -13,6 +13,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import ePub from 'epubjs';
 import WaveSurfer from 'wavesurfer.js';
 import gpt4 from '../../../../../gpt4.json';
+import { BucketService } from './bucket-service';
 
 // Interface para descrever a estrutura da resposta da API
 interface ResponseData {
@@ -29,7 +30,7 @@ interface ResponseData {
   imports: [
     MatBadgeModule, MatCardModule,
     MatIconModule, MatSelectModule,
-    FormsModule, MatTooltipModule,CommonModule]
+    FormsModule, MatTooltipModule, CommonModule]
 
 })
 
@@ -67,132 +68,140 @@ export class BookComponent implements OnInit, AfterViewInit {
   constructor(
     private http: HttpClient,
     private _snackBar: MatSnackBar,
-    ) {}
+    private bucketService: BucketService
+  ) { }
 
   ngOnInit() {
     this.initializeBook();
 
     setTimeout(() => {
       this.generateAudio(this.currentPageText);
-    }, 1000); // Ajuste o tempo conforme necessário
+    }, 1000);
+
+/*     this.bucketService.listBucketFiles().subscribe(data => {
+      console.log(data);
+      if (data.items) {
+        this.files = data.items;
+      }
+    }); */
 
   }
 
   //initializeBook
   async initializeBook() {
     try {
-        this.book = ePub("../../assets/epub/TheLittlePrince.epub");
-        await this.book.ready;
-        this.rendition = this.book.renderTo("area-de-exibicao");
-        await this.book.locations.generate(1024);
-        this.totalPages = this.book.locations.length(); // Atualiza o total de páginas
-
-        this.rendition.display().then(() => {
-            // Após a exibição inicial, chama a função para atualizar texto da página e localização
-            this.updateCurrentPageTextAndLocation();
-        });
-
-        // Adiciona um ouvinte para o evento 'relocated'
-        this.rendition.on('relocated', (location: any) => {
-            // Chamada após cada navegação do usuário
-            this.updateCurrentPageTextAndLocation();
-        });
+      //this.book = ePub("../../assets/epub/TheLittlePrince.epub");
+      this.book = ePub("../../assets/epub/Alice.epub");
+      await this.book.ready;
+      this.rendition = this.book.renderTo("area-de-exibicao");
+      await this.book.locations.generate(1024);
+      this.totalPages = this.book.locations.length();
+      this.rendition.display().then(() => {
+        this.updateCurrentPageTextAndLocation();
+      });
+      this.rendition.on('relocated', (location: any) => {
+        this.updateCurrentPageTextAndLocation();
+      });
     } catch (error) {
-        console.error("Error loading or rendering book: ", error);
+      console.error("Error loading or rendering book: ", error);
     }
-}
+  }
 
- //updateCurrentPage
+  //updateCurrentPage
   updateCurrentPage() {
     const currentLocation = this.rendition.currentLocation();
     if (currentLocation && currentLocation.start && currentLocation.start.cfi) {
-        // Encontrar o índice do CFI atual nas localizações geradas
-        const pageIndex = this.book.locations.locationFromCfi(currentLocation.start.cfi);
-        this.currentPage = pageIndex + 1; // ePub.js pode usar índices base 0, então adicione 1 para ter base 1
-        console.log(`Current page: ${this.currentPage} / ${this.totalPages}`);
-        this.openSnackBar(`Current page: ${this.currentPage} / ${this.totalPages}`);
+      const pageIndex = this.book.locations.locationFromCfi(currentLocation.start.cfi);
+      this.currentPage = pageIndex + 1; // ePub.js pode usar índices base 0, então adicione 1 para ter base 1
+      console.log(`Current page: ${this.currentPage} / ${this.totalPages}`);
+      this.openSnackBar(`Current page: ${this.currentPage} / ${this.totalPages}`);
     } else {
-        console.log("Não foi possível determinar a localização atual.");
+      console.log("Não foi possível determinar a localização atual.");
     }
+  }
+
+   //updateCurrentPage 2
+  // Assumindo que você tenha acesso ao iframe ou ao conteúdo do DOM que o epubjs gera
+public async captureCurrentPageText() {
+  let currentPageText = '';
+  // Tente obter o iframe ou o elemento que contém o texto da página atual
+  const contentDocument = document.querySelector('iframe')?.contentDocument || document;
+
+  // Captura todo o texto dentro do elemento identificado
+  currentPageText = contentDocument.body?.innerText || '';
+
+  console.log('Texto da página atual:', currentPageText);
+  return currentPageText.trim();
 }
 
+
 // getCurrentPageText
-async getCurrentPageText(): Promise<string> {
+ public async getCurrentPageText(): Promise<void> {
   if (!this.rendition) {
-    this.openSnackBar('Rendition is not available.');
-    console.log('Rendition is not available.');
-    return '';
+    console.error('A renderização (rendition) não está disponível.');
+    this.openSnackBar('A renderização (rendition) não está disponível.');
+    return;
   }
 
   try {
-    const contents = this.rendition.getContents();
-    if (contents.length === 0) {
-      this.openSnackBar('No content available.');
-      console.log('No content available.');
-      return '';
-    }
+    // Tentativa de focar apenas no conteúdo visível
+    let visibleContentText = '';
+    const visibleContents = this.rendition.getContents(); // Assumindo que isso retorna todos os conteúdos carregados
 
-    let fullText = '';
-    for (const content of contents) {
-      if (content && typeof content.textContent === 'function') {
-        const text = await content.textContent();
-        fullText += text;
+    // Idealmente, filtrar os conteúdos visíveis baseando-se em algum critério ou estado (isso pode precisar de ajuste)
+    visibleContents.forEach((content: { document: any; contentDocument: any; }) => {
+      // Acessando diretamente o DOM do conteúdo
+      const doc = content.document || content.contentDocument;
+      if (doc && doc.body) {
+        // Aqui, você poderia tentar aplicar alguma lógica para determinar se o conteúdo é realmente visível
+        // Esta é uma simplificação; a lógica real pode precisar ser mais complexa
+        visibleContentText += doc.body.innerText || '';
       }
-    }
+    });
 
-    if (fullText) {
-      this.openSnackBar('Texto da página obtido com sucesso.');
-      console.log('Texto da página obtido com sucesso:', fullText);
-      return fullText.trim();
-    } else {
-      this.openSnackBar('Falha ao obter texto da página.');
-      return '';
-    }
+    this.currentPageText = visibleContentText.trim();
+    console.log('Texto da página atual:', this.currentPageText);
   } catch (error) {
-    console.error('Erro ao tentar obter o texto da Current page:', error);
-    this.openSnackBar('Erro ao tentar obter o texto da Current page.');
-    return '';
+    console.error('Erro ao tentar obter o texto da página atual:', error);
   }
 }
 
+  // updateAndGenerateAudio
+  async updateAndGenerateAudio() {
+    // Chamada para atualizar o texto da página atual diretamente.
+    await this.getCurrentPageText();
 
-// updateAndGenerateAudio
-async updateAndGenerateAudio() {
-  this.currentPageText = await this.getCurrentPageText();
-  console.log('Texto atualizado para geração de áudio:', this.currentPageText);
-  if (this.currentPageText) {
-    this.generateAudio(this.currentPageText);
-  } else {
-    console.log('Nenhum texto disponível para gerar áudio.');
+    // Verifica a propriedade 'currentPageText' diretamente após a atualização.
+    console.log('Texto atualizado para geração de áudio:', this.currentPageText);
+
+    if (this.currentPageText) {
+      this.generateAudio(this.currentPageText);
+    } else {
+      console.log('Nenhum texto disponível para gerar áudio.');
+    }
   }
-}
 
-//toggleLayout
+  //toggleLayout
   toggleLayout() {
     return () => {
       this.rendition.spread = (this.rendition.spread === "none") ? "always" : "none";
       this.rendition.display();
-      this.openSnackBar(this.rendition.display());
     };
   }
 
   nextPage() {
-    this.openSnackBar("nextPage"+this.rendition.next().length);
     this.rendition.next();
   }
 
   prevPage() {
-    this.openSnackBar("prevPage"+this.rendition.prev().length);
     this.rendition.prev();
   }
 
   zoomIn() {
-    this.openSnackBar("zoomIn");
     this.rendition.themes.fontSize('120%');
   }
 
   zoomOut() {
-    this.openSnackBar("zoomOut");
     this.rendition.themes.fontSize('100%');
   }
 
@@ -205,8 +214,8 @@ async updateAndGenerateAudio() {
     navigator.clipboard.writeText(this.selectedText);
   }
 
-/*questionTo OpenAI CONSOME API DA OPEN IA, recebe question, retorna messages */
-async questionToOpenAI(question: string) {
+  /*questionTo OpenAI CONSOME API DA OPEN IA, recebe question, retorna messages */
+  /* async questionToOpenAI(question: string) {
     this.isLoading = true;
     try {
       const headers = new HttpHeaders({
@@ -215,7 +224,7 @@ async questionToOpenAI(question: string) {
       });
 
       const response: ResponseData | undefined = await this.http.post<ResponseData>(gpt4.gptUrl, {
-        messages: [{ role: 'user', content: "repeat this tex:" + question}],
+        messages: [{ role: 'user', content: "repeat this tex:" + question }],
         //messages: [{ role: 'user', content: "repeat this word:" + question }],
         temperature: 0.0,//0.5
         max_tokens: 100,//4000
@@ -236,7 +245,7 @@ async questionToOpenAI(question: string) {
       });
 
       // Opção de exibir a mensagem em um Snackbar imediatamente,
-      this.openSnackBar("questionTo OpenAI«««"+this.chatMessage);
+      this.openSnackBar("questionTo OpenAI«««" + this.chatMessage);
 
     } catch (error) {
       // Tratamento de erros
@@ -248,20 +257,20 @@ async questionToOpenAI(question: string) {
       this.isLoading = false;
     }
   }
-
-//fim IA
+ */
+  //fim IA
 
   //countPages
   async countPages(): Promise<number> {
     const numberOfPages = await this.book.locations.length;
-    this.openSnackBar("countPages:"+numberOfPages);
+    this.openSnackBar("countPages:" + numberOfPages);
     return numberOfPages;
   }
 
   //getCurrentPage
   getCurrentPage(): number {
     const currentPageIndex = this.book && this.book.navigation && this.book.navigation.indexOf(this.book.currentLocation);
-    this.openSnackBar("countPages:"+ currentPageIndex + 1);
+    this.openSnackBar("countPages:" + currentPageIndex + 1);
     return currentPageIndex + 1;
   }
 
@@ -271,7 +280,7 @@ async questionToOpenAI(question: string) {
     let width: string | null = null;
     let height: string | null = null;
 
-    switch(option) {
+    switch (option) {
       case 'default':
         this.openSnackBar("Default");
         // Possivelmente, manter padrões ou aplicar configurações específicas
@@ -310,32 +319,29 @@ async questionToOpenAI(question: string) {
     }
   }
 
+  /* ==================updateCurrentPageTextAndLocation==================== */
   async updateCurrentPageTextAndLocation() {
-    // Atualiza o texto da Current page
-    this.currentPageText = await this.getCurrentPageText();
-    console.log("Texto da Current page:", this.currentPageText);
+    // Simplesmente chama getCurrentPageText para atualizar o texto da página atual.
+    await this.getCurrentPageText();
+    console.log("Texto da página atual:", this.currentPageText);
 
     // Atualiza a localização atual (número da página e total de páginas)
     const currentLocation = this.rendition.currentLocation();
     if (currentLocation && currentLocation.start && currentLocation.start.cfi) {
-        // Encontrar o índice do CFI atual nas localizações geradas
-        const pageIndex = this.book.locations.locationFromCfi(currentLocation.start.cfi);
-        if (pageIndex !== undefined) {
-            this.currentPage = pageIndex + 1; // ePub.js pode usar índices base 0, então adicione 1 para ter base 1
-        } else {
-            console.log("CFI atual não encontrado nas localizações.");
-        }
+      // Encontrar o índice do CFI atual nas localizações geradas
+      const pageIndex = this.book.locations.locationFromCfi(currentLocation.start.cfi);
+      if (pageIndex !== undefined) {
+        this.currentPage = pageIndex + 1; // ePub.js pode usar índices base 0, então adicione 1 para ter base 1
+        console.log(`Página atual: ${this.currentPage} / ${this.totalPages}`);
+        this.openSnackBar(`Página atual: ${this.currentPage} / ${this.totalPages}`);
+      } else {
+        console.log("CFI atual não encontrado nas localizações.");
+      }
     } else {
-        console.log("Não foi possível determinar a localização atual.");
+      console.log("Não foi possível determinar a localização atual.");
     }
+  }
 
-    // Exibe informações atualizadas no console ou na UI
-    console.log(`Current page: ${this.currentPage} / ${this.totalPages}`);
-    // Atualiza a UI com a nova Current page, se necessário
-    // Exemplo: this.updatePageIndicator(this.currentPage, this.totalPages);
-    // Ou use uma função para exibir o texto da Current page no Snackbar
-    this.openSnackBar(`Current page: ${this.currentPage} / ${this.totalPages}`);
-}
 
   /* ==================SNACK BAR==================== */
   openSnackBar(textDisplay: string) {
@@ -368,7 +374,7 @@ async questionToOpenAI(question: string) {
 
     // Configura o corpo da requisição
     const body = JSON.stringify({
-      model: "tts-1",
+      model: "tts-1-hd",
       voice: this.getRandomVoice(),
       input: text
       //"model": "tts-1-hd",//tts-1-hd, tts-1
@@ -415,40 +421,36 @@ async questionToOpenAI(question: string) {
     this.isPlaying = true;
     this.waveform = WaveSurfer.create({
       container: this.waveformEl.nativeElement,
-      /*  url: 'https://storage.googleapis.com/priming_text_wav/ABOVE.wav', */
-
-     // url: '../../assets/audio/ABOVE.wav',
+      mediaControls: true, //controles
+      height: 50,
       waveColor: '#d3d3d3',
       progressColor: 'rgb(0, 0, 0)',
-      /*       waveColor: 'rgb(200, 0, 200)',
-            progressColor: '#000000', */
       cursorColor: 'rgb(0, 0, 0)',
-      cursorWidth: 1,
-      minPxPerSec: 10,
-      barWidth: 1,
-      barRadius: 1,
-      barGap: 1,
+      cursorWidth: 6,
+      barGap: 3,
+      barWidth: 2,
+      barHeight: 3,
+      barRadius: 10,
       autoScroll: true,
       autoCenter: true,
       interact: true,
       dragToSeek: true,
-      mediaControls: true, //controles
-      autoplay: true,
       fillParent: true,
-      height: 50,
+      autoplay: false,
+      minPxPerSec: 50
     });
 
     this.waveform.on('audioprocess', () => {
 
     });
-  this.waveform.setVolume(0.1); // 10/100
-  this.waveform.on('audioprocess', (currentTime) => this.updatePlaybackHint(currentTime));
-  this.waveform.on('pause', () => this.hidePlaybackHint());
-  this.waveform.on('finish', () => this.hidePlaybackHint());
+    this.waveform.setVolume(0.1); // 10/100
+    this.waveform.on('audioprocess', (currentTime) => this.updatePlaybackHint(currentTime));
+    this.waveform.on('pause', () => this.hidePlaybackHint());
+    this.waveform.on('finish', () => this.hidePlaybackHint());
 
-  setTimeout(() => {
-    this.generateAudio(this.currentPageText);
-  }, 1000);
+    setTimeout(() => {
+      this.generateAudio(this.currentPageText);
+    }, 1000);
 
   }
 
@@ -475,18 +477,18 @@ async questionToOpenAI(question: string) {
     const formattedTime = `${minutes}:${seconds.toString().padStart(2, '0')}`;
     const hintElement = document.getElementById('playback-hint');
     if (hintElement) {
-        hintElement.textContent = `Tempo: ${formattedTime}`;
-        hintElement.style.display = 'block';
+      hintElement.textContent = `Tempo: ${formattedTime}`;
+      hintElement.style.display = 'block';
     }
-}
-
-   /* ==================UPDATE PLAY BACK HINT==================== */
-  hidePlaybackHint() {
-  const hintElement = document.getElementById('playback-hint');
-  if (hintElement) {
-      hintElement.style.display = 'none';
   }
-}
+
+  /* ==================UPDATE PLAY BACK HINT==================== */
+  hidePlaybackHint() {
+    const hintElement = document.getElementById('playback-hint');
+    if (hintElement) {
+      hintElement.style.display = 'none';
+    }
+  }
 
   /* ==================VOZ ALEATORIA==================== */
   getRandomVoice(): string {
@@ -496,6 +498,5 @@ async questionToOpenAI(question: string) {
 
   }
 
-/* ==================AO SELECIONAR O TEXTO==================== */
 
 }//fim

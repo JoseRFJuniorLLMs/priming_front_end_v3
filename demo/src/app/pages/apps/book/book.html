@@ -7,23 +7,25 @@
   </ul>
 </div>
 
+
 <mat-card cdkDrag cdkDragHandle
 class="action flex-none" color="primary"
 id="barr01" mat-flat-button>
 
-  <mat-card-actions align="end">
-    <button mat-raised-button
+<mat-card-actions align="end">
+<button mat-raised-button
     matTooltip="Página Atual: {{currentPage}}">
 Página {{currentPage}} de {{totalPages}}
 </button>
+
 <mat-form-field appearance="fill" matTooltip="{{currentPage}}"
- mat-raised-button [matBadge]="currentPage">
+mat-raised-button [matBadge]="currentPage">
       <mat-label>Layout Options</mat-label>
       <mat-select [(ngModel)]="selectedLayoutOption" (selectionChange)="changeRenderOption($event.value)">
-        <mat-option disabled="true" value="default">Default</mat-option>
-        <mat-option disabled="true" value="continuous">Continuous</mat-option>
+        <mat-option disabled="false" value="default">Default</mat-option>
+        <mat-option disabled="false" value="continuous">Continuous</mat-option>
         <mat-option value="paginated">Paginated</mat-option>
-        <mat-option disabled="true" value="auto">Auto</mat-option>
+        <mat-option disabled="false" value="auto">Auto</mat-option>
       </mat-select>
     </mat-form-field>
 
@@ -41,17 +43,13 @@ Página {{currentPage}} de {{totalPages}}
       <mat-icon svgIcon="mat:zoom_out">Zoom OUT</mat-icon>
     </button>
 
-
     <button (click)="countPages()" matTooltip="{{totalPages}}" [matBadge]="totalPages"
-     class="config-panel-toggle4" color="primary" mat-fab type="button">
+    class="config-panel-toggle4" color="primary" mat-fab type="button">
       <mat-icon svgIcon="mat:content_paste">Count Pages</mat-icon>
     </button>
 
-
-
  </mat-card-actions>
 </mat-card>
-
 
 <!-- Container para o Waveform, com posicionamento relativo -->
 <div class="waveform-container">
@@ -65,13 +63,13 @@ Página {{currentPage}} de {{totalPages}}
   </div>
 </div>
 
-
 <button (click)="updateAndGenerateAudio()"
 matTooltip="Send Current Page Text to AI" class="config-panel-toggle4"
 color="primary" mat-fab type="button">
   <mat-icon svgIcon="mat:send">Send</mat-icon>
 </button>
 
-
+<!-- Botão para testar getCurrentPageText -->
+<button mat-raised-button (click)="getCurrentPageText()">Obter Texto</button>
 
 <div id="area-de-exibicao"></div>
