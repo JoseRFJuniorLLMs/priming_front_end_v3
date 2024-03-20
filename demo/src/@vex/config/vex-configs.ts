@@ -32,7 +32,7 @@ const baseConfig: VexConfig = {
   boxed: false,
   sidenav: {
     title: 'Priming',
-    imageUrl: 'assets/img/logo/logo.svg',
+    imageUrl: 'assets/img/icons/flags/united-states.svg',
     showCollapsePin: true,
     user: {
       visible: true

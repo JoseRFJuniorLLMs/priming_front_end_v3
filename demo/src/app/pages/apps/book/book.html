@@ -51,6 +51,13 @@ mat-raised-button [matBadge]="currentPage">
  </mat-card-actions>
 </mat-card>
 
+<div class="ebook-gallery">
+  <div *ngFor="let ebook of ebooks" class="ebook-item" (click)="selectEbook(ebook)">
+    <img alt="cover" [src]="ebook.cover" [alt]="ebook.title" class="ebook-cover">
+    <div class="ebook-title">{{ ebook.title }}</div>
+  </div>
+</div>
+
 <!-- Container para o Waveform, com posicionamento relativo -->
 <div class="waveform-container">
   <!-- Waveform -->

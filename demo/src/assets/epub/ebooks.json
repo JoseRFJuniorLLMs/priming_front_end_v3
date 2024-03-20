@@ -1,0 +1,549 @@
+[
+  {
+    "title": "The Little Price",
+    "path": "demo/src/assets/epub/TheLittlePrince.epub",
+    "cover": "demo/src/assets/epub/theLittlePrince.png"
+  },
+  {
+    "title": "The Coming Wave",
+    "path": "demo/src/assets/epub/The_Coming_Wave_-_Mustafa_Suleyman_Michael_Bhaska.epub",
+    "cover": "demo/src/assets/epub/theComingWave.jpg"
+  },
+
+  {
+      "title": "60 Second Solutions: Motivation - Jeff Davidson",
+      "path": "demo/src/assets/epub/60 Second Solutions_ Motivation - Jeff Davidson.epub",
+      "cover": "demo/src/assets/epub/60 Second Solutions_ Motivation - Jeff Davidson.png"
+    },
+    {
+      "title": "A Monk's Guide to a Clean House and Mind - Shoukei Matsumoto",
+      "path": "demo/src/assets/epub/A Monk's Guide to a Clean House and Mind - Shoukei Matsumoto.epub",
+      "cover": "demo/src/assets/epub/A Monk's Guide to a Clean House and Mind - Shoukei Matsumoto.png"
+    },
+    {
+      "title": "A Practical Guide to Critical Thinking - Greg R. Haskins",
+      "path": "demo/src/assets/epub/A Practical Guide to Critical Thinking - Greg R. Haskins.epub",
+      "cover": "demo/src/assets/epub/A Practical Guide to Critical Thinking - Greg R. Haskins.png"
+    },
+    {
+      "title": "Achieve Anything In Just One Year",
+      "path": "demo/src/assets/epub/Achieve Anything In Just One Year.epub",
+      "cover": "demo/src/assets/epub/Achieve Anything In Just One Year.png"
+    },
+    {
+      "title": "against empathy - bloom paul",
+      "path": "demo/src/assets/epub/against_empathy_bloom_paul.epub",
+      "cover": "demo/src/assets/epub/against_empathy_bloom_paul.png"
+    },
+    {
+      "title": "Aladdin - Ruth Hobart",
+      "path": "demo/src/assets/epub/Aladdin-Ruth_Hobart.epub",
+      "cover": "demo/src/assets/epub/Aladdin-Ruth_Hobart.png"
+    },
+    {
+      "title": "Alice",
+      "path": "demo/src/assets/epub/Alice.epub",
+      "cover": "demo/src/assets/epub/alice.png"
+    },
+    {
+      "title": "Amy Alkon - Unf_ckology",
+      "path": "demo/src/assets/epub/Amy Alkon - Unf_ckology.epub",
+      "cover": "demo/src/assets/epub/Amy Alkon - Unf_ckology.png"
+    },
+    {
+      "title": "As A Dog Thinketh - Monique Anstee",
+      "path": "demo/src/assets/epub/As A Dog Thinketh - Monique Anstee.epub",
+      "cover": "demo/src/assets/epub/As A Dog Thinketh - Monique Anstee.png"
+    },
+    {
+      "title": "Awareness Games: Playing with Y - O'Connor, Brian Tom",
+      "path": "demo/src/assets/epub/Awareness Games_ Playing with Y - O'Connor, Brian Tom.epub",
+      "cover": "demo/src/assets/epub/Awareness Games_ Playing with Y - O'Connor, Brian Tom.png"
+    },
+    {
+        "title": "Black Hat Python: Python Programming for Hackers and Pentesters",
+        "path": "demo/src/assets/epub/Black Hat Python_ Python Programming for Hackers and Pentesters.epub",
+        "cover": "demo/src/assets/epub/Black Hat Python_ Python Programming for Hackers and Pentesters.png"
+      },
+      {
+        "title": "Book of Mistakes: 9 Secrets to Creating a Successful Future, The - Skip Prichard",
+        "path": "demo/src/assets/epub/Book of Mistakes_ 9 Secrets to Creating a Successful Future, The - Skip Prichard.epub",
+        "cover": "demo/src/assets/epub/Book of Mistakes_ 9 Secrets to Creating a Successful Future, The - Skip Prichard.png"
+      },
+      {
+        "title": "Brain Hacks: 200 Ways to Boost Your Brain - Adams Media",
+        "path": "demo/src/assets/epub/Brain Hacks_ 200_ Ways to Boost Your Brain - Adams Media.epub",
+        "cover": "demo/src/assets/epub/Brain Hacks_ 200_ Ways to Boost Your Brain - Adams Media.png"
+      },
+      {
+        "title": "Bryan Caplan - Selfish Reasons to Have More Kids",
+        "path": "demo/src/assets/epub/Bryan Caplan - Selfish Reasons to Have More Kids.epub",
+        "cover": "demo/src/assets/epub/Bryan Caplan - Selfish Reasons to Have More Kids.png"
+      },
+      {
+        "title": "Cinderella - Ruth Hobart",
+        "path": "demo/src/assets/epub/Cinderella-Ruth_Hobart.epub",
+        "cover": "demo/src/assets/epub/Cinderella-Ruth_Hobart.png"
+      },
+      {
+        "title": "Developing Unrelenting Drive, Dedication, and Determination",
+        "path": "demo/src/assets/epub/Developing Unrelenting Drive, Dedication, and Determination.epub",
+        "cover": "demo/src/assets/epub/Developing Unrelenting Drive, Dedication, and Determination.png"
+      },
+      {
+        "title": "Dont Be Such a Scientist - Dr. Randy Olson",
+        "path": "demo/src/assets/epub/Dont Be Such a Scientist - Dr. Randy Olson.epub",
+        "cover": "demo/src/assets/epub/Dont Be Such a Scientist - Dr. Randy Olson.png"
+      },
+      {
+        "title": "Easy Money - gail vaz-oxlade",
+        "path": "demo/src/assets/epub/Easy Money - gail vaz-oxlade.epub",
+        "cover": "demo/src/assets/epub/Easy Money - gail vaz-oxlade.png"
+      },
+      {
+        "title": "Effortless Living - Jason Gregory",
+        "path": "demo/src/assets/epub/Effortless Living - Jason Gregory.epub",
+        "cover": "demo/src/assets/epub/Effortless Living - Jason Gregory.png"
+      },
+      {
+        "title": "Emotional Intelligence 2.0 - Travis Bradberry",
+        "path": "demo/src/assets/epub/Emotional Intelligence 2.0 - Travis Bradberry.epub",
+        "cover": "demo/src/assets/epub/Emotional Intelligence 2.0 - Travis Bradberry.png"
+      },
+        {
+          "title": "Emotional Success by David DeSteno",
+          "path": "demo/src/assets/epub/Emotional_Success_by_David_DeSteno.epub",
+          "cover": "demo/src/assets/epub/Emotional_Success_by_David_DeSteno.png"
+        },
+        {
+          "title": "Everybody Lies 2017",
+          "path": "demo/src/assets/epub/Everybody.Lies.2017.epub",
+          "cover": "demo/src/assets/epub/Everybody.Lies.2017.png"
+        },
+        {
+          "title": "Freakonomics: A Rogue Economist Explores - Steven D. Levitt; Stephen J. Dubner",
+          "path": "demo/src/assets/epub/Freakonomics_ A Rogue Economist Explores - Steven D. Levitt; Stephen J. Dubner.epub",
+          "cover": "demo/src/assets/epub/Freakonomics_ A Rogue Economist Explores - Steven D. Levitt; Stephen J. Dubner.png"
+        },
+        {
+          "title": "Gabriella Coleman - Hacker, Hoaxer, Whistleblower, Spy: The Many Faces of Anonymous",
+          "path": "demo/src/assets/epub/Gabriella Coleman - Hacker, Hoaxer, Whistleblower, Spy- The Many Faces of Anonymous (retail) (epub).epub",
+          "cover": "demo/src/assets/epub/Gabriella Coleman - Hacker, Hoaxer, Whistleblower, Spy- The Many Faces of Anonymous.png"
+        },
+        {
+          "title": "Getting Sh_t Done: How to Power - Stefan Cain",
+          "path": "demo/src/assets/epub/Getting Sh_t Done_ How to Power - Stefan Cain.epub",
+          "cover": "demo/src/assets/epub/Getting Sh_t Done_ How to Power - Stefan Cain.png"
+        },
+        {
+          "title": "Ghost in the Wires - Kevin Mitnick & Steve Wozniak & William L. Simon",
+          "path": "demo/src/assets/epub/Ghost_in_the_Wires_-_Kevin_Mitnick_&_Steve_Wozniak_&_William_L._Simon.epub",
+          "cover": "demo/src/assets/epub/Ghost_in_the_Wires_-_Kevin_Mitnick_&_Steve_Wozniak_&_William_L._Simon.png"
+        },
+        {
+          "title": "GiftImperfection",
+          "path": "demo/src/assets/epub/GiftImperfectio.epub",
+          "cover": "demo/src/assets/epub/GiftImperfectio.png"
+        },
+        {
+          "title": "Happy Is the New Healthy: 31 Ways - Dave Romanelli",
+          "path": "demo/src/assets/epub/Happy Is the New Healthy_ 31 Wa - Dave Romanelli.epub",
+          "cover": "demo/src/assets/epub/Happy Is the New Healthy_ 31 Wa - Dave Romanelli.png"
+        },
+        {
+          "title": "how to analyze people at first sight",
+          "path": "demo/src/assets/epub/how to analyze people at first sight.epub",
+          "cover": "demo/src/assets/epub/how to analyze people at first sight.png"
+        },
+        {
+          "title": "How to Keep People From Pushing - Albert Ellis",
+          "path": "demo/src/assets/epub/How to Keep People From Pushing - Albert Ellis.epub",
+          "cover": "demo/src/assets/epub/How to Keep People From Pushing - Albert Ellis.png"
+        },
+          {
+            "title": "How to Listen So People Will Talk - Becky Harling",
+            "path": "demo/src/assets/epub/How to Listen So People Will Ta - Becky Harling.epub",
+            "cover": "demo/src/assets/epub/How to Listen So People Will Ta - Becky Harling.png"
+          },
+          {
+            "title": "How to Stay Alive: The Ultimate Survival Guide for Any Situation - Bear Grylls",
+            "path": "demo/src/assets/epub/How to Stay Alive_ The Ultimate Survival Guide for Any Situation - Bear Grylls.epub",
+            "cover": "demo/src/assets/epub/How to Stay Alive_ The Ultimate Survival Guide for Any Situation - Bear Grylls.png"
+          },
+          {
+            "title": "How to Stop Feeling Like Sh_t - Andrea Owen",
+            "path": "demo/src/assets/epub/How to Stop Feeling Like Sh_t_ - Andrea Owen.epub",
+            "cover": "demo/src/assets/epub/How to Stop Feeling Like Sh_t_ - Andrea Owen.png"
+          },
+          {
+            "title": "I Can Make You Rich - Paul McKenna",
+            "path": "demo/src/assets/epub/I Can Make You Rich - Paul McKenna.epub",
+            "cover": "demo/src/assets/epub/I Can Make You Rich - Paul McKenna.png"
+          },
+          {
+            "title": "I Don't Get You - Sherry Graf",
+            "path": "demo/src/assets/epub/I Don't Get You - Sherry Graf.epub",
+            "cover": "demo/src/assets/epub/I Don't Get You - Sherry Graf.png"
+          },
+          {
+            "title": "I'm Right - You're Wrong: How to Think Clear - Sia Mohajer",
+            "path": "demo/src/assets/epub/I'm Right - You're Wrong_ How to Think Cle - Sia Mohajer.epub",
+            "cover": "demo/src/assets/epub/I'm Right - You're Wrong_ How to Think Cle - Sia Mohajer.png"
+          },
+          {
+            "title": "Ian Tuhovsky - Speed Reading How To Read 3-5 Times Faster And Become an Effective Learner",
+            "path": "demo/src/assets/epub/Ian Tuhovsky - Speed Reading How To Read 3-5 Times Faster And Become an Effective Learner.epub",
+            "cover": "demo/src/assets/epub/Ian Tuhovsky - Speed Reading How To Read 3-5 Times Faster And Become an Effective Learner.png"
+          },
+          {
+            "title": "Josh Doody - Fearless Salary Negotiation",
+            "path": "demo/src/assets/epub/Josh Doody - Fearless Salary Negotiation.epub",
+            "cover": "demo/src/assets/epub/Josh Doody - Fearless Salary Negotiation.png"
+          },
+          {
+            "title": "Learning Python",
+            "path": "demo/src/assets/epub/Learning Python.epub",
+            "cover": "demo/src/assets/epub/Learning Python.png"
+          },
+          {
+            "title": "Leaves of Grass - Walt Whitman",
+            "path": "demo/src/assets/epub/Leaves of Grass - Walt Whitman.epub",
+            "cover": "demo/src/assets/epub/Leaves of Grass - Walt Whitman.png"
+          },
+            {
+              "title": "Life of Pi - Yann Martel",
+              "path": "demo/src/assets/epub/Life_of_Pi-Yann_Martel.epub",
+              "cover": "demo/src/assets/epub/Life_of_Pi-Yann_Martel.png"
+            },
+            {
+              "title": "LinkedIn In 30 Minutes (2nd Edition): How to create a rock-solid LinkedIn profile and build connections that matter - Angela Rose",
+              "path": "demo/src/assets/epub/LinkedIn In 30 Minutes (2nd Edition) How to create a rock-solid LinkedIn profile and build connections that matter - Angela Rose.epub",
+              "cover": "demo/src/assets/epub/LinkedIn In 30 Minutes (2nd Edition) How to create a rock-solid LinkedIn profile and build connections that matter - Angela Rose.png"
+            },
+            {
+              "title": "Loving Our Kids on Purpose - Danny Silk",
+              "path": "demo/src/assets/epub/Loving Our Kids on Purpose - Danny Silk.epub",
+              "cover": "demo/src/assets/epub/Loving Our Kids on Purpose - Danny Silk.png"
+            },
+            {
+              "title": "Man's Search for Meaning - Viktor E. Frankl",
+              "path": "demo/src/assets/epub/Man's Search for Meaning - Viktor E. Frankl.epub",
+              "cover": "demo/src/assets/epub/Man's Search for Meaning - Viktor E. Frankl.png"
+            },
+            {
+              "title": "Micromastery: Learn Small, Learn Fast, and Find the Hidden Path to Happiness - Robert Twigger",
+              "path": "demo/src/assets/epub/Micromastery_ Learn Small, Learn Fast, and - Robert Twigger.epub",
+              "cover": "demo/src/assets/epub/Micromastery_ Learn Small, Learn Fast, and - Robert Twigger.png"
+            },
+            {
+              "title": "Mind Hacking - John Hargrave",
+              "path": "demo/src/assets/epub/Mind Hacking - John Hargrave.epub",
+              "cover": "demo/src/assets/epub/Mind Hacking - John Hargrave.png"
+            },
+            {
+              "title": "Mindful Running - Mackenzie L. Havey",
+              "path": "demo/src/assets/epub/Mindful Running - Mackenzie L. Havey.epub",
+              "cover": "demo/src/assets/epub/Mindful Running - Mackenzie L. Havey.png"
+            },
+            {
+              "title": "Mindfulness Is Better Than Chocolate - David Michie",
+              "path": "demo/src/assets/epub/Mindfulness Is Better Than Chocolate - David Michie.epub",
+              "cover": "demo/src/assets/epub/Mindfulness Is Better Than Chocolate - David Michie.png"
+            },
+            {
+              "title": "Money-Smart Kids: Teach Your Children Financial Confidence and Control - Gail Vaz-Oxlade",
+              "path": "demo/src/assets/epub/Money-Smart-Kids-Teach-Your-Children-Financial-Confidence-and-Control.epub",
+              "cover": "demo/src/assets/epub/Money-Smart-Kids-Teach-Your-Children-Financial-Confidence-and-Control.png"
+            },
+            {
+              "title": "Monks of New Skete - Let Dogs Be Dogs",
+              "path": "demo/src/assets/epub/Monks of New Skete - Let Dogs Be Dogs.epub",
+              "cover": "demo/src/assets/epub/Monks of New Skete - Let Dogs Be Dogs.png"
+            },
+            {
+              "title": "Never Eat Alone: And Other Secrets to Success, One Relationship at a Time - Ferrazzi, Keith; Raz, Tahl",
+              "path": "demo/src/assets/epub/Never Eat Alone _ And Other Secrets to Suc - Ferrazzi, Keith; Raz, Tahl.epub",
+              "cover": "demo/src/assets/epub/Never Eat Alone _ And Other Secrets to Suc - Ferrazzi, Keith; Raz, Tahl.png"
+            },
+            {
+              "title": "On Fire: The 7 Choices to Ignite a Radically Inspired Life - John O'Leary",
+              "path": "demo/src/assets/epub/On Fire - John O'Leary.epub",
+              "cover": "demo/src/assets/epub/On Fire - John O'Leary.png"
+            },
+            {
+              "title": "One Thousand Ways to Make $1000 - F.C. Minaker",
+              "path": "demo/src/assets/epub/One Thousand Ways to Make $1000 - F.C. Minaker.epub",
+              "cover": "demo/src/assets/epub/One Thousand Ways to Make $1000 - F.C. Minaker.png"
+            },
+            {
+              "title": "One Up On Wall Street - Peter Lynch",
+              "path": "demo/src/assets/epub/One Up On Wall Street.epub",
+              "cover": "demo/src/assets/epub/One Up On Wall Street.png"
+            },
+            {
+              "title": "Peter Pan - J.M. Barrie",
+              "path": "demo/src/assets/epub/Peter_Pan-J_M_Barrie.epub",
+              "cover": "demo/src/assets/epub/Peter_Pan-J_M_Barrie.png"
+            },
+            {
+              "title": "Practical Programming for Strength Training, 3rd Edition",
+              "path": "demo/src/assets/epub/practical_programming_for_strength_training_3rd_edition.epub",
+              "cover": "demo/src/assets/epub/practical_programming_for_strength_training_3rd_edition.png"
+            },
+            {
+              "title": "Put the Disciple into Discipline - Erin MacPherson",
+              "path": "demo/src/assets/epub/Put the Disciple into Disciplin - Erin MacPherson.epub",
+              "cover": "demo/src/assets/epub/Put the Disciple into Disciplin - Erin MacPherson.png"
+            },
+            {
+              "title": "A Little Book on the Human Shadow - Robert Bly",
+              "path": "demo/src/assets/epub/Robert Bly - A Little Book on the Human Shad.epub",
+              "cover": "demo/src/assets/epub/Robert Bly - A Little Book on the Human Shad.png"
+            },
+            {
+              "title": "Saladin - Nina Prentice",
+              "path": "demo/src/assets/epub/Saladin-Nina_Prentice.epub",
+              "cover": "demo/src/assets/epub/Saladin-Nina_Prentice.png"
+            },
+            {
+              "title": "Self Confidence: 52 Proven Ways To Gain Self Confidence - Andy C.E. Brown",
+              "path": "demo/src/assets/epub/Self Confidence - 52 Proven Ways To Gain S - Andy C. E. Brown.epub",
+              "cover": "demo/src/assets/epub/Self Confidence - 52 Proven Ways To Gain S - Andy C. E. Brown.png"
+            },
+              {
+                "title": "The 4-Hour Workweek, Expanded and Updated: Escape 9-5, Live Anywhere, and Join the New Rich - Timothy Ferriss",
+                "path": "demo/src/assets/epub/The 4-Hour Workweek, Expanded and Updated_ Escape 9-5, Live Anywhere, and Join the New Rich.epub",
+                "cover": "demo/src/assets/epub/The 4-Hour Workweek, Expanded and Updated_ Escape 9-5, Live Anywhere, and Join the New Rich.png"
+              },
+              {
+                "title": "The 48 Laws of Power - Robert Greene",
+                "path": "demo/src/assets/epub/The 48 Laws of Power.epub",
+                "cover": "demo/src/assets/epub/The 48 Laws of Power.png"
+              },
+              {
+                "title": "The Alchemist (25th Anniversary Edition) - Paulo Coelho",
+                "path": "demo/src/assets/epub/The Alchemist (25th Anniversary ed.) by Paulo Coelho.epub",
+                "cover": "demo/src/assets/epub/The Alchemist (25th Anniversary ed.) by Paulo Coelho.png"
+              },
+              {
+                "title": "The Art of Application Performance Testing - Ian Molyneaux",
+                "path": "demo/src/assets/epub/The Art of Application Performance Testing.epub",
+                "cover": "demo/src/assets/epub/The Art of Application Performance Testing.png"
+              },
+              {
+                "title": "The Art of Extraordinary Confidence - Dr. Aziz Gazipura",
+                "path": "demo/src/assets/epub/The Art of Extraordinary Confid - Dr Aziz.epub",
+                "cover": "demo/src/assets/epub/The Art of Extraordinary Confid - Dr Aziz.png"
+              },
+              {
+                "title": "The Big Leap - Gay Hendricks",
+                "path": "demo/src/assets/epub/The Big Leap.epub",
+                "cover": "demo/src/assets/epub/The Big Leap.png"
+              },
+              {
+                "title": "The Brave Athlete: Calm the F*ck Down and Rise to the Occasion - Simon Marshall, PhD, and Lesley Paterson",
+                "path": "demo/src/assets/epub/The Brave Athlete_ Calm the F_ck Down and - Simon Marshall, Phd.epub",
+                "cover": "demo/src/assets/epub/The Brave Athlete_ Calm the F_ck Down and - Simon Marshall, Phd.png"
+              },
+              {
+                "title": "The Driving Book - Karen Gravelle",
+                "path": "demo/src/assets/epub/The Driving Book - Karen Gravelle.epub",
+                "cover": "demo/src/assets/epub/The Driving Book - Karen Gravelle.png"
+              },
+              {
+                "title": "The Happiness Purpose - Edward De Bono",
+                "path": "demo/src/assets/epub/The Happiness Purpose - Edward De Bono.epub",
+                "cover": "demo/src/assets/epub/The Happiness Purpose - Edward De Bono.png"
+              },
+              {
+                "title": "The Kindness Challenge - Shaunti Feldhahn",
+                "path": "demo/src/assets/epub/The Kindness Challenge - Feldhahn, Shaunti.epub",
+                "cover": "demo/src/assets/epub/The Kindness Challenge - Feldhahn, Shaunti.png"
+              },
+                {
+                  "title": "The Marshmallow Test: Mastering Self-Control - Walter Mischel",
+                  "path": "demo/src/assets/epub/The Marshmallow Test_ Mastering Self-Control.epub",
+                  "cover": "demo/src/assets/epub/The Marshmallow Test_ Mastering Self-Control.png"
+                },
+                {
+                  "title": "The Memory Bible - Gary Small",
+                  "path": "demo/src/assets/epub/The Memory Bible - Gary Small.epub",
+                  "cover": "demo/src/assets/epub/The Memory Bible - Gary Small.png"
+                },
+                {
+                  "title": "The MindBody Code - Mario Martinez",
+                  "path": "demo/src/assets/epub/The MindBody Code - Mario Martinez.epub",
+                  "cover": "demo/src/assets/epub/The MindBody Code - Mario Martinez.png"
+                },
+                {
+                  "title": "The Power Of Now - Eckhart Tolle",
+                  "path": "demo/src/assets/epub/The Power Of Now - Eckhart Tolle.epub",
+                  "cover": "demo/src/assets/epub/The Power Of Now - Eckhart Tolle.png"
+                },
+                {
+                  "title": "The Self-Driven Child",
+                  "path": "demo/src/assets/epub/The Self-Driven Child.epub",
+                  "cover": "demo/src/assets/epub/The Self-Driven Child.png"
+                },
+                {
+                  "title": "The Sociopath's Guide to Getting Ahead",
+                  "path": "demo/src/assets/epub/The Sociopaths Guide to Getting Ahead.epub",
+                  "cover": "demo/src/assets/epub/The Sociopaths Guide to Getting Ahead.png"
+                },
+                {
+                  "title": "The Subtle Art of Not Giving a F*ck - Mark Manson",
+                  "path": "demo/src/assets/epub/The Subtle Art of Not Giving a - Mark Manson.epub",
+                  "cover": "demo/src/assets/epub/The Subtle Art of Not Giving a - Mark Manson.png"
+                },
+                {
+                  "title": "The Surprisingly Simple Truth Behind Extraordinary Results - Gary Keller",
+                  "path": "demo/src/assets/epub/The Surpisingly Simple Truth Behind Extr - Gary Keller.epub",
+                  "cover": "demo/src/assets/epub/The Surpisingly Simple Truth Behind Extr - Gary Keller.png"
+                },
+                {
+                  "title": "The Worry Trick: How Your Brain Tricks You into Expecting the Worst and What You Can Do About It - David A Carbonell",
+                  "path": "demo/src/assets/epub/The Worry Trick_ How Your Brain Tricks You - David A Carbonell.epub",
+                  "cover": "demo/src/assets/epub/The Worry Trick_ How Your Brain Tricks You - David A Carbonell.png"
+                },
+                {
+                  "title": "The Adventure of the Blue Carbuncle - Conan Doyle",
+                  "path": "demo/src/assets/epub/The_Adventure_of_the_Blue_Carbuncle-Conan_Doyle.epub",
+                  "cover": "demo/src/assets/epub/The_Adventure_of_the_Blue_Carbuncle-Conan_Doyle.png"
+                },
+                {
+                    "title": "The Beauty and the Beast - Jeanne-Marie Leprince De Beaumont",
+                    "path": "demo/src/assets/epub/The_Beauty_and_the_Beast-Jeanne_Marie_Leprince_De_Beaumont.epub",
+                    "cover": "demo/src/assets/epub/The_Beauty_and_the_Beast-Jeanne_Marie_Leprince_De_Beaumont.png"
+                  },
+                  {
+                    "title": "The Coming Wave - Mustafa Suleyman & Michael Bhaskar",
+                    "path": "demo/src/assets/epub/The_Coming_Wave_-_Mustafa_Suleyman_Michael_Bhaska.epub",
+                    "cover": "demo/src/assets/epub/The_Coming_Wave_-_Mustafa_Suleyman_Michael_Bhaska.png"
+                  },
+                  {
+                    "title": "The Invisible Man - H.G. Wells",
+                    "path": "demo/src/assets/epub/The_Invisible_Man-H_G_Wells.epub",
+                    "cover": "demo/src/assets/epub/The_Invisible_Man-H_G_Wells.png"
+                  },
+                  {
+                    "title": "The Man Who Would Be King - Rudyard Kipling",
+                    "path": "demo/src/assets/epub/The_Man_Who_Would_Be_King-Rudyard_Kipling.epub",
+                    "cover": "demo/src/assets/epub/The_Man_Who_Would_Be_King-Rudyard_Kipling.png"
+                  },
+                  {
+                    "title": "The Nightingale - Hans Christian Andersen",
+                    "path": "demo/src/assets/epub/The_Nightingale-Hans_Andersen.epub",
+                    "cover": "demo/src/assets/epub/The_Nightingale-Hans_Andersen.png"
+                  },
+                  {
+                    "title": "The Three Little Pigs - John Bookworm",
+                    "path": "demo/src/assets/epub/The_Three_Little_Pigs-John_Bookworm.epub",
+                    "cover": "demo/src/assets/epub/The_Three_Little_Pigs-John_Bookworm.png"
+                  },
+                  {
+                    "title": "The Art of Witty Banter: Be Clever, Be Quick, Be Interesting - Create Captivating Conversation",
+                    "path": "demo/src/assets/epub/The-Art-of-Witty-Banter-Be-Clever-Be-Quick-Be-Interesting-Create-Captivatin.epub",
+                    "cover": "demo/src/assets/epub/The-Art-of-Witty-Banter-Be-Clever-Be-Quick-Be-Interesting-Create-Captivatin.png"
+                  },
+                  {
+                    "title": "The Little Prince - Antoine de Saint-Exupéry",
+                    "path": "demo/src/assets/epub/TheLittlePrince.epub",
+                    "cover": "demo/src/assets/epub/TheLittlePrince.png"
+                  },
+                  {
+                    "title": "Things I Wish I'd Known Before We Got Married - Gary Chapman",
+                    "path": "demo/src/assets/epub/Things I Wish I'd Known Before We Got Married - Gary Chapman.epub",
+                    "cover": "demo/src/assets/epub/Things I Wish I'd Known Before We Got Married - Gary Chapman.png"
+                  },
+                  {
+                    "title": "Think and Grow Rich! - Napoleon Hill",
+                    "path": "demo/src/assets/epub/Think and Grow Rich!.epub",
+                    "cover": "demo/src/assets/epub/Think and Grow Rich!.png"
+                  },
+                  {
+                    "title": "Thinking, Fast and Slow - Daniel Kahneman",
+                    "path": "demo/src/assets/epub/Thinking, Fast and Slow.epub",
+                    "cover": "demo/src/assets/epub/Thinking, Fast and Slow.png"
+                  },
+                  {
+                    "title": "This Messy Magnificent Life - Geneen Roth",
+                    "path": "demo/src/assets/epub/This Messy Magnificent Life - Geneen Roth.epub",
+                    "cover": "demo/src/assets/epub/This Messy Magnificent Life - Geneen Roth.png"
+                  },
+                  {
+                    "title": "The Time Machine - H.G. Wells",
+                    "path": "demo/src/assets/epub/Time_Machine-H_G_Wells.epub",
+                    "cover": "demo/src/assets/epub/Time_Machine-H_G_Wells.png"
+                  },
+                    {
+                      "title": "Tune In: Let Your Intuition Guide You to Fulfillment and Flow - Sonia Choquette",
+                      "path": "demo/src/assets/epub/Tune In - Sonia Choquette.epub",
+                      "cover": "demo/src/assets/epub/Tune In - Sonia Choquette.png"
+                    },
+                    {
+                      "title": "Unit Test Frameworks: Tools for High-Quality Software Development",
+                      "path": "demo/src/assets/epub/Unit Test Frameworks_ Tools for High-Quality Software Development.epub",
+                      "cover": "demo/src/assets/epub/Unit Test Frameworks_ Tools for High-Quality Software Development.png"
+                    },
+                    {
+                      "title": "Unlocking Greatness - Charlie Harary",
+                      "path": "demo/src/assets/epub/Unlocking Greatness - Charlie Harary.epub",
+                      "cover": "demo/src/assets/epub/Unlocking Greatness - Charlie Harary.png"
+                    },
+                    {
+                      "title": "WDKU",
+                      "path": "demo/src/assets/epub/WDKU.epub",
+                      "cover": "demo/src/assets/epub/WDKU.png"
+                    },
+                    {
+                      "title": "Welcome to Your Brain: Why You Lose Your Car Keys but Never Forget How to Drive - Sandra Aamodt",
+                      "path": "demo/src/assets/epub/Welcome to Your Brain_ Why You Lose Your Car Keys but Never Forget How to Drive - Sandra Aamodt.epub",
+                      "cover": "demo/src/assets/epub/Welcome to Your Brain_ Why You Lose Your Car Keys but Never Forget How to Drive - Sandra Aamodt.png"
+                    },
+                    {
+                      "title": "Work",
+                      "path": "demo/src/assets/epub/Work.epub",
+                      "cover": "demo/src/assets/epub/Work.png"
+                    },
+                    {
+                      "title": "You Can Have an Amazing Memory - O'Brien, Dominic",
+                      "path": "demo/src/assets/epub/You Can Have an Amazing Memory - O'Brien, Dominic.epub",
+                      "cover": "demo/src/assets/epub/You Can Have an Amazing Memory - O'Brien, Dominic.png"
+                    },
+                    {
+                      "title": "Tune In: Let Your Intuition Guide You to Fulfillment and Flow - Sonia Choquette",
+                      "path": "demo/src/assets/epub/Tune In - Sonia Choquette.epub",
+                      "cover": "demo/src/assets/epub/Tune In - Sonia Choquette.png"
+                    },
+                    {
+                      "title": "Unit Test Frameworks: Tools for High-Quality Software Development",
+                      "path": "demo/src/assets/epub/Unit Test Frameworks_ Tools for High-Quality Software Development.epub",
+                      "cover": "demo/src/assets/epub/Unit Test Frameworks_ Tools for High-Quality Software Development.png"
+                    },
+                    {
+                      "title": "Unlocking Greatness - Charlie Harary",
+                      "path": "demo/src/assets/epub/Unlocking Greatness - Charlie Harary.epub",
+                      "cover": "demo/src/assets/epub/Unlocking Greatness - Charlie Harary.png"
+                    },
+                    {
+                      "title": "WDKU",
+                      "path": "demo/src/assets/epub/WDKU.epub",
+                      "cover": "demo/src/assets/epub/WDKU.png"
+                    },
+                    {
+                      "title": "Welcome to Your Brain: Why You Lose Your Car Keys but Never Forget How to Drive - Sandra Aamodt",
+                      "path": "demo/src/assets/epub/Welcome to Your Brain_ Why You Lose Your Car Keys but Never Forget How to Drive - Sandra Aamodt.epub",
+                      "cover": "demo/src/assets/epub/Welcome to Your Brain_ Why You Lose Your Car Keys but Never Forget How to Drive - Sandra Aamodt.png"
+                    },
+                    {
+                      "title": "Work",
+                      "path": "demo/src/assets/epub/Work.epub",
+                      "cover": "demo/src/assets/epub/Work.png"
+                    },
+                    {
+                      "title": "You Can Have an Amazing Memory - O'Brien, Dominic",
+                      "path": "demo/src/assets/epub/You Can Have an Amazing Memory - O'Brien, Dominic.epub",
+                      "cover": "demo/src/assets/epub/You Can Have an Amazing Memory - O'Brien, Dominic.png"
+                    }
+                  ]
+

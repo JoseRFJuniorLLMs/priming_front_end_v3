@@ -19,6 +19,12 @@ interface ResponseData {
   choices?: { message: { content: string } }[];
 }
 
+interface Ebook {
+  title: string;
+  path: string;
+  cover: string;
+}
+
 @Component({
 
   selector: 'book',
@@ -34,6 +40,8 @@ interface ResponseData {
 })
 
 export class BookComponent implements OnInit, AfterViewInit {
+
+  ebooks: Ebook[] = [];
 
   /* ==================VIEWCHILD==================== */
   @ViewChild('waveform', { static: false }) waveformEl!: ElementRef<any>;
@@ -70,28 +78,41 @@ export class BookComponent implements OnInit, AfterViewInit {
   ) { }
 
   ngOnInit() {
+
+    this.loadEbooks();
     this.initializeBook();
+    window.addEventListener('resize', () => {
+      this.rendition.resize(window.innerWidth, window.innerHeight);
+    });
 
     setTimeout(() => {
       this.generateAudio(this.currentPageText);
     }, 1000);
 
-/*     this.bucketService.listBucketFiles().subscribe(data => {
-      console.log(data);
-      if (data.items) {
-        this.files = data.items;
-      }
-    }); */
-
   }
 
-  //initializeBook
+  loadEbooks() {
+    this.http.get<Ebook[]>('../../assets/epub/ebooks.json').subscribe(data => {
+      this.ebooks = data;
+    });
+  }
+
+  selectEbook(ebook: Ebook) {
+    // Supondo que você tenha uma função no seu componente que carrega um eBook baseado no seu caminho
+    //this.initializeBook(ebook.path);
+    console.log('Ebook selecionado:', ebook.title);
+  }
+
+
   async initializeBook() {
     try {
-      //this.book = ePub("../../assets/epub/TheLittlePrince.epub");
       this.book = ePub("../../assets/epub/Alice.epub");
       await this.book.ready;
-      this.rendition = this.book.renderTo("area-de-exibicao");
+      this.rendition = this.book.renderTo("area-de-exibicao", {
+        width: window.innerWidth,
+        height: window.innerHeight,
+        spread: 'always' // Pode ajustar conforme a necessidade
+      });
       await this.book.locations.generate(1024);
       this.totalPages = this.book.locations.length();
       this.rendition.display().then(() => {
@@ -104,6 +125,7 @@ export class BookComponent implements OnInit, AfterViewInit {
       console.error("Error loading or rendering book: ", error);
     }
   }
+
 
   //updateCurrentPage
   updateCurrentPage() {
@@ -134,7 +156,7 @@ public async captureCurrentPageText() {
 
 
 // getCurrentPageText
- public async getCurrentPageText(): Promise<void> {
+public async getCurrentPageText(): Promise<void> {
   if (!this.rendition) {
     console.error('A renderização (rendition) não está disponível.');
     this.openSnackBar('A renderização (rendition) não está disponível.');
