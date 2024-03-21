@@ -93,8 +93,9 @@ export class BookComponent implements OnInit, AfterViewInit {
       this.rendition.resize(window.innerWidth, window.innerHeight);
     }); */
 
-    setTimeout(() => {
-      this.generateAudio(this.currentPageText);
+    setTimeout(async () => {
+      const currentPageTextArray = await this.captureCurrentPageText();
+      this.generateAudio(currentPageTextArray);
     }, 1000);
 
   }
@@ -120,7 +121,7 @@ export class BookComponent implements OnInit, AfterViewInit {
   }
 
   /* ==================initialize Book==================== */
-  async initializeBook(filePath: string) {
+  /* async initializeBook(filePath: string) {
     try {
       this.book = ePub(filePath);
       await this.book.ready;
@@ -137,6 +138,41 @@ export class BookComponent implements OnInit, AfterViewInit {
       });
       this.rendition.on('relocated', (location: any) => {
         this.updateCurrentPageTextAndLocation();
+      });
+    } catch (error) {
+      console.error("Error loading or rendering book: ", error);
+    }
+  }
+ */
+
+  async initializeBook(filePath: string) {
+    try {
+      this.book = ePub(filePath);
+      await this.book.ready;
+      this.rendition = this.book.renderTo("area-de-exibicao", {
+        width: window.innerWidth,
+        height: window.innerHeight,
+        spread: 'none' //none, auto, e always
+      });
+      this.rendition.flow('scrolled-doc');
+      await this.book.locations.generate(1024);
+      this.totalPages = this.book.locations.length();
+      this.rendition.display().then(() => {
+        this.updateCurrentPageTextAndLocation();
+        // Após exibir o livro, captura o texto da página atual e gera áudio
+        this.captureCurrentPageText().then(sentences => {
+          // Aqui você pode exibir as sentenças na tela, se necessário
+          // Chama a função para gerar áudio com as sentenças capturadas
+          this.generateAudio(sentences);
+        });
+      });
+      this.rendition.on('relocated', (location: any) => {
+        this.updateCurrentPageTextAndLocation();
+        // Sempre que a página muda, captura o novo texto da página e gera áudio
+        this.captureCurrentPageText().then(sentences => {
+          // Chama a função para gerar áudio com as sentenças capturadas
+          this.generateAudio(sentences);
+        });
       });
     } catch (error) {
       console.error("Error loading or rendering book: ", error);
@@ -188,24 +224,36 @@ export class BookComponent implements OnInit, AfterViewInit {
     }
   }
 
-/* ==================Capture Current PageText==================== */
+/* ==================Capture Current PageText Frases==================== */
 public async captureCurrentPageText() {
   let currentPageText = '';
-  // Tente obter o iframe ou o elemento que contém o texto da página atual
-  const contentDocument = document.querySelector('iframe')?.contentDocument || document;
-  // Captura todo o texto dentro do elemento identificado
-  currentPageText = contentDocument.body?.innerText || '';
-  // Quebra o texto em frases baseadas em ponto seguido de espaço
-  const sentences = currentPageText.trim().split(". ").map(sentence => sentence.trim() + ".");
-  console.log('Texto da página atual dividido em frases:', sentences);
-  // Retorna o array de frases, removendo o último ponto adicionado indevidamente ao final do último elemento
-  // Isso é necessário porque o último elemento da lista terá um ponto extra no final que não faz parte do texto original
-  if (sentences.length > 0) {
-      sentences[sentences.length - 1] = sentences[sentences.length - 1].slice(0, -1);
+
+  // Primeiro, tenta selecionar especificamente o iframe dentro do elemento 'area-de-exibicao'
+  const displayArea = document.getElementById('area-de-exibicao');
+  const iframe = displayArea ? displayArea.querySelector('iframe') : null;
+
+  // Se um iframe foi encontrado, tenta acessar seu conteúdo document; senão, usa o document global como fallback
+  const contentDocument = iframe ? iframe.contentDocument || iframe.contentWindow?.document : document;
+
+  if (contentDocument && contentDocument.body) {
+    // Captura todo o texto dentro do elemento identificado
+    currentPageText = contentDocument.body.innerText || '';
+  } else {
+    console.error('Não foi possível acessar o conteúdo do iframe ou do documento.');
+    return [];
   }
+
+  // Quebra o texto em frases, considerando diferentes terminações
+  const sentences = currentPageText.trim()
+                                    .split(/(?<=[.!?])\s+/) // Quebra o texto onde houver um ponto, exclamação ou interrogação seguidos de um ou mais espaços.
+                                    .map(sentence => sentence.trim())
+                                    .filter(sentence => sentence.length > 0); // Remove strings vazias que podem ser geradas no processo
+
+  console.log('Texto da página atual dividido em frases:', sentences);
 
   return sentences;
 }
+
 
 /* ==================Get Current Page Text==================== */
 public async getCurrentPageText(): Promise<void> {
@@ -240,20 +288,28 @@ public async getCurrentPageText(): Promise<void> {
 }
 
 
-  /* ==================Update And Generate Audio==================== */
-  async updateAndGenerateAudio() {
-    // Chamada para atualizar o texto da página atual diretamente.
-    await this.getCurrentPageText();
+/* ==================Update And Generate Audio==================== */
+async updateAndGenerateAudio() {
+  // Chamada para atualizar o texto da página atual diretamente.
+  await this.getCurrentPageText();
 
-    // Verifica a propriedade 'currentPageText' diretamente após a atualização.
-    console.log('Texto atualizado para geração de áudio:', this.currentPageText);
+  // Verifica a propriedade 'currentPageText' diretamente após a atualização.
+  console.log('Texto atualizado para geração de áudio:', this.currentPageText);
 
-    if (this.currentPageText) {
-      this.generateAudio(this.currentPageText);
+  if (this.currentPageText) {
+    // Divide a string em frases
+    const currentPageTextArray = this.currentPageText.trim().split(". ");
+    // Verifica se há frases antes de chamar generateAudio
+    if (currentPageTextArray.length > 0) {
+      this.generateAudio(currentPageTextArray);
     } else {
       console.log('Nenhum texto disponível para gerar áudio.');
     }
+  } else {
+    console.log('Nenhum texto disponível para gerar áudio.');
   }
+}
+
 
   //toggleLayout
   toggleLayout() {
@@ -429,69 +485,65 @@ public async getCurrentPageText(): Promise<void> {
     });
   }
 
+/* ==================GERA AUDIO==================== */
+public generateAudio(sentences: string[]) {
+  // Verifica se já está gerando áudio para evitar duplicação
+  if (this.isGeneratingAudio) return;
 
-  /* ==================GERA AUDIO==================== */
-  generateAudio(text: string): void {
-    // Verifica se já está gerando áudio para evitar duplicação
-    if (this.isGeneratingAudio) return;
+  this.isGeneratingAudio = true;
 
-    this.isGeneratingAudio = true;
-
-    // Verifica se o texto foi fornecido
-    if (!text) {
-      console.error('No text provided to generate audio from.');
-      this.openSnackBar("No text provided to generate audio from.");
-      this.isGeneratingAudio = false;
-      return;
-    }
-
-    // Define a chave API e a URL da API
-    const openAIKey = gpt4.gptApiKey;
-    const url = "https://api.openai.com/v1/audio/speech";
-
-    // Configura o corpo da requisição
-    const body = JSON.stringify({
-      model: "tts-1-hd",
-      voice: this.getRandomVoice(),
-      input: text
-      //"model": "tts-1-hd",//tts-1-hd, tts-1
-      //"voice": "alloy",//voices: string[] = ['alloy', 'echo', 'fable', 'onyx', 'nova', 'shimmer'];
-      //"input": this.bookText
-    });
-
-    // Configura os cabeçalhos da requisição
-    const headers = new HttpHeaders({
-      "Authorization": `Bearer ${openAIKey}`,
-      "Content-Type": "application/json"
-    });
-
-    // Faz a requisição POST para gerar o áudio
-    this.http.post(url, body, { headers, responseType: "blob" }).subscribe(
-      response => {
-        // Cria uma URL a partir do Blob de áudio recebido
-        const audioBlob = new Blob([response], { type: 'audio/wav' });
-        const audioUrl = URL.createObjectURL(audioBlob);
-        this.openSnackBar("Faz a requisição POST para gerar o áudio");
-        // Carrega o áudio no WaveSurfer e configura eventos para reprodução
-        this.waveform.load(audioUrl);
-        this.waveform.on('ready', () => {
-          this.waveform.play();
-          this.openSnackBar(" this.waveform.play();");
-        });
-
-        this.waveform.on('finish', () => {
-          // Restaura o estado ao terminar de reproduzir o áudio
-          this.isGeneratingAudio = false;
-        });
-      },
-      error => {
-        // Trata erros na requisição
-        console.error("Error generating audio:", error);
-        this.openSnackBar("Error generating audio");
-        this.isGeneratingAudio = false;
-      }
-    );
+  // Verifica se o texto foi fornecido
+  if (!sentences || sentences.length === 0) {
+    console.error('No text provided to generate audio from.');
+    this.openSnackBar("No text provided to generate audio from.");
+    this.isGeneratingAudio = false;
+    return;
   }
+
+  // Define a chave API e a URL da API
+  const openAIKey = gpt4.gptApiKey;
+  const url = "https://api.openai.com/v1/audio/speech";
+
+  // Configura o corpo da requisição
+  const body = JSON.stringify({
+    model: "tts-1-hd",
+    voice: this.getRandomVoice(),
+    input: sentences.join(" ") // Junta as frases em um único texto
+  });
+
+  // Configura os cabeçalhos da requisição
+  const headers = new HttpHeaders({
+    "Authorization": `Bearer ${openAIKey}`,
+    "Content-Type": "application/json"
+  });
+
+  // Faz a requisição POST para gerar o áudio
+  this.http.post(url, body, { headers, responseType: "blob" }).subscribe(
+    response => {
+      // Cria uma URL a partir do Blob de áudio recebido
+      const audioBlob = new Blob([response], { type: 'audio/wav' });
+      const audioUrl = URL.createObjectURL(audioBlob);
+      this.openSnackBar("Faz a requisição POST para gerar o áudio");
+      // Carrega o áudio no WaveSurfer e configura eventos para reprodução
+      this.waveform.load(audioUrl);
+      this.waveform.on('ready', () => {
+        this.waveform.play();
+        this.openSnackBar(" this.waveform.play();");
+      });
+
+      this.waveform.on('finish', () => {
+        // Restaura o estado ao terminar de reproduzir o áudio
+        this.isGeneratingAudio = false;
+      });
+    },
+    error => {
+      // Trata erros na requisição
+      console.error("Error generating audio:", error);
+      this.openSnackBar("Error generating audio");
+      this.isGeneratingAudio = false;
+    }
+  );
+}
 
   /* ==================WAVESURFER==================== */
   ngAfterViewInit(): void {
@@ -524,10 +576,6 @@ public async getCurrentPageText(): Promise<void> {
     this.waveform.on('audioprocess', (currentTime) => this.updatePlaybackHint(currentTime));
     this.waveform.on('pause', () => this.hidePlaybackHint());
     this.waveform.on('finish', () => this.hidePlaybackHint());
-
-    setTimeout(() => {
-      this.generateAudio(this.currentPageText);
-    }, 1000);
 
   }
 
