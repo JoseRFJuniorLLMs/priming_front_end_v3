@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import { MatBadgeModule } from '@angular/material/badge';
@@ -75,12 +75,14 @@ export class BookComponent implements OnInit, AfterViewInit {
   wordsArray: string[] = [];
   selectedLayoutOption = 'continuous';
 
-  voices: string[] = ['alloy', 'echo', 'fable', 'onyx', 'nova', 'shimmer'];
+  //voices: string[] = ['alloy', 'echo', 'fable', 'onyx', 'nova', 'shimmer'];
+  voices: string[] = ['shimmer'];
   files: any[] = [];
 
   constructor(
     private http: HttpClient,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    private changeDetectorRef: ChangeDetectorRef
   ) { }
 
   /* ==================NG On Init==================== */
@@ -254,7 +256,6 @@ public async captureCurrentPageText() {
   return sentences;
 }
 
-
 /* ==================Get Current Page Text==================== */
 public async getCurrentPageText(): Promise<void> {
   if (!this.rendition) {
@@ -287,7 +288,6 @@ public async getCurrentPageText(): Promise<void> {
   }
 }
 
-
 /* ==================Update And Generate Audio==================== */
 async updateAndGenerateAudio() {
   // Chamada para atualizar o texto da página atual diretamente.
@@ -309,7 +309,6 @@ async updateAndGenerateAudio() {
     console.log('Nenhum texto disponível para gerar áudio.');
   }
 }
-
 
   //toggleLayout
   toggleLayout() {
@@ -390,14 +389,12 @@ async updateAndGenerateAudio() {
  */
   //fim IA
 
-
    /* ==================Count Pages==================== */
   async countPages(): Promise<number> {
     const numberOfPages = await this.book.locations.length;
     this.openSnackBar("countPages:" + numberOfPages);
     return numberOfPages;
   }
-
 
   /* ==================Get CurrentPage==================== */
   getCurrentPage(): number {
@@ -475,7 +472,6 @@ async updateAndGenerateAudio() {
     }
   }
 
-
   /* ==================SNACK BAR==================== */
   openSnackBar(textDisplay: string) {
     const snackBarRef = this._snackBar.open(textDisplay, "Close", {
@@ -486,7 +482,7 @@ async updateAndGenerateAudio() {
   }
 
 /* ==================GERA AUDIO==================== */
-public generateAudio(sentences: string[]) {
+/* public generateAudio(sentences: string[]) {
   // Verifica se já está gerando áudio para evitar duplicação
   if (this.isGeneratingAudio) return;
 
@@ -544,9 +540,62 @@ public generateAudio(sentences: string[]) {
     }
   );
 }
+ */
+public async generateAudio(sentences: string[]) {
+  for (const sentence of sentences) {
+    await this.generateAndPlayAudio(sentence);
+  }
+}
+
+private async generateAndPlayAudio(sentence: string): Promise<void> {
+  // Verifica se a frase foi fornecida
+  if (!sentence) {
+    console.error('No text provided to generate audio from.');
+    return;
+  }
+
+  // Aqui você faz a requisição para gerar o áudio como antes
+  // Simulando uma chamada de API com uma Promise
+  await new Promise<void>((resolve, reject) => {
+    const openAIKey = gpt4.gptApiKey;
+    const url = "https://api.openai.com/v1/audio/speech";
+    const body = JSON.stringify({
+      model: "tts-1-hd",
+      voice: 'shimmer', //this.getRandomVoice(),
+      input: sentence
+    });
+    const headers = new HttpHeaders({
+      "Authorization": `Bearer ${openAIKey}`,
+      "Content-Type": "application/json"
+    });
+
+    this.http.post(url, body, { headers, responseType: "blob" }).subscribe(
+      response => {
+        const audioBlob = new Blob([response], { type: 'audio/wav' });
+        const audioUrl = URL.createObjectURL(audioBlob);
+
+        // Carrega o áudio no WaveSurfer
+        this.waveform.load(audioUrl);
+
+        // Configura um manipulador para resolver a Promise quando o áudio terminar de tocar
+        this.waveform.on('ready', () => {
+          this.waveform.play();
+        });
+
+        this.waveform.on('finish', () => {
+          resolve(); // Resolve a Promise quando o áudio terminar de tocar
+        });
+      },
+      error => {
+        console.error("Error generating audio:", error);
+        reject(error); // Rejeita a Promise em caso de erro
+      }
+    );
+  });
+}
 
   /* ==================WAVESURFER==================== */
-  ngAfterViewInit(): void {
+ /*  ngAfterViewInit(): void {
     this.isPlaying = true;
     this.waveform = WaveSurfer.create({
       container: this.waveformEl.nativeElement,
@@ -578,7 +627,61 @@ public generateAudio(sentences: string[]) {
     this.waveform.on('finish', () => this.hidePlaybackHint());
 
   }
+ */
 
+  ngAfterViewInit(): void {
+    this.isPlaying = false; // Inicializa isPlaying como false, já que o áudio não está tocando ao iniciar
+    this.waveform = WaveSurfer.create({
+      container: this.waveformEl.nativeElement,
+      mediaControls: true, //controles
+      height: 50,
+      waveColor: '#d3d3d3',
+      progressColor: 'rgb(0, 0, 0)',
+      cursorColor: 'rgb(0, 0, 0)',
+      cursorWidth: 6,
+      barGap: 3,
+      barWidth: 2,
+      barHeight: 3,
+      barRadius: 10,
+      autoScroll: true,
+      autoCenter: true,
+      interact: true,
+      dragToSeek: true,
+      fillParent: true,
+      autoplay: false,
+      minPxPerSec: 50
+    });
+
+    // Configurações adicionais de volume e eventos de audioprocess
+    this.waveform.setVolume(0.1); // 10/100
+    this.waveform.on('audioprocess', (currentTime) => this.updatePlaybackHint(currentTime));
+
+    // Eventos para gerenciar o estado de reprodução
+    this.waveform.on('play', () => {
+      this.isPlaying = true;
+      this.changeDetectorRef.detectChanges(); // Atualiza a UI
+      this.openSnackBar("Play");
+    });
+
+    this.waveform.on('pause', () => {
+      this.isPlaying = false;
+      this.changeDetectorRef.detectChanges(); // Atualiza a UI
+      this.openSnackBar("Pause");
+    });
+
+    this.waveform.on('finish', () => {
+      this.isPlaying = false;
+      this.changeDetectorRef.detectChanges(); // Atualiza a UI
+      this.hidePlaybackHint(); // Esconde a dica de reprodução
+    });
+
+    // Adiciona tratamento para evento de interação inicial, se necessário
+    this.waveform.once('interaction', () => {
+      this.waveform.play();
+    });
+  }
+
+  /* ==================EVENTS WAVE FORM==================== */
   events() {
     this.waveform.once('interaction', () => {
       this.waveform.play();
@@ -618,7 +721,7 @@ public generateAudio(sentences: string[]) {
   /* ==================VOZ ALEATORIA==================== */
   getRandomVoice(): string {
     const randomIndex = Math.floor(Math.random() * this.voices.length);
-    this.openSnackBar("Voz: " + this.voices[randomIndex]);
+    //this.openSnackBar("Voz: " + this.voices[randomIndex]);
     return this.voices[randomIndex];
 
   }

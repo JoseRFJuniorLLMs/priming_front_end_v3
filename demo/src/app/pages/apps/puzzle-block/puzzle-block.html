@@ -1,4 +1,4 @@
-<!-- <vex-secondary-toolbar current="Game">
+<vex-secondary-toolbar current="Game">
   <vex-breadcrumbs
     [crumbs]="['Game', 'Student']"
     class="flex-auto"></vex-breadcrumbs>
@@ -8,7 +8,7 @@
   </button>
 </vex-secondary-toolbar> -->
 
-<!-- <div class="example-box" cdkDrag>
+<div class="example-box" cdkDrag>
   <iframe
   src="https://macunaima-game.web.app/"
   width="800"
@@ -17,18 +17,4 @@
   allowfullscreen
 ></iframe>
 </div>
- -->
-
-
- <!-- Adicione isso no seu template HTML -->
-<input type="file" (change)="enviarArquivo()" hidden #fileInput>
-<button (click)="fileInput.click()">Enviar Arquivo de Áudio</button>
-
-
- <div>
-  <button (click)="startRecording()" [disabled]="isRecording">Iniciar Gravação</button>
-  <button (click)="stopRecording()" [disabled]="!isRecording">Parar Gravação</button>
-  <!-- Adicione mais elementos de interface conforme necessário -->
-</div>
-
 

@@ -27,6 +27,7 @@ mat-raised-button [matBadge]="currentPage">
     <button (click)="nextPage()" matTooltip="Next Page" class="config-panel-toggle4" color="primary" mat-fab type="button">
       <mat-icon svgIcon="mat:arrow_forward_ios">Next Page</mat-icon>
     </button>
+
     <button (click)="zoomIn()" matTooltip="Zoom IN" class="config-panel-toggle4" color="primary" mat-fab type="button">
       <mat-icon svgIcon="mat:zoom_in">Zoom IN</mat-icon>
     </button>
@@ -53,8 +54,6 @@ mat-raised-button [matBadge]="currentPage">
   </div>
 </div>
 
-<!-- Botão para testar getCurrentPageText -->
-<button mat-raised-button (click)="getCurrentPageText()">Obter Texto</button>
 <div id="area-de-exibicao"></div>
 
 <div class="ebook-gallery">
