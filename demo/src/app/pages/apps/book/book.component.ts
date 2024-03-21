@@ -180,9 +180,9 @@ export class BookComponent implements OnInit, AfterViewInit {
     const currentLocation = this.rendition.currentLocation();
     if (currentLocation && currentLocation.start && currentLocation.start.cfi) {
       const pageIndex = this.book.locations.locationFromCfi(currentLocation.start.cfi);
-      this.currentPage = pageIndex + 1; // ePub.js pode usar índices base 0, então adicione 1 para ter base 1
+      this.currentPage = pageIndex + 1;
       console.log(`Current page: ${this.currentPage} / ${this.totalPages}`);
-      this.openSnackBar(`Current page: ${this.currentPage} / ${this.totalPages}`);
+      //this.openSnackBar(`Current page: ${this.currentPage} / ${this.totalPages}`);
     } else {
       console.log("Não foi possível determinar a localização atual.");
     }
@@ -193,12 +193,18 @@ public async captureCurrentPageText() {
   let currentPageText = '';
   // Tente obter o iframe ou o elemento que contém o texto da página atual
   const contentDocument = document.querySelector('iframe')?.contentDocument || document;
-
   // Captura todo o texto dentro do elemento identificado
   currentPageText = contentDocument.body?.innerText || '';
+  // Quebra o texto em frases baseadas em ponto seguido de espaço
+  const sentences = currentPageText.trim().split(". ").map(sentence => sentence.trim() + ".");
+  console.log('Texto da página atual dividido em frases:', sentences);
+  // Retorna o array de frases, removendo o último ponto adicionado indevidamente ao final do último elemento
+  // Isso é necessário porque o último elemento da lista terá um ponto extra no final que não faz parte do texto original
+  if (sentences.length > 0) {
+      sentences[sentences.length - 1] = sentences[sentences.length - 1].slice(0, -1);
+  }
 
-  //console.log('Texto da página atual:', currentPageText);
-  return currentPageText.trim();
+  return sentences;
 }
 
 /* ==================Get Current Page Text==================== */
@@ -227,6 +233,7 @@ public async getCurrentPageText(): Promise<void> {
 
     this.currentPageText = visibleContentText.trim();
     //console.log('Texto da página atual:', this.currentPageText);
+    this.captureCurrentPageText();//CHAMADA PARA TESTAR O TEXTO CORRENTE
   } catch (error) {
     console.error('Erro ao tentar obter o texto da página atual:', error);
   }
@@ -239,7 +246,7 @@ public async getCurrentPageText(): Promise<void> {
     await this.getCurrentPageText();
 
     // Verifica a propriedade 'currentPageText' diretamente após a atualização.
-    //console.log('Texto atualizado para geração de áudio:', this.currentPageText);
+    console.log('Texto atualizado para geração de áudio:', this.currentPageText);
 
     if (this.currentPageText) {
       this.generateAudio(this.currentPageText);
@@ -393,7 +400,7 @@ public async getCurrentPageText(): Promise<void> {
   async updateCurrentPageTextAndLocation() {
     // Simplesmente chama getCurrentPageText para atualizar o texto da página atual.
     await this.getCurrentPageText();
-    console.log("Texto da página atual:", this.currentPageText);
+    //console.log("Texto da página atual:", this.currentPageText);
 
     // Atualiza a localização atual (número da página e total de páginas)
     const currentLocation = this.rendition.currentLocation();
