@@ -80,3 +80,60 @@
   text-align: center;
   margin-top: 5px;
 }
+
+.ebook-gallery {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px; // Espaçamento entre os itens
+
+  .ebook-item {
+    width: 200px; // Define uma largura fixa para os itens para manter a consistência
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .example-card {
+      width: 100%; // Faz o card ocupar todo o espaço disponível do .ebook-item
+      display: flex;
+      flex-direction: column;
+
+      mat-card-header {
+        // Centra o conteúdo do cabeçalho
+        text-align: center;
+
+        mat-card-title-group {
+          flex-direction: column;
+
+          img[mat-card-xl-image] {
+            // Ajusta o tamanho da imagem para caber bem no card
+            max-width: 100%; // Limita a largura da imagem para não exceder o card
+            height: auto; // Mantém a proporção da imagem
+            border-radius: 5px; // Arredonda os cantos da imagem
+          }
+        }
+      }
+
+      mat-card-content {
+        padding-top: 10px; // Adiciona um espaçamento entre o cabeçalho e o conteúdo
+      }
+    }
+  }
+}
+
+// Media queries para responsividade
+@media (max-width: 768px) {
+  .ebook-gallery {
+    .ebook-item {
+      width: 150px; // Reduz o tamanho dos itens em telas menores
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .ebook-gallery {
+    .ebook-item {
+      width: 100%; // Faz os itens ocuparem toda a largura da tela em dispositivos muito pequenos
+    }
+  }
+}

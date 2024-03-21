@@ -5,6 +5,56 @@
     "cover": "../../assets/epub/cover/TheLittlePrince.png"
   },
   {
+    "title": "The Secret Garden",
+    "path": "../../assets/epub/TheSecretGarden.epub",
+    "cover": "../../assets/epub/cover/TheSecretGarden.png"
+  },
+  {
+    "title": "Dom Quixote",
+    "path": "../../assets/epub/DomQuixote.epub",
+    "cover": "../../assets/epub/cover/domquixote.png"
+  },
+  {
+    "title": "War and Peace",
+    "path": "../../assets/epub/WarandPeace.epub",
+    "cover": "../../assets/epub/cover/WarandPeace.png"
+  },
+  {
+    "title": "Pride and Prejudice",
+    "path": "../../assets/epub/PrideandPrejudice.epub",
+    "cover": "../../assets/epub/cover/PrideandPrejudice.png"
+  },
+  {
+    "title": "The Divine Comedy",
+    "path": "../../assets/epub/TheDivineComedy.epub",
+    "cover": "../../assets/epub/cover/TheDivineComedy.png"
+  },
+  {
+    "title": "The Great Gatsby",
+    "path": "../../assets/epub/TheGreatGatsby.epub",
+    "cover": "../../assets/epub/cover/TheGreatGatsby.png"
+  },
+  {
+    "title": "Moby Dick",
+    "path": "../../assets/epub/MobyDick.epub",
+    "cover": "../../assets/epub/cover/MobyDick.png"
+  },
+  {
+    "title": "Hamlet",
+    "path": "../../assets/epub/Hamlet.epub",
+    "cover": "../../assets/epub/cover/Hamlet.png"
+  },
+  {
+    "title": "1984",
+    "path": "../../assets/epub/1984.epub",
+    "cover": "../../assets/epub/cover/1984.png"
+  },
+  {
+    "title": "Crime and Punishment",
+    "path": "../../assets/epub/CrimeandPunishment.epub",
+    "cover": "../../assets/epub/cover/CrimeandPunishment.png"
+  },
+  {
     "title": "The Coming Wave",
     "path": "../../assets/epub/The_Coming_Wave_-_Mustafa_Suleyman_Michael_Bhaska.epub",
     "cover": "../../assets/epub/cover/The_Coming_Wave_-_Mustafa_Suleyman_Michael_Bhaska.png"
@@ -130,12 +180,7 @@
           "cover": "../../assets/epub/cover/Ghost_in_the_Wires_-_Kevin_Mitnick_&_Steve_Wozniak_&_William_L._Simon.png"
         },
         {
-          "title": "GiftImperfection",
-          "path": "../../assets/epub/GiftImperfectio.epub",
-          "cover": "../../assets/epub/cover/GiftImperfectio.png"
-        },
-        {
-          "title": "Happy Is the New Healthy",
+          "title": "Happy..Healthy",
           "path": "../../assets/epub/Happy Is the New Healthy_ 31 Wa - Dave Romanelli.epub",
           "cover": "../../assets/epub/cover/Happy Is the New Healthy_ 31 Wa - Dave Romanelli.png"
         },
