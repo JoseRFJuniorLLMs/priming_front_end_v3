@@ -70,7 +70,7 @@ export class BookComponent implements OnInit, AfterViewInit {
   imageDisplayed: boolean = false;
   wordDuration: number = 0;
   wordsArray: string[] = [];
-  selectedLayoutOption = 'paginated';
+  selectedLayoutOption = 'continuous';
 
   voices: string[] = ['alloy', 'echo', 'fable', 'onyx', 'nova', 'shimmer'];
   files: any[] = [];
@@ -81,6 +81,8 @@ export class BookComponent implements OnInit, AfterViewInit {
   ) { }
 
   ngOnInit() {
+    const initialEbookPath = '../../assets/epub/Alice.epub';
+    this.initializeBook(initialEbookPath);
     this.loadEbooks();
     window.addEventListener('resize', this.resizeListener);
 /*     window.addEventListener('resize', () => {
@@ -140,8 +142,9 @@ export class BookComponent implements OnInit, AfterViewInit {
       this.rendition = this.book.renderTo("area-de-exibicao", {
         width: window.innerWidth,
         height: window.innerHeight,
-        spread: 'always'
+        spread: 'none'//none, auto, e always
       });
+      this.rendition.flow('scrolled-doc');
       await this.book.locations.generate(1024);
       this.totalPages = this.book.locations.length();
       this.rendition.display().then(() => {
@@ -157,20 +160,21 @@ export class BookComponent implements OnInit, AfterViewInit {
 
 
   async selectEbook(ebook: Ebook) {
-    console.log("Caminho do eBook selecionado:", ebook.path);
     this.initializeBook(ebook.path);
     try {
       // Inicializa o ePub com o caminho do arquivo do ebook selecionado
       this.book = ePub(ebook.path);
-
+      console.log("Caminho do eBook selecionado:", ebook.path);
       // Aguarda até que o livro esteja pronto para ser processado
       await this.book.ready;
-
       // Configura o local de renderização para o livro e define opções como largura, altura e spread
       this.rendition = this.book.renderTo("area-de-exibicao", {
         width: window.innerWidth,
         height: window.innerHeight,
-        spread: 'always'
+        //script
+        //stylesheet
+        manager: 'continuous', //continuous, default, paginated, flow, scrolled
+        spread: 'none'//none , auto, always
       });
 
       // Gera as localizações do livro (necessário para navegação, por exemplo)
@@ -360,7 +364,9 @@ public async getCurrentPageText(): Promise<void> {
 
   //getCurrentPage
   getCurrentPage(): number {
-    const currentPageIndex = this.book && this.book.navigation && this.book.navigation.indexOf(this.book.currentLocation);
+    const currentPageIndex = this.book
+    && this.book.navigation
+    && this.book.navigation.indexOf(this.book.currentLocation);
     this.openSnackBar("countPages:" + currentPageIndex + 1);
     return currentPageIndex + 1;
   }
@@ -393,7 +399,6 @@ public async getCurrentPageText(): Promise<void> {
     }
 
     if (flowValue) {
-      this.openSnackBar("flowValue");
       this.rendition.flow(flowValue);
     }
 
@@ -405,9 +410,9 @@ public async getCurrentPageText(): Promise<void> {
     // Re-renderizar o conteúdo no ponto atual
     const currentLocation = this.rendition.currentLocation();
     if (currentLocation) {
-      this.openSnackBar(currentLocation.stringify(currentLocation(currentLocation)));
       this.rendition.display(currentLocation.start.cfi);
     }
+
   }
 
   /* ==================updateCurrentPageTextAndLocation==================== */
@@ -424,7 +429,7 @@ public async getCurrentPageText(): Promise<void> {
       if (pageIndex !== undefined) {
         this.currentPage = pageIndex + 1; // ePub.js pode usar índices base 0, então adicione 1 para ter base 1
         console.log(`Página atual: ${this.currentPage} / ${this.totalPages}`);
-        this.openSnackBar(`Página atual: ${this.currentPage} / ${this.totalPages}`);
+        //this.openSnackBar(`Página atual: ${this.currentPage} / ${this.totalPages}`);
       } else {
         console.log("CFI atual não encontrado nas localizações.");
       }

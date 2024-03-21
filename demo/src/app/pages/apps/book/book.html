@@ -11,11 +11,12 @@ Página {{currentPage}} de {{totalPages}}
 <mat-form-field appearance="fill" matTooltip="{{currentPage}}"
 mat-raised-button [matBadge]="currentPage">
       <mat-label>Layout Options</mat-label>
-      <mat-select [(ngModel)]="selectedLayoutOption" (selectionChange)="changeRenderOption($event.value)">
-        <mat-option disabled="false" value="default">Default</mat-option>
+      <mat-select [(ngModel)]="selectedLayoutOption"
+      (selectionChange)="changeRenderOption($event.value)">
+        <mat-option disabled="true" value="default">Default</mat-option>
         <mat-option disabled="false" value="continuous">Continuous</mat-option>
-        <mat-option value="paginated">Paginated</mat-option>
-        <mat-option disabled="false" value="auto">Auto</mat-option>
+        <mat-option disabled="true" value="paginated">Paginated</mat-option>
+        <mat-option disabled="true" value="auto">Auto</mat-option>
       </mat-select>
     </mat-form-field>
 
