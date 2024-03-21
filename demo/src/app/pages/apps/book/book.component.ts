@@ -112,28 +112,6 @@ export class BookComponent implements OnInit, AfterViewInit {
     });
   }
 
-/*   async initializeBook() {
-    try {
-      this.book = ePub("../../assets/epub/Alice.epub");
-      await this.book.ready;
-      this.rendition = this.book.renderTo("area-de-exibicao", {
-        width: window.innerWidth,
-        height: window.innerHeight,
-        spread: 'always' // Pode ajustar conforme a necessidade
-      });
-      await this.book.locations.generate(1024);
-      this.totalPages = this.book.locations.length();
-      this.rendition.display().then(() => {
-        this.updateCurrentPageTextAndLocation();
-      });
-      this.rendition.on('relocated', (location: any) => {
-        this.updateCurrentPageTextAndLocation();
-      });
-    } catch (error) {
-      console.error("Error loading or rendering book: ", error);
-    }
-  }
- */
 
   async initializeBook(filePath: string) {
     try {
@@ -158,49 +136,36 @@ export class BookComponent implements OnInit, AfterViewInit {
     }
   }
 
-
   async selectEbook(ebook: Ebook) {
-    this.initializeBook(ebook.path);
+    // Limpa a área de exibição
+    const displayArea = document.getElementById("area-de-exibicao");
+    if (displayArea) {
+        displayArea.innerHTML = ''; // Remove o conteúdo anterior
+    }
+    // Inicializa o ePub com o caminho do arquivo do ebook selecionado
     try {
-      // Inicializa o ePub com o caminho do arquivo do ebook selecionado
       this.book = ePub(ebook.path);
       console.log("Caminho do eBook selecionado:", ebook.path);
-      // Aguarda até que o livro esteja pronto para ser processado
       await this.book.ready;
-      // Configura o local de renderização para o livro e define opções como largura, altura e spread
       this.rendition = this.book.renderTo("area-de-exibicao", {
         width: window.innerWidth,
         height: window.innerHeight,
-        //script
-        //stylesheet
-        manager: 'continuous', //continuous, default, paginated, flow, scrolled
-        spread: 'none'//none , auto, always
+        manager: 'continuous',
+        spread: 'none'
       });
-
-      // Gera as localizações do livro (necessário para navegação, por exemplo)
       await this.book.locations.generate(1024);
-
-      // Atualiza o total de páginas com base nas localizações geradas
       this.totalPages = this.book.locations.length();
-
-      // Reinicia a contagem da página atual para o novo livro
       this.currentPage = 1;
-
-      // Exibe o livro começando do início
       this.rendition.display().then(() => {
-        // Chamada para atualizar texto e localização da página atual após o livro ser exibido
         this.updateCurrentPageTextAndLocation();
       });
-
-      // Adiciona um ouvinte para atualizações de localização (quando o usuário navega pelo livro)
       this.rendition.on('relocated', (location: any) => {
-        // Chamada para atualizar texto e localização da página atual quando há navegação
         this.updateCurrentPageTextAndLocation();
       });
     } catch (error) {
       console.error("Erro ao carregar ou renderizar o livro: ", error);
     }
-  }
+}
 
   //updateCurrentPage
   updateCurrentPage() {
