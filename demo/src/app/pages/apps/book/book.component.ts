@@ -44,6 +44,9 @@ interface Ebook {
 
 export class BookComponent implements OnInit, AfterViewInit {
 
+  splitIntoSentences(text: string): string[] {
+    return text.match(/[^\.!\?]+[\.!\?]+/g) || [];
+  }
   ebooks: Ebook[] = [];
 
   /* ==================VIEWCHILD==================== */
@@ -80,6 +83,7 @@ export class BookComponent implements OnInit, AfterViewInit {
     private _snackBar: MatSnackBar
   ) { }
 
+  /* ==================NG On Init==================== */
   ngOnInit() {
     const initialEbookPath = '../../assets/epub/Alice.epub';
     this.initializeBook(initialEbookPath);
@@ -95,24 +99,27 @@ export class BookComponent implements OnInit, AfterViewInit {
 
   }
 
+  /* ==================NG On Destroy==================== */
   ngOnDestroy(): void {
     // Limpando o listener de eventos ao destruir o componente
     window.removeEventListener('resize', this.resizeListener);
   }
 
+  /* ==================Resize Listener==================== */
   private resizeListener = (): void => {
     if (this.rendition) {
       this.rendition.resize(window.innerWidth, window.innerHeight);
     }
   };
 
+   /* ==================Load Ebooks==================== */
   loadEbooks() {
     this.http.get<Ebook[]>('../../assets/epub/ebooks.json').subscribe(data => {
       this.ebooks = data;
     });
   }
 
-
+  /* ==================initialize Book==================== */
   async initializeBook(filePath: string) {
     try {
       this.book = ePub(filePath);
@@ -136,6 +143,7 @@ export class BookComponent implements OnInit, AfterViewInit {
     }
   }
 
+  /* ==================Select Ebook==================== */
   async selectEbook(ebook: Ebook) {
     // Limpa a área de exibição
     const displayArea = document.getElementById("area-de-exibicao");
@@ -167,7 +175,7 @@ export class BookComponent implements OnInit, AfterViewInit {
     }
 }
 
-  //updateCurrentPage
+  /* ==================Update Current Page==================== */
   updateCurrentPage() {
     const currentLocation = this.rendition.currentLocation();
     if (currentLocation && currentLocation.start && currentLocation.start.cfi) {
@@ -180,8 +188,7 @@ export class BookComponent implements OnInit, AfterViewInit {
     }
   }
 
-   //updateCurrentPage 2
-  // Assumindo que você tenha acesso ao iframe ou ao conteúdo do DOM que o epubjs gera
+/* ==================Capture Current PageText==================== */
 public async captureCurrentPageText() {
   let currentPageText = '';
   // Tente obter o iframe ou o elemento que contém o texto da página atual
@@ -194,8 +201,7 @@ public async captureCurrentPageText() {
   return currentPageText.trim();
 }
 
-
-// getCurrentPageText
+/* ==================Get Current Page Text==================== */
 public async getCurrentPageText(): Promise<void> {
   if (!this.rendition) {
     console.error('A renderização (rendition) não está disponível.');
@@ -226,7 +232,8 @@ public async getCurrentPageText(): Promise<void> {
   }
 }
 
-  // updateAndGenerateAudio
+
+  /* ==================Update And Generate Audio==================== */
   async updateAndGenerateAudio() {
     // Chamada para atualizar o texto da página atual diretamente.
     await this.getCurrentPageText();
@@ -320,14 +327,16 @@ public async getCurrentPageText(): Promise<void> {
  */
   //fim IA
 
-  //countPages
+
+   /* ==================Count Pages==================== */
   async countPages(): Promise<number> {
     const numberOfPages = await this.book.locations.length;
     this.openSnackBar("countPages:" + numberOfPages);
     return numberOfPages;
   }
 
-  //getCurrentPage
+
+  /* ==================Get CurrentPage==================== */
   getCurrentPage(): number {
     const currentPageIndex = this.book
     && this.book.navigation
@@ -558,6 +567,8 @@ public async getCurrentPageText(): Promise<void> {
     return this.voices[randomIndex];
 
   }
+
+
 
 
 }//fim
