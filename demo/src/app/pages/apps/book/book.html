@@ -1,13 +1,3 @@
-<div>
-  <h2>Lista de Arquivos no Bucket</h2>
-  <ul>
-    <li *ngFor="let file of files">
-      {{ file }}
-    </li>
-  </ul>
-</div>
-
-
 <mat-card cdkDrag cdkDragHandle
 class="action flex-none" color="primary"
 id="barr01" mat-flat-button>
@@ -47,29 +37,8 @@ mat-raised-button [matBadge]="currentPage">
     class="config-panel-toggle4" color="primary" mat-fab type="button">
       <mat-icon svgIcon="mat:content_paste">Count Pages</mat-icon>
     </button>
-
- </mat-card-actions>
+  </mat-card-actions>
 </mat-card>
-
-<div class="ebook-gallery">
-  <div *ngFor="let ebook of ebooks" class="ebook-item" (click)="selectEbook(ebook)">
-    <mat-card class="example-card">
-      <mat-card-header>
-        <mat-card-title-group>
-          <mat-card-title>{{ ebook.title }}</mat-card-title>
-          <!-- Se você tiver um subtítulo disponível -->
-        <!--   <mat-card-subtitle>{{ ebook.subtitle }}</mat-card-subtitle> -->
-          <img mat-card-xl-image [src]="ebook.cover" [alt]="ebook.title">
-        </mat-card-title-group>
-      </mat-card-header>
-      <mat-card-content>
-        <!-- Supondo que você tenha uma descrição ou outro conteúdo para exibir aqui -->
-       <!--  {{ ebook.description }} -->
-      </mat-card-content>
-    </mat-card>
-  </div>
-</div>
-
 
 <!-- Container para o Waveform, com posicionamento relativo -->
 <div class="waveform-container">
@@ -91,5 +60,21 @@ color="primary" mat-fab type="button">
 
 <!-- Botão para testar getCurrentPageText -->
 <button mat-raised-button (click)="getCurrentPageText()">Obter Texto</button>
-
 <div id="area-de-exibicao"></div>
+
+<div class="ebook-gallery">
+  <div *ngFor="let ebook of ebooks" class="ebook-item" (click)="selectEbook(ebook)" matTooltip="{{ebook.title}} por {{ebook.author}} - {{ebook.pageCount}} páginas">
+    <mat-card class="example-card">
+      <mat-card-header>
+        <mat-card-title-group>
+          <img alt="{{ebook.title}} cover" mat-card-xl-image [src]="ebook.cover" [alt]="ebook.title">
+          <mat-card-title>{{ ebook.title }}</mat-card-title>
+          <!-- Aqui poderia adicionar o nome do autor no cartão se quiser -->
+        </mat-card-title-group>
+      </mat-card-header>
+      <mat-card-content>
+        <mat-card-subtitle>{{ ebook.author }}</mat-card-subtitle>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

@@ -57,6 +57,8 @@
   width: 100vw; /* 100% da largura da viewport */
   height: 100vh; /* 100% da altura da viewport */
   overflow: hidden; /* Esconde o scrollbar, se necessário */
+  border: 1px solid #ccc; // Apenas para visualização, pode ser removido depois
+  background-color: #fff; // Fundo branco para melhorar a legibilidade
 }
 
 .ebook-gallery {
