@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatCardModule } from '@angular/material/card';
@@ -38,7 +39,7 @@ interface Ebook {
   imports: [
     MatBadgeModule, MatCardModule,
     MatIconModule, MatSelectModule,
-    FormsModule, MatTooltipModule, CommonModule]
+    FormsModule, MatTooltipModule, CommonModule, MatExpansionModule]
 
 })
 
@@ -48,6 +49,7 @@ export class BookComponent implements OnInit, AfterViewInit {
     return text.match(/[^\.!\?]+[\.!\?]+/g) || [];
   }
   ebooks: Ebook[] = [];
+  panelOpenState = false;
 
   /* ==================VIEWCHILD==================== */
   @ViewChild('waveform', { static: false }) waveformEl!: ElementRef<any>;
