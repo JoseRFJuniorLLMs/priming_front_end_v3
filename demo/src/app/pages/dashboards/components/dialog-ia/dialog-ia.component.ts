@@ -53,6 +53,7 @@ import gpt4 from '../../../../../../gpt4.json';
 })
 
 export class DialogIAComponent implements OnInit {
+
   @ViewChild('spectrogram') spectrogramEl: ElementRef | undefined;
   @ViewChild('waveform') waveformEl!: ElementRef;
   @ViewChild('stepper') stepper!: MatStepper;

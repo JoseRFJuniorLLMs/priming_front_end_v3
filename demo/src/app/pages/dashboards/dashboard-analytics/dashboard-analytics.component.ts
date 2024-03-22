@@ -723,33 +723,7 @@ generateAudio(): void {
     );
   }
 
-  /* ==================GENERATE IMAGE==================== */
-/*   generateImageFromOpenAI(prompt: string) {
-    const openAIKey = gpt4.gptApiKey;
-    const headers = new HttpHeaders({
-      "Authorization": `Bearer ${openAIKey}`,
-      'Content-Type': 'application/json'
-    });
-
-    const body = {
-      model: "dall-e-3", // Ajuste conforme o modelo desejado
-      prompt: prompt,
-      quality: "standard",
-      size: "1024x1024",
-      n: 1
-    };
-
-    this.http.post<any>('https://api.openai.com/v1/images/generations', body, { headers }).subscribe({
-      next: (response) => {
-        this.generatedImageUrl = response.data[0].url; // Exemplo, ajuste conforme necessário
-      },
-      error: (error) => {
-        console.error('Erro ao gerar a imagem:', error);
-      }
-    });
-  } */
-
-  // Método modificado para aceitar o texto selecionado como argumento
+// Método modificado para aceitar o texto selecionado como argumento
 generateImageFromOpenAI(selectedText: string) {
   const openAIKey = gpt4.gptApiKey;
   const headers = new HttpHeaders({
