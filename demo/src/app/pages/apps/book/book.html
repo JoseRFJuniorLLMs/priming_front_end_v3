@@ -54,21 +54,50 @@ mat-raised-button [matBadge]="currentPage">
   </div>
 </div>
 
-<div id="area-de-exibicao"></div>
 
-<!-- <div class="ebook-gallery">
-  <div *ngFor="let ebook of ebooks" class="ebook-item" (click)="selectEbook(ebook)" matTooltip="{{ebook.title}} por {{ebook.author}} - {{ebook.pageCount}} páginas">
-    <mat-card class="example-card">
-      <mat-card-header>
-        <mat-card-title-group>
-          <img alt="{{ebook.title}} cover" mat-card-xl-image [src]="ebook.cover" [alt]="ebook.title">
-          <mat-card-title>{{ ebook.title }}</mat-card-title>
 
-        </mat-card-title-group>
-      </mat-card-header>
-      <mat-card-content>
-        <mat-card-subtitle>{{ ebook.author }}</mat-card-subtitle>
-      </mat-card-content>
-    </mat-card>
-  </div>
-</div> -->
+<mat-accordion>
+  <mat-expansion-panel hideToggle>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Bookstore
+      </mat-panel-title>
+      <mat-panel-description>
+
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+      <div class="ebook-gallery">
+        <div *ngFor="let ebook of ebooks" class="ebook-item" (click)="selectEbook(ebook)" matTooltip="{{ebook.title}} por {{ebook.author}} - {{ebook.pageCount}} páginas">
+          <mat-card class="example-card">
+            <mat-card-header>
+              <mat-card-title-group>
+                <img alt="{{ebook.title}} cover" mat-card-xl-image [src]="ebook.cover" [alt]="ebook.title">
+                <mat-card-title>{{ ebook.title }}</mat-card-title>
+
+              </mat-card-title-group>
+            </mat-card-header>
+            <mat-card-content>
+              <mat-card-subtitle>{{ ebook.author }}</mat-card-subtitle>
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </div>
+
+  </mat-expansion-panel>
+  <mat-expansion-panel (opened)="panelOpenState = true"
+          (closed)="panelOpenState = false">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Book
+      </mat-panel-title>
+      <mat-panel-description>
+        {{panelOpenState ? 'Open' : 'Closed'}}
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+      <div id="area-de-exibicao"></div>
+
+  </mat-expansion-panel>
+</mat-accordion>
+
