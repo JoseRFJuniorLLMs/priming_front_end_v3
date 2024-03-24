@@ -237,7 +237,7 @@ public async captureCurrentPageText() {
   const iframe = displayArea ? displayArea.querySelector('iframe') : null;
 
   // Se um iframe foi encontrado, tenta acessar seu conteúdo document; senão, usa o document global como fallback
-  const contentDocument = iframe ? iframe.contentDocument || iframe.contentWindow?.document : document;
+  const contentDocument = iframe ? iframe.contentDocument || iframe.contentWindow?.document : null;
 
   if (contentDocument && contentDocument.body) {
     // Captura todo o texto dentro do elemento identificado
@@ -249,9 +249,9 @@ public async captureCurrentPageText() {
 
   // Quebra o texto em frases, considerando diferentes terminações
   const sentences = currentPageText.trim()
-                                    .split(/(?<=[.!?])\s+/) // Quebra o texto onde houver um ponto, exclamação ou interrogação seguidos de um ou mais espaços.
+                                    .split(/(?<=[.!?])\s+/)
                                     .map(sentence => sentence.trim())
-                                    .filter(sentence => sentence.length > 0); // Remove strings vazias que podem ser geradas no processo
+                                    .filter(sentence => sentence.length > 0);
 
   console.log('Texto da página atual dividido em frases:', sentences);
 
@@ -483,71 +483,48 @@ async updateAndGenerateAudio() {
     });
   }
 
-/* ==================GERA AUDIO==================== */
-/* public generateAudio(sentences: string[]) {
-  // Verifica se já está gerando áudio para evitar duplicação
-  if (this.isGeneratingAudio) return;
 
-  this.isGeneratingAudio = true;
 
-  // Verifica se o texto foi fornecido
-  if (!sentences || sentences.length === 0) {
-    console.error('No text provided to generate audio from.');
-    this.openSnackBar("No text provided to generate audio from.");
-    this.isGeneratingAudio = false;
-    return;
-  }
+  public async generateAudio(sentences: string[]) {
+    // Calcula o número total de grupos de três frases
+    const totalGroups = Math.ceil(sentences.length / 3);
 
-  // Define a chave API e a URL da API
-  const openAIKey = gpt4.gptApiKey;
-  const url = "https://api.openai.com/v1/audio/speech";
+    for (let i = 0; i < totalGroups; i++) {
+        // Extrai as três próximas frases do array
+        const group = sentences.slice(i * 3, (i + 1) * 3);
 
-  // Configura o corpo da requisição
-  const body = JSON.stringify({
-    model: "tts-1-hd",
-    voice: this.getRandomVoice(),
-    input: sentences.join(" ") // Junta as frases em um único texto
-  });
+        // Junta as três frases em uma única string, separadas por um espaço
+        const groupText = group.join(' ');
 
-  // Configura os cabeçalhos da requisição
-  const headers = new HttpHeaders({
-    "Authorization": `Bearer ${openAIKey}`,
-    "Content-Type": "application/json"
-  });
+        // Gera o áudio para o grupo de frases
+        await this.generateAndPlayAudio(groupText);
 
-  // Faz a requisição POST para gerar o áudio
-  this.http.post(url, body, { headers, responseType: "blob" }).subscribe(
-    response => {
-      // Cria uma URL a partir do Blob de áudio recebido
-      const audioBlob = new Blob([response], { type: 'audio/wav' });
-      const audioUrl = URL.createObjectURL(audioBlob);
-      this.openSnackBar("Faz a requisição POST para gerar o áudio");
-      // Carrega o áudio no WaveSurfer e configura eventos para reprodução
-      this.waveform.load(audioUrl);
-      this.waveform.on('ready', () => {
-        this.waveform.play();
-        this.openSnackBar(" this.waveform.play();");
-      });
-
-      this.waveform.on('finish', () => {
-        // Restaura o estado ao terminar de reproduzir o áudio
-        this.isGeneratingAudio = false;
-      });
-    },
-    error => {
-      // Trata erros na requisição
-      console.error("Error generating audio:", error);
-      this.openSnackBar("Error generating audio");
-      this.isGeneratingAudio = false;
+        // Se for o último grupo, chama a mudança para a próxima página
+        if (i === totalGroups - 1) {
+            this.changeToNextPage();
+        }
     }
-  );
 }
- */
-public async generateAudio(sentences: string[]) {
-  for (const sentence of sentences) {
-    await this.generateAndPlayAudio(sentence);
+
+async changeToNextPage() {
+  // Avança para a próxima página
+  this.nextPage(); // Certifique-se de que isso atualiza a visualização corretamente
+  console.log("Mudou para a próxima página");
+
+  try {
+      // Espera a captura das novas frases da próxima página
+      const sentences = await this.captureCurrentPageText();
+      if (sentences.length > 0) {
+          // Chama generateAudio com as novas frases
+          this.generateAudio(sentences);
+      } else {
+          console.log("Nenhuma frase encontrada na próxima página.");
+      }
+  } catch (error) {
+      console.error("Erro ao capturar texto da próxima página:", error);
   }
 }
+
 
 private async generateAndPlayAudio(sentence: string): Promise<void> {
   // Verifica se a frase foi fornecida
@@ -556,7 +533,7 @@ private async generateAndPlayAudio(sentence: string): Promise<void> {
     return;
   }
 
-  // Aqui você faz a requisição para gerar o áudio como antes
+  // Faz a requisição para gerar o áudio como antes
   // Simulando uma chamada de API com uma Promise
   await new Promise<void>((resolve, reject) => {
     const openAIKey = gpt4.gptApiKey;
@@ -596,43 +573,9 @@ private async generateAndPlayAudio(sentence: string): Promise<void> {
   });
 }
 
-  /* ==================WAVESURFER==================== */
- /*  ngAfterViewInit(): void {
-    this.isPlaying = true;
-    this.waveform = WaveSurfer.create({
-      container: this.waveformEl.nativeElement,
-      mediaControls: true, //controles
-      height: 50,
-      waveColor: '#d3d3d3',
-      progressColor: 'rgb(0, 0, 0)',
-      cursorColor: 'rgb(0, 0, 0)',
-      cursorWidth: 6,
-      barGap: 3,
-      barWidth: 2,
-      barHeight: 3,
-      barRadius: 10,
-      autoScroll: true,
-      autoCenter: true,
-      interact: true,
-      dragToSeek: true,
-      fillParent: true,
-      autoplay: false,
-      minPxPerSec: 50
-    });
-
-    this.waveform.on('audioprocess', () => {
-
-    });
-    this.waveform.setVolume(0.1); // 10/100
-    this.waveform.on('audioprocess', (currentTime) => this.updatePlaybackHint(currentTime));
-    this.waveform.on('pause', () => this.hidePlaybackHint());
-    this.waveform.on('finish', () => this.hidePlaybackHint());
-
-  }
- */
 
   ngAfterViewInit(): void {
-    this.isPlaying = false; // Inicializa isPlaying como false, já que o áudio não está tocando ao iniciar
+    this.isPlaying = false;
     this.waveform = WaveSurfer.create({
       container: this.waveformEl.nativeElement,
       mediaControls: true, //controles
